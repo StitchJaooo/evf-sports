@@ -1,0 +1,268 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'OpenSauce';
+    src: url('../assets/font/OpenSauceOne-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSauceBold';
+    src: url('../assets/font/OpenSauceOne-Regular.ttf') format('truetype');
+}
+
+@keyframes Surgir {
+    0%{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scale {
+    0%{
+        width: 100vw;
+        transform: scaleX(1.1);
+    }
+    100%{
+        width: 85vw;
+        transform: scaleX(1);
+    }
+}
+
+body {
+    color: #fff;
+    overflow-x: hidden;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    height: 15vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: 1rem 'OpenSauce';
+    user-select: none;
+    transition: .5s;
+    z-index: 10;
+    animation: Surgir 0.9s ease-in-out;
+}
+
+header.scrolled{
+    background-color: #050a30;
+}
+
+header ion-icon {
+    font-size: 2.3rem;
+    cursor: pointer;
+}
+
+.usuario,
+.usuario p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.usuario p{
+    margin: 5px;
+}
+
+.usuario p ion-icon {
+    font-size: 1.3rem;
+    margin: 2.2px 5px 0 5px;
+    transform: rotate(90deg);
+}
+
+ion-icon[name="person-circle"] {
+    margin-left: 10px;
+}
+
+header img {
+    margin-right: 22.5vw;
+    margin-left: 30vw;
+    height: 12vh;
+}
+
+nav{
+    opacity: 0;
+    visibility: hidden;
+    display: block;
+    left: 0;
+    position: fixed;
+    height: 100vh;
+    width: 15vw;
+    z-index: 9;
+    align-items: start;
+    justify-content: center;
+    background-color: #050a30;
+    overflow-x: hidden;
+}
+
+nav ul{
+    margin-top: 16vh;
+    font-family: "OpenSauce";
+    text-transform: uppercase;
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li{
+    font-size: 1.4rem;
+    margin: 20px;
+    cursor: pointer;
+    transition: .3s;
+    border-radius: 12px;
+    border: none;
+}
+
+nav li:hover{
+    background-color: #06168f;
+    padding: 10px;
+}
+
+nav ul li.selecionado{
+    background-color: #06168f;
+    padding: 10px;
+}
+
+nav.ativo{
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+    margin: 0;
+}
+.conteudo{
+    transition: .2s;
+}
+
+.conteudo.ativo{
+    width: 85vw;
+    margin-left: 15vw;
+}
+
+.animacao-exit{
+    animation: scale 0.9s reverse;
+}
+
+.animacao-enter{
+    animation: scale 0.9s ease-in-out;
+}
+
+.borda{
+    border-bottom: 2px solid #cae8ff;
+}
+
+.inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 110vh;
+    width: 100%;
+    background-image: url("../assets/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: start;
+    font-family: "Archivo Black";
+}
+
+.inicio h1 {
+    font-size: 2.8rem;
+    animation: Surgir 0.9s ease-in-out;
+}
+
+.inicio h3 {
+    margin: 10px 0 30px 0;
+    font-size: 1.3rem;
+    animation: Surgir 0.9s ease-in-out;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: Surgir 0.9s ease-in-out;
+}
+
+.buttons button{
+    margin: 10px;
+}
+
+.raised {
+    color: #fff;
+    background: none;
+    border: 3px solid #233dff;
+    border-radius: 24px;
+    font: 1.3rem "OpenSauceBold";
+    padding: 15px;
+    cursor: pointer;
+    transition: .8s;
+    z-index: 1;
+}
+
+.raised:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px 4px #233dff, inset 0px 0px 10px 2px #233dff;
+}
+
+.flat {
+    color: #fff;
+    background: #233dff;
+    border: 3px solid #233dff;
+    border-radius: 24px;
+    font: 1.3rem "OpenSauceBold";
+    padding: 15px;
+    cursor: pointer;
+    transition: .8s;
+    z-index: 1;
+}
+
+.flat:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px 4px #233dff;
+}
+
+.propaganda {
+    height: 40vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #f4f6fc;
+}
+
+.anuncio{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 30%;
+}
+
+.anuncio h1{
+    font-family: "OpenSauce";
+    color: #000;
+    font-size: 1.6rem;
+    margin: 5px;
+}
+
+.anuncio h3{
+    color: #737373;
+    font-family: "OpenSauce";
+}
+
+.anuncio ion-icon{
+    color: #06168f;
+    border: 2px dashed;
+    border-radius: 100%;
+    font-size: 5rem;
+    padding: 15px;
+}

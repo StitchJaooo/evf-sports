@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 </head>
 
 <body>
@@ -36,33 +39,85 @@
             <div class="borda"></div>
         </ul>
     </nav>
-    <div class="conteudo">
-        <div class="inicio">
-            <h1>Bem vindo ao nosso site!</h1>
-            <h3>Encontre aqui a camiseta que é do seu jeito!</h3>
-            <div class="buttons">
+    <div class="inicio">
+        <h1>Bem vindo ao nosso site!</h1>
+        <h3>Encontre aqui a camiseta que é do seu jeito!</h3>
+        <div class="buttons">
+            <a href="#camisas">
                 <button class="flat">Coleção de camisas</button>
-                <button class="raised">Montar sua camisa</button>
+            </a>
+            <button class="raised">Montar sua camisa</button>
+        </div>
+    </div>
+    <div class="propaganda">
+        <div class="anuncio">
+            <ion-icon name="car-sport"></ion-icon>
+            <h1>Frete Grátis</h1>
+            <h3>Para toda zona leste - SP</h3>
+        </div>
+        <div class="anuncio">
+            <ion-icon name="call"></ion-icon>
+            <h1>Suporte 24H</h1>
+            <h3>Atendimento online a todo momento.</h3>
+        </div>
+        <div class="anuncio">
+            <ion-icon name="refresh-outline"></ion-icon>
+            <h1>Dinheiro de volta</h1>
+            <h3>Em caso de erro, tenha seu dinheiro de volta.</h3>
+        </div>
+    </div>
+    <div id="camisas">
+        <h1>Camisas feitas</h1>
+    </div>
+    <div class="slick-carousel">
+        <div class="card">
+            <img src="assets/camisa.png" alt="Imagem do Card" class="card-img">
+            <div class="card-body">
+                <h2 class="card-title">2° DS - AZUL</h2>
+                <h2 class="card-price">R$ 63,00</h2>
             </div>
         </div>
-        <div class="propaganda">
-            <div class="anuncio">
-                <ion-icon name="car-sport"></ion-icon>
-                <h1>Frete Grátis</h1>
-                <h3>Para toda zona leste - SP</h3>
+        <div class="card">
+            <img src="assets/camisa.png" alt="Imagem do Card" class="card-img">
+            <div class="card-body">
+                <h2 class="card-title">1° ADM - VERDE</h2>
+                <h2 class="card-price">R$ 48,00</h2>
             </div>
-            <div class="anuncio">
-                <ion-icon name="call"></ion-icon>
-                <h1>Suporte 24H</h1>
-                <h3>Atendimento online a todo momento.</h3>
+        </div>
+        <div class="card">
+            <img src="assets/camisa.png" alt="Imagem do Card" class="card-img">
+            <div class="card-body">
+                <h2 class="card-title">ADM 2023 - ROXO</h2>
+                <h2 class="card-price">R$ 50,00</h2>
             </div>
-            <div class="anuncio">
-                <ion-icon name="refresh-outline"></ion-icon>
-                <h1>Dinheiro de volta</h1>
-                <h3>Em caso de erro, tenha seu dinheiro de volta.</h3>
+        </div>
+        <div class="card">
+            <img src="assets/camisa.png" alt="Imagem do Card" class="card-img">
+            <div class="card-body">
+                <h2 class="card-title">1° DS - ROSA</h2>
+                <h2 class="card-price">R$ 50,00</h2>
+            </div>
+        </div>
+        <div class="card">
+            <img src="assets/camisa.png" alt="Imagem do Card" class="card-img">
+            <div class="card-body">
+                <h2 class="card-title">2° MA - LARANJA</h2>
+                <h2 class="card-price">R$ 40,00</h2>
+            </div>
+        </div>
+        <div class="card">
+            <img src="assets/camisa.png" alt="Imagem do Card" class="card-img">
+            <div class="card-body">
+                <h2 class="card-title">MA 2023 - VERMELHO</h2>
+                <h2 class="card-price">R$ 40,00</h2>
             </div>
         </div>
     </div>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript" src="js/carousel-camisas.js"></script>
     <script src="js/nav-animation.js"></script>
     <script src="js/header-animation.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

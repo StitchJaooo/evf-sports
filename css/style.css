@@ -14,25 +14,31 @@
 }
 
 @keyframes Surgir {
-    0%{
+    0% {
         opacity: 0;
         transform: translateY(20px);
     }
-    100%{
+
+    100% {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
 @keyframes scale {
-    0%{
+    0% {
         width: 100vw;
         transform: scaleX(1.1);
     }
-    100%{
+
+    100% {
         width: 85vw;
         transform: scaleX(1);
     }
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -55,7 +61,7 @@ header {
     animation: Surgir 0.9s ease-in-out;
 }
 
-header.scrolled{
+header.scrolled {
     background-color: #050a30;
 }
 
@@ -71,7 +77,7 @@ header ion-icon {
     align-items: center;
 }
 
-.usuario p{
+.usuario p {
     margin: 5px;
 }
 
@@ -86,27 +92,26 @@ ion-icon[name="person-circle"] {
 }
 
 header img {
-    margin-right: 22.5vw;
-    margin-left: 30vw;
+    margin-right: 26.6vw;
+    margin-left: 35vw;
     height: 12vh;
 }
 
-nav{
-    opacity: 0;
-    visibility: hidden;
-    display: block;
-    left: 0;
+nav {
+    left: -15vw;
     position: fixed;
     height: 100vh;
     width: 15vw;
     z-index: 9;
+    display: flex;
     align-items: start;
     justify-content: center;
     background-color: #050a30;
     overflow-x: hidden;
+    transition: .5s;
 }
 
-nav ul{
+nav ul {
     margin-top: 16vh;
     font-family: "OpenSauce";
     text-transform: uppercase;
@@ -114,7 +119,7 @@ nav ul{
     text-align: center;
 }
 
-nav ul li{
+nav ul li {
     font-size: 1.4rem;
     margin: 20px;
     cursor: pointer;
@@ -123,40 +128,25 @@ nav ul li{
     border: none;
 }
 
-nav li:hover{
+nav li:hover,
+nav ul li.selecionado {
     background-color: #06168f;
     padding: 10px;
 }
 
-nav ul li.selecionado{
-    background-color: #06168f;
-    padding: 10px;
+nav.ativo {
+    left: 0;
 }
 
-nav.ativo{
-    opacity: 1;
-    visibility: visible;
-    display: flex;
-    margin: 0;
-}
-.conteudo{
-    transition: .2s;
-}
-
-.conteudo.ativo{
-    width: 85vw;
-    margin-left: 15vw;
-}
-
-.animacao-exit{
+.animacao-exit {
     animation: scale 0.9s reverse;
 }
 
-.animacao-enter{
+.animacao-enter {
     animation: scale 0.9s ease-in-out;
 }
 
-.borda{
+.borda {
     border-bottom: 2px solid #cae8ff;
 }
 
@@ -185,14 +175,19 @@ nav.ativo{
     animation: Surgir 0.9s ease-in-out;
 }
 
-.buttons{
+.buttons {
     display: flex;
     align-items: center;
     justify-content: center;
     animation: Surgir 0.9s ease-in-out;
 }
 
-.buttons button{
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.buttons button {
     margin: 10px;
 }
 
@@ -208,7 +203,7 @@ nav.ativo{
     z-index: 1;
 }
 
-.raised:hover{
+.raised:hover {
     transform: scale(1.1);
     box-shadow: 0px 0px 10px 4px #233dff, inset 0px 0px 10px 2px #233dff;
 }
@@ -225,7 +220,7 @@ nav.ativo{
     z-index: 1;
 }
 
-.flat:hover{
+.flat:hover {
     transform: scale(1.1);
     box-shadow: 0px 0px 10px 4px #233dff;
 }
@@ -239,7 +234,7 @@ nav.ativo{
     background-color: #f4f6fc;
 }
 
-.anuncio{
+.anuncio {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -247,22 +242,74 @@ nav.ativo{
     width: 30%;
 }
 
-.anuncio h1{
+.anuncio h1 {
     font-family: "OpenSauce";
     color: #000;
     font-size: 1.6rem;
     margin: 5px;
 }
 
-.anuncio h3{
+.anuncio h3 {
     color: #737373;
     font-family: "OpenSauce";
 }
 
-.anuncio ion-icon{
+.anuncio ion-icon {
     color: #06168f;
     border: 2px dashed;
     border-radius: 100%;
     font-size: 5rem;
     padding: 15px;
+}
+
+#camisas {
+    color: #06168f;
+    font-family: "OpenSauceBold";
+    margin: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#camisas h1 {
+    padding: 0 25px 10px 25px;
+    border-bottom: 3px solid #cae8ff;
+}
+
+.card {
+    background-color: #f4f6fc;
+    border-radius: 24px;
+    cursor: pointer;
+    width: 300px;
+    margin: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-family: "OpenSauce";
+}
+
+.card-img {
+    width: 100%;
+    height: auto;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin: 5px 0 5px 0;
+    color: #000;
+}
+
+.card-price {
+    font-size: 1.5rem;
+    margin: 5px 0 5px 0;
+    color: #06168f;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }

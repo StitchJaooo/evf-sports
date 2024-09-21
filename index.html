@@ -20,26 +20,41 @@
         <div class="usuario">
             <ion-icon name="cart"></ion-icon>
             <ion-icon name="person-circle"></ion-icon>
-            <p>usuário
-                <ion-icon name="chevron-forward" id="config-user"></ion-icon>
+            <p id="user">usuário
+                <ion-icon name="chevron-forward" class="seta-user"></ion-icon>
             </p>
+            <div class="config-conta">
+                <p id="myuser">Minha conta</p>
+                <div class="borda"></div>
+                <p id="exit">Sair</p>
+            </div>
         </div>
     </header>
-    <nav>
+    <nav class="sidebar">
         <ul>
-            <li class="selecionado">Home</li>
+            <a href="#home">
+                <li data-section="home" class="selecionado">Home</li>
+            </a>
             <div class="borda"></div>
-            <li>Camisas</li>
+            <a href="#camisas">
+                <li data-section="camisas">Camisas</li>
+            </a>
             <div class="borda"></div>
-            <li>Bandeiras</li>
+            <a href="#bandeiras">
+                <li data-section="bandeiras">Bandeiras</li>
+            </a>
             <div class="borda"></div>
-            <li>Logos</li>
+            <a href="#logos">
+                <li data-section="logos">Logos</li>
+            </a>
             <div class="borda"></div>
-            <li>Quem Somos</li>
+            <a href="">
+                <li>Quem Somos</li>
+            </a>
             <div class="borda"></div>
         </ul>
     </nav>
-    <div class="inicio">
+    <div class="section" id="home">
         <h1>Bem vindo ao nosso site!</h1>
         <h3>Encontre aqui a camiseta que é do seu jeito!</h3>
         <div class="buttons">
@@ -66,8 +81,9 @@
             <h3>Em caso de erro, tenha seu dinheiro de volta.</h3>
         </div>
     </div>
-    <div id="camisas">
-        <h1>Camisas feitas</h1>
+    <div class="section" id="camisas">
+        <p>Conheça agora as melhoras camisas de interclasse de todas as escolas deste país!!!</p>
+        <h1>Camisas já feitas</h1>
     </div>
     <div class="slick-carousel">
         <div class="card">
@@ -113,11 +129,37 @@
             </div>
         </div>
     </div>
+    <div id="create-camisa">
+        <p>Create-camisa in works</p>
+    </div>
+    <div class="section" id="bandeiras">
+        <p>Bandeiras in works</p>
+    </div>
+    <div class="section" id="logos">
+        <p>Logos in works</p>
+    </div>
+
+    <footer>
+        <div class="infos">
+            <div class="item-footer">
+                <h1>Sobre nós</h1>
+                <p>Somos uma empresa de confecção de camisas, bandeiras e designs, vendemos itens prontos já feitos por
+                    nossa empresa!</p>
+            </div>
+            <div class="item-footer">
+                <h1>Nossos contatos</h1>
+                <p>random@teste.com</p>
+                <p>1199999999999999</p>
+            </div>
+        </div>
+        <p class="copy">Copyrights © 2024 - EVF SPORTS</p>
+    </footer>
 
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript" src="js/carousel-camisas.js"></script>
+    <script src="js/user-animation.js"></script>
     <script src="js/nav-animation.js"></script>
     <script src="js/header-animation.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

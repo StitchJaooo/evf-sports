@@ -21,7 +21,7 @@
 @keyframes Surgir {
     0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
 
     100% {
@@ -30,16 +30,89 @@
     }
 }
 
-@keyframes scale {
-    0% {
-        width: 100vw;
-        transform: scaleX(1.1);
+@media all and (max-width: 600px) {
+    .sidebar {
+        left: -90vw;
+        width: 40vw;
+        align-items: center;
     }
 
-    100% {
-        width: 85vw;
-        transform: scaleX(1);
+    .sidebar ul {
+        margin-top: 0;
     }
+
+    .usuario {
+        right: 0px;
+        left: -200vw;
+        margin-top: 13vh;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .usuario ion-icon[name="cart"] {
+        position: absolute;
+        margin-left: -22vw;
+        margin-top: 22vw;
+    }
+
+    .usuario.ativo {
+        left: -50vw;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .config-conta {
+        right: 0;
+        left: 37vw;
+    }
+
+    #home {
+        text-align: center;
+    }
+
+    .anuncio-sub {
+        text-align: start;
+        font-size: .8rem;
+        margin: 10px 10px 0 10px;
+    }
+
+    #propaganda h1 {
+        font-size: 1.2rem;
+        margin: 10px 10px 0 10px;
+        text-align: start;
+    }
+
+    #propaganda ion-icon {
+        font-size: 3rem;
+        margin-right: 32px;
+    }
+
+    footer {
+        height: 80vh;
+    }
+
+    .infos {
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 5vh;
+        margin-bottom: -100px;
+    }
+
+    .item-footer {
+        margin: 10px;
+    }
+
+    .copy {
+        margin-top: -10vh;
+    }
+}
+
+@media all and (min-width: 601px) and (max-width: 1024px) {}
+
+
+
+.animation-surgir {
+    animation: 2.5s Surgir ease-in-out;
 }
 
 html {
@@ -75,8 +148,21 @@ header ion-icon {
     cursor: pointer;
 }
 
+.nav-menu {
+    position: absolute;
+    left: 30px;
+}
+
+.usuario {
+    position: absolute;
+    right: 40px;
+    transition: .5s;
+}
+
 .usuario,
-.usuario p {
+.usuario p,
+#create,
+#create button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -110,7 +196,7 @@ ion-icon[name="person-circle"] {
 
 .config-conta {
     position: fixed;
-    right: 5vw;
+    right: 30px;
     top: 10vh;
     width: 140px;
     background-color: #fff;
@@ -146,16 +232,14 @@ ion-icon[name="person-circle"] {
 }
 
 header img {
-    margin-right: 26.6vw;
-    margin-left: 35vw;
     height: 12vh;
 }
 
 nav {
-    left: -15vw;
+    left: -20vw;
     position: fixed;
     height: 100vh;
-    width: 15vw;
+    width: 20vw;
     z-index: 9;
     display: flex;
     align-items: start;
@@ -190,14 +274,6 @@ nav ul a li.selecionado {
 
 nav.ativo {
     left: 0;
-}
-
-.animacao-exit {
-    animation: scale 0.9s reverse;
-}
-
-.animacao-enter {
-    animation: scale 0.9s ease-in-out;
 }
 
 .borda {
@@ -296,23 +372,23 @@ a {
     width: 30%;
 }
 
-.anuncio h1 {
+.anuncio-title {
     font-family: "OpenSauce";
     color: #000;
     font-size: 1.6rem;
     margin: 5px;
 }
 
-.anuncio h3 {
+.anuncio-sub {
     color: #737373;
     font-family: "OpenSauce";
 }
 
-.anuncio ion-icon {
+.icons-anuncio {
     color: #06168f;
     border: 2px dashed;
     border-radius: 100%;
-    font-size: 5rem;
+    font-size: 4rem;
     padding: 15px;
 }
 
@@ -327,7 +403,6 @@ a {
 }
 
 #camisas p {
-    text-align: center;
     margin: 35px 0 85px 0;
     width: 40%;
 }
@@ -380,23 +455,43 @@ a {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-#create-camisa {
-    color: #000;
-    border-top: 5px solid #cae8ff;
-    height: 90vh;
+#create button {
+    margin: 30px;
+}
+
+#create ion-icon {
+    margin-left: 8px;
+    font-size: 1.6rem;
 }
 
 #bandeiras {
-    height: 90vh;
     border-top: 5px solid #cae8ff;
-    border-bottom: 5px solid #cae8ff;
-    color: #000;
+}
+
+#bandeiras h1,
+#logos h1,
+#bandeiras p,
+#logos p {
+    text-align: center;
+    color: #06168f;
+}
+
+#bandeiras p,
+#logos p {
+    text-align: center;
+    font-family: "OpenSauceBold";
+    margin: 60px;
+}
+
+#bandeiras h1,
+#logos h1 {
+    margin: 30px;
+    font-family: "OpenSauceBold";
+    letter-spacing: -2px;
 }
 
 #logos {
-    height: 100vh;
-    color: #000;
-    border-bottom: 5px solid #cae8ff;
+    border-top: 5px solid #cae8ff;
 }
 
 footer {

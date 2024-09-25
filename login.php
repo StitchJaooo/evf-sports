@@ -150,7 +150,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     <div class="container">
         <div class="login-container">
             <h2>Login</h2>
-            <form id="loginForm" action="logged.php" method="POST">
+            <form id="loginForm" action="loggin.php" method="POST">
                 <input type="email" name="email" placeholder="Digite seu email" required>
                 <input type="password" name="senha" placeholder="Senha" required>
                 <button type="submit" class="flat">Entrar</button>

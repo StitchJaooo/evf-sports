@@ -16,7 +16,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
         $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
         $usuario = $sql_query->fetch_assoc();
 
-        if ($usuario && password_verify($senha, $usuario['senha'])) { // Verifica a senha hasheada
+        if ($usuario && password_verify($senha, $usuario['senha'])) {
             if (!isset($_SESSION)) {
                 session_start();
             } else {
@@ -27,9 +27,9 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
             $_SESSION['nome'] = $usuario['nome'];
 
             if ($usuario['perfil'] == 'ADM') {
-                header("Location: indexAdm.php");
+                header("Location: adm.php");
             } else {
-                header("Location: indexLogged.php");
+                header("Location: logged.php");
             }
         } else {
             echo "<div id=\"mensagem\">Falha ao logar | E-mail ou senha incorretos!!</div>";
@@ -69,7 +69,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
 
         .login-container,
         .register-container {
-            height: 30vh;
+            height: 35vh;
             padding: 20px;
             width: 30%;
             border: 1px solid #cae8ff33;
@@ -86,7 +86,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
             margin-bottom: 20px;
         }
 
-        form{
+        form {
             border-top: 1px solid #fff;
             border-bottom: none;
             border-left: none;
@@ -115,7 +115,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
             outline: none;
         }
 
-        input::placeholder{
+        input::placeholder {
             color: #fff;
         }
 
@@ -143,16 +143,55 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
             transform: scale(1.05);
             box-shadow: 0px 0px 10px 1px #233dff;
         }
+        
+        .senha {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .btnVer {
+            margin-left: 2px;
+            padding: 10px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btnVer:hover {
+            background-color: #ffffff31;
+        }
     </style>
+    <script>
+        function verSenha(inputClass) {
+            const senha = document.querySelector(`.${inputClass}`);
+            const icone = senha.nextElementSibling; // Obtém o próximo elemento que é o ícone
+
+            if (senha.type === 'password') {
+                senha.type = 'text';
+                icone.setAttribute('name', 'eye-off');
+            } else {
+                senha.type = 'password';
+                icone.setAttribute('name', 'eye');
+            }
+        }
+    </script>
 </head>
 
 <body>
     <div class="container">
         <div class="login-container">
             <h2>Login</h2>
-            <form id="loginForm" action="loggin.php" method="POST">
+            <form id="loginForm" action="login.php" method="POST">
                 <input type="email" name="email" placeholder="Digite seu email" required>
-                <input type="password" name="senha" placeholder="Senha" required>
+                <div class="senha">
+                    <input type="password" name="senha" placeholder="Senha" class="inpSenha login-senha" required
+                        autocomplete="current-password">
+                    <ion-icon onclick="verSenha('login-senha')" class="btnVer" name="eye"></ion-icon>
+                </div>
                 <button type="submit" class="flat">Entrar</button>
             </form>
             <div class="forgot-password">
@@ -166,7 +205,11 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
             <form id="registerForm" action="processa_cadastro.php" method="POST">
                 <input type="text" name="nomecad" placeholder="Digite seu nome" required>
                 <input type="email" name="emailcad" placeholder="Digite seu email" required>
-                <input type="password" name="senhacad" placeholder="Senha" required>
+                <div class="senha">
+                    <input type="password" name="senhacad" placeholder="Senha" class="inpSenha register-senha" required
+                        autocomplete="current-password">
+                    <ion-icon onclick="verSenha('register-senha')" class="btnVer" name="eye"></ion-icon>
+                </div>
                 <button type="submit" class="flat">Cadastrar</button>
             </form>
             <div class="message" id="registerMessage"></div>
@@ -202,6 +245,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
                 });
         });
     </script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </body>
 
 </html>

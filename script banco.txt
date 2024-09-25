@@ -1,0 +1,25 @@
+
+--
+-- Banco de dados: `login`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuarios`
+--
+
+create database login;
+
+use login;
+
+CREATE TABLE `usuarios` (
+  `ID` int(11) NOT NULL,
+  `nome` varchar(140) DEFAULT NULL,
+  `email` varchar(140) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `perfil` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `usuarios` (`ID`, `nome`, `email`, `senha`, `perfil`) VALUES
+(17, 'ADMIN', 'admin@gmail.com', '$2y$10$f6MJyHhS2CHScdsvsU3kOO6UZmLvbWZ8MZQe8oTACsLzklX6MCMUi', 'ADM');

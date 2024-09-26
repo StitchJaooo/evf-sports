@@ -1,7 +1,7 @@
-drop database if exists evf-sports; 
-create database evf-sports;
+drop database if exists evfsports; 
+create database evfsports;
 
-use evf-sports;
+use evfsports;
 
 CREATE TABLE `usuarios` (
   `ID` int(11) NOT NULL,

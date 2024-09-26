@@ -1,17 +1,7 @@
+drop database if exists evf-sports; 
+create database evf-sports;
 
---
--- Banco de dados: `login`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `usuarios`
---
-drop database if exists login; 
-create database login;
-
-use login;
+use evf-sports;
 
 CREATE TABLE `usuarios` (
   `ID` int(11) NOT NULL,
@@ -23,3 +13,23 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`ID`, `nome`, `email`, `senha`, `perfil`) VALUES
 (17, 'ADMIN', 'admin@gmail.com', '$2y$10$f6MJyHhS2CHScdsvsU3kOO6UZmLvbWZ8MZQe8oTACsLzklX6MCMUi', 'ADM');
+
+CREATE TABLE `produtos` (
+  `id_produto` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  `nome` varchar(40) DEFAULT NULL,
+  `classificacao` varchar(40) NOT NULL,
+  `ano` YEAR NOT NULL,
+  `cor_principal` varchar(40) NOT NULL,
+  `imagem` varchar(140) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `produtos` (`nome`, `classificacao`, `ano`, `cor_principal`, `imagem`) VALUES
+('2° DS', 'camisa', 2024, 'AZUL', 'assets/camisa.png'),
+('1° DS', 'camisa', 2024, 'ROSA', 'assets/camisa.png'),
+('1° ADM', 'camisa', 2022, 'ROSA', 'assets/camisa.png'),
+('1° ADM', 'camisa', 2023, 'ROXO', 'assets/camisa.png'),
+('1° ADM', 'camisa', 2024, 'VERDE', 'assets/camisa.png'),
+('1° MA', 'camisa', 2023, 'VERMELHO', 'assets/camisa.png'),
+('2° ADM', 'camisa', 2023, 'AMARELO', 'assets/camisa.png'),
+('2° MA', 'camisa', 2024, 'LARANJA', 'assets/camisa.png'),
+('3° ADM', 'camisa', 2024, 'CIANO', 'assets/camisa.png');

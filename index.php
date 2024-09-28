@@ -1,4 +1,4 @@
-<?php include('protect.php');
+<?php
 include('conexao.php');
 $sql_camisas = "SELECT * FROM produtos WHERE classificacao = 'camisa';";
 $camisas = $mysqli->query($sql_camisas);
@@ -7,7 +7,6 @@ $bandeiras = $mysqli->query($sql_bandeiras);
 $sql_logos = "SELECT * FROM produtos WHERE  classificacao = 'logo';";
 $logos = $mysqli->query($sql_logos);
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -30,16 +29,9 @@ $logos = $mysqli->query($sql_logos);
         <div class="usuario">
             <ion-icon name="cart"></ion-icon>
             <ion-icon name="person-circle"></ion-icon>
-            <p id="user"><?php echo $_SESSION['nome']; ?>
-                <ion-icon name="chevron-forward" class="seta-user"></ion-icon>
-            </p>
-            <div class="config-conta">
-                <p id="myuser">Minha conta</p>
-                <div class="borda"></div>
-                <p id="exit">
-                    <a style="color:red;" href="logout.php">Sair</a>
-                </p>
-            </div>
+            <a href="logout.php">
+                <p id="user">Entrar</p>
+            </a>
         </div>
     </header>
     <nav class="sidebar">

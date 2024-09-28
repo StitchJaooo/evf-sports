@@ -2,7 +2,7 @@
 
 $usuario = 'root';
 $senha = '';
-$database = 'evf-sports';
+$database = 'evfsports';
 $host = 'localhost';
 
 $mysqli = new mysqli($host, $usuario, $senha, $database);

@@ -172,6 +172,10 @@ header ion-icon {
     margin: 5px;
 }
 
+#secaoAdd{
+    color: black;
+}
+
 .seta-user {
     font-size: 1.3rem;
     margin: 2.2px 5px 0 5px;

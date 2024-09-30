@@ -110,11 +110,35 @@ $logos = $mysqli->query($sql_logos);
         }
         ?>
     </div>
-    <div id="create">
-        <button class="flat">Crie sua camisa
-            <ion-icon name="shirt"></ion-icon>
-        </button>
-    </div>
+    <section id="secaoAdd">
+        <h2>Adicionar Novo Item</h2>
+        <form action="add_item.php" method="POST" enctype="multipart/form-data" id="formAdd">
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" required>
+
+            <label for="tipo">Tipo:</label>
+            <select name="classificacao" required>
+                <option value="camisa">Camisa</option>
+                <option value="bandeira">Bandeira</option>
+                <option value="logo">Logo</option>
+            </select>
+            
+            <label for="ano">Ano:</label>
+            <input type="number" name="ano" min="2000" max="2100" required>
+
+            <label for="imagem">Imagem:</label>
+            <input type="file" name="imagem" accept="image/*" required>
+
+            <label for="cor_principal">Cor Principal:</label>
+            <input type="text" name="cor_principal" required>
+
+            <label for="preco">Preço:</label>
+            <input type="number" name="preco" step="0.01" required>
+
+            <button type="submit">Adicionar Item</button>
+        </form>
+    </section>
+
     <div class="section" id="bandeiras">
         <p>Confira as melhores Bandeiras de interclasse de todas as escolas do Brasil!</p>
         <h1>Bandeiras</h1>

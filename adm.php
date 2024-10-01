@@ -15,12 +15,116 @@ $logos = $mysqli->query($sql_logos);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EVF SPORTS</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100vw;
+        }
+
+        .card {
+            color: #000;
+        }
+
+        .card.form {
+            width: 500px;
+        }
+
+        .card form {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form .card-title {
+            text-align: center;
+            margin: 15px 0 5px 0;
+        }
+
+        .card-subtitle {
+            font-size: 1rem;
+            margin: 15px 0 5px 0;
+            color: #838383;
+        }
+
+        .modal {
+            color: #000;
+        }
+
+        .flat {
+            padding: 8px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+        }
+
+        .flat:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 10px 1px #233dff;
+        }
+
+        .custom-file-upload {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 10px 0 5px 0;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+            color: #333;
+            width: 80%;
+        }
+
+        input[type="file"] {
+            display: none;
+            /* Esconde o input file original */
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0 10px 0;
+            border-top: none;
+            border-bottom: 1px solid #000;
+            border-left: none;
+            border-right: none;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+            font-family: "OpenSauce";
+            font-size: 1rem;
+            color: #000;
+            background: #00294910;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #000;
+        }
+
+        form p {
+            margin-top: 10px;
+        }
+
+        select {
+            margin-left: 5px;
+            padding: 2px;
+        }
+
+        form button {
+            margin: 15px 10px 10px 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -66,6 +170,21 @@ $logos = $mysqli->query($sql_logos);
             <div class="borda"></div>
         </ul>
     </nav>
+
+    <div class="modal fade" id="resultadoModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="section" id="home">
         <h1>Bem vindo ao nosso site!</h1>
         <h3>Encontre aqui a camiseta que é do seu jeito!</h3>
@@ -97,52 +216,53 @@ $logos = $mysqli->query($sql_logos);
         <p>Conheça agora as melhoras camisas de interclasse de todas as escolas deste país!!!</p>
         <h1>Camisas já feitas</h1>
     </div>
-    <div class="slick-carousel">
+    <div class="container">
+        <div class="card form">
+            <h2 class="card-title">Formulário</h2>
+            <form id="meuForm" enctype="multipart/form-data">
+                <input type="text" name="nome" placeholder="nome" required>
+
+                <p>Tipo:
+                    <select name="classificacao" class="flat" required>
+                        <option value="camisa">Camisa</option>
+                        <option value="bandeira">Bandeira</option>
+                        <option value="logo">Logo</option>
+                    </select>
+                </p>
+
+                <input type="number" name="ano" min="2000" max="2100" placeholder="ano" required>
+
+                <label class="custom-file-upload">
+                    <input type="file" id="imageUpload" name="imagem" accept="image/*" placeholder="Imagem" required />
+                    Imagem
+                </label>
+                <div id="fileName" class="mt-2"></div>
+
+                <input type="text" name="cor_principal" placeholder="cor principal" required>
+
+                <input type="number" name="preco" step="0.01" placeholder="preco" required>
+
+                <button type="submit" class="flat">Adicionar Item</button>
+            </form>
+        </div>
         <?php
         while ($dados_camisas = mysqli_fetch_assoc($camisas)) {
-            echo "<div class='card'>";
+            echo "<div class='card' onclick=\"Delete(" . $dados_camisas['id_produto'] . ")\">";
             echo "<img src=\"" . $dados_camisas['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
             echo "<div class='card-body'>";
             echo "<h2 class='card-title'>" . $dados_camisas['nome'] . " - " . $dados_camisas['cor_principal'] . "</h2>";
             echo "<h2 class='card-price'>R$" . $dados_camisas['preco'] . "</h2>";
+            echo "<h2 class='card-subtitle'> COD PRODUTO: " . $dados_camisas['id_produto'] . "</h2>";
             echo "</div>";
             echo "</div>";
         }
         ?>
     </div>
-    <section id="secaoAdd">
-        <h2>Adicionar Novo Item</h2>
-        <form action="add_item.php" method="POST" enctype="multipart/form-data" id="formAdd">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" required>
-
-            <label for="tipo">Tipo:</label>
-            <select name="classificacao" required>
-                <option value="camisa">Camisa</option>
-                <option value="bandeira">Bandeira</option>
-                <option value="logo">Logo</option>
-            </select>
-            
-            <label for="ano">Ano:</label>
-            <input type="number" name="ano" min="2000" max="2100" required>
-
-            <label for="imagem">Imagem:</label>
-            <input type="file" name="imagem" accept="image/*" required>
-
-            <label for="cor_principal">Cor Principal:</label>
-            <input type="text" name="cor_principal" required>
-
-            <label for="preco">Preço:</label>
-            <input type="number" name="preco" step="0.01" required>
-
-            <button type="submit">Adicionar Item</button>
-        </form>
-    </section>
 
     <div class="section" id="bandeiras">
         <p>Confira as melhores Bandeiras de interclasse de todas as escolas do Brasil!</p>
         <h1>Bandeiras</h1>
-        <div class="slick-carousel">
+        <div class="container">
             <?php
             while ($dados_bandeiras = mysqli_fetch_assoc($bandeiras)) {
                 echo "<div class='card'>";
@@ -150,6 +270,7 @@ $logos = $mysqli->query($sql_logos);
                 echo "<div class='card-body'>";
                 echo "<h2 class='card-title'>" . $dados_bandeiras['nome'] . " - " . $dados_bandeiras['cor_principal'] . "</h2>";
                 echo "<h2 class='card-price'>R$" . $dados_bandeiras['preco'] . "</h2>";
+                echo "<h2 class='card-subtitle'> COD PRODUTO: " . $dados_bandeiras['id_produto'] . "</h2>";
                 echo "</div>";
                 echo "</div>";
             }
@@ -164,7 +285,7 @@ $logos = $mysqli->query($sql_logos);
     <div class="section" id="logos">
         <p>Veja também os melhores Escudos e Logos de interclasse de todas os campeonatos deste país!!!</p>
         <h1>Logos</h1>
-        <div class="slick-carousel">
+        <div class="container">
             <?php
             while ($dados_logos = mysqli_fetch_assoc($logos)) {
                 echo "<div class='card'>";
@@ -172,6 +293,7 @@ $logos = $mysqli->query($sql_logos);
                 echo "<div class='card-body'>";
                 echo "<h2 class='card-title'>" . $dados_logos['nome'] . " - " . $dados_logos['cor_principal'] . "</h2>";
                 echo "<h2 class='card-price'>R$" . $dados_logos['preco'] . "</h2>";
+                echo "<h2 class='card-subtitle'> COD PRODUTO: " . $dados_logos['id_produto'] . "</h2>";
                 echo "</div>";
                 echo "</div>";
             }
@@ -200,10 +322,42 @@ $logos = $mysqli->query($sql_logos);
         <p class="copy">Copyrights © 2024 - EVF SPORTS</p>
     </footer>
 
+    <script>
+        function Delete(idproduto) {
+            $('#modalLabel').html('Você tem certeza que deseja deletar o produto com ID: ' + idproduto + '?');
+            $('#resultadoModal').modal('show');
+        }
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script type="text/javascript" src="js/carousel-camisas.js"></script>
+        document.getElementById('imageUpload').addEventListener('change', function () {
+            const fileName = this.files[0] ? this.files[0].name : 'Nenhum arquivo selecionado';
+            document.getElementById('fileName').textContent = fileName;
+        });
+
+        $(document).ready(function () {
+            $('#meuForm').on('submit', function (event) {
+                event.preventDefault();
+
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: 'add_item.php',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        $('#modalLabel').html(response);
+                        $('#resultadoModal').modal('show');
+                    },
+                    error: function () {
+                        $('#modalLabel').html('Erro ao enviar os dados.');
+                        $('#resultadoModal').modal('show');
+                    }
+                });
+            });
+        });
+    </script>
+
     <script src="js/user-animation.js"></script>
     <script src="js/nav-animation.js"></script>
     <script src="js/header-animation.js"></script>

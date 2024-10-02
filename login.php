@@ -38,7 +38,6 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -46,12 +45,22 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Login</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
     <style>
         #mensagemErro {
             text-align: right;
             margin-left: 900px;
+        }
+
+        body {
+            background-image: url("../assets/background.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: start;
         }
 
         .container {
@@ -59,13 +68,8 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
             justify-content: center;
             align-items: center;
             width: 100vw;
-            height: 95.8vh;
-            padding: 20px;
+            height: 100vh;
             font-family: "OpenSauceRegular";
-            background-image: url("assets/background.png");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: start;
         }
 
         .login-container,
@@ -144,16 +148,17 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
             transform: scale(1.05);
             box-shadow: 0px 0px 10px 1px #233dff;
         }
-        
+
         .senha {
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        
+
         .btnVer {
             margin-left: 2px;
             padding: 10px;
+            font-size: 2rem;
             background-color: transparent;
             border: none;
             color: white;
@@ -165,24 +170,44 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
         .btnVer:hover {
             background-color: #ffffff31;
         }
-    </style>
-    <script>
-        function verSenha(inputClass) {
-            const senha = document.querySelector(`.${inputClass}`);
-            const icone = senha.nextElementSibling; // Obtém o próximo elemento que é o ícone
 
-            if (senha.type === 'password') {
-                senha.type = 'text';
-                icone.setAttribute('name', 'eye-off');
-            } else {
-                senha.type = 'password';
-                icone.setAttribute('name', 'eye');
+        .modal {
+            color: #737373;
+        }
+
+        @media all and (max-width: 600px) {
+            .container {
+                flex-direction: column;
+                justify-content: space-evenly;
+            }
+
+            .register-container,
+            .login-container {
+                height: 40vh;
+                width: 50vw;
+                margin: 0;
+                backdrop-filter: blur(15px);
             }
         }
-    </script>
+    </style>
 </head>
 
 <body>
+
+    <div class="modal fade" id="resultadoModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="login-container">
             <h2>Login</h2>
@@ -203,7 +228,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
 
         <div class="register-container">
             <h2>Cadastro</h2>
-            <form id="registerForm" action="processa_cadastro.php" method="POST">
+            <form id="registerForm">
                 <input type="text" name="nomecad" placeholder="Digite seu nome" required>
                 <input type="email" name="emailcad" placeholder="Digite seu email" required>
                 <div class="senha">
@@ -218,7 +243,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function (e) {
+         document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const formData = new FormData(this);
             formData.append('action', 'login');
@@ -232,21 +257,31 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
                 });
         });
 
-        document.getElementById('registerForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            formData.append('action', 'register');
-
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('registerMessage').textContent = data.message;
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
+        $(document).ready(function () {
+            $('#registerForm').on('submit', function (event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: 'processa_cadastro.php',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            $('#modalLabel').html(response.message);
+                        } else {
+                            $('#modalLabel').html('Erro: ' + response.message);
+                        }
+                        $('#resultadoModal').modal('show');
+                    }
                 });
+            });
         });
     </script>
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
+    <script src="js/password.js"></script>
 </body>
 
 </html>

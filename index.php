@@ -2,8 +2,6 @@
 include('conexao.php');
 $sql_camisas = "SELECT * FROM produtos WHERE classificacao = 'camisa';";
 $camisas = $mysqli->query($sql_camisas);
-$sql_bandeiras = "SELECT * FROM produtos WHERE classificacao = 'bandeira';";
-$bandeiras = $mysqli->query($sql_bandeiras);
 $sql_logos = "SELECT * FROM produtos WHERE  classificacao = 'logo';";
 $logos = $mysqli->query($sql_logos);
 ?>
@@ -42,10 +40,6 @@ $logos = $mysqli->query($sql_logos);
             <div class="borda"></div>
             <a href="#camisas">
                 <li data-section="camisas">Camisas</li>
-            </a>
-            <div class="borda"></div>
-            <a href="#bandeiras">
-                <li data-section="bandeiras">Bandeiras</li>
             </a>
             <div class="borda"></div>
             <a href="#logos">
@@ -105,28 +99,6 @@ $logos = $mysqli->query($sql_logos);
     <div id="create">
         <button class="flat">Crie sua camisa
             <ion-icon name="shirt"></ion-icon>
-        </button>
-    </div>
-    <div class="section" id="bandeiras">
-        <p>Confira as melhores Bandeiras de interclasse de todas as escolas do Brasil!</p>
-        <h1>Bandeiras</h1>
-        <div class="slick-carousel">
-            <?php
-            while ($dados_bandeiras = mysqli_fetch_assoc($bandeiras)) {
-                echo "<div class='card'>";
-                echo "<img src=\"" . $dados_bandeiras['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
-                echo "<div class='card-body'>";
-                echo "<h2 class='card-title'>" . $dados_bandeiras['nome'] . " - " . $dados_bandeiras['cor_principal'] . "</h2>";
-                echo "<h2 class='card-price'>R$" . $dados_bandeiras['preco'] . "</h2>";
-                echo "</div>";
-                echo "</div>";
-            }
-            ?>
-        </div>
-    </div>
-    <div id="create">
-        <button class="flat">Crie sua bandeira
-            <ion-icon name="flag"></ion-icon>
         </button>
     </div>
     <div class="section" id="logos">

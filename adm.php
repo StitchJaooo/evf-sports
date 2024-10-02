@@ -2,8 +2,6 @@
 include('conexao.php');
 $sql_camisas = "SELECT * FROM produtos WHERE classificacao = 'camisa';";
 $camisas = $mysqli->query($sql_camisas);
-$sql_bandeiras = "SELECT * FROM produtos WHERE classificacao = 'bandeira';";
-$bandeiras = $mysqli->query($sql_bandeiras);
 $sql_logos = "SELECT * FROM produtos WHERE  classificacao = 'logo';";
 $logos = $mysqli->query($sql_logos);
 ?>
@@ -84,7 +82,6 @@ $logos = $mysqli->query($sql_logos);
 
         input[type="file"] {
             display: none;
-            /* Esconde o input file original */
         }
 
         input[type="text"],
@@ -156,10 +153,6 @@ $logos = $mysqli->query($sql_logos);
                 <li data-section="camisas">Camisas</li>
             </a>
             <div class="borda"></div>
-            <a href="#bandeiras">
-                <li data-section="bandeiras">Bandeiras</li>
-            </a>
-            <div class="borda"></div>
             <a href="#logos">
                 <li data-section="logos">Logos</li>
             </a>
@@ -225,7 +218,6 @@ $logos = $mysqli->query($sql_logos);
                 <p>Tipo:
                     <select name="classificacao" class="flat" required>
                         <option value="camisa">Camisa</option>
-                        <option value="bandeira">Bandeira</option>
                         <option value="logo">Logo</option>
                     </select>
                 </p>
@@ -257,30 +249,6 @@ $logos = $mysqli->query($sql_logos);
             echo "</div>";
         }
         ?>
-    </div>
-
-    <div class="section" id="bandeiras">
-        <p>Confira as melhores Bandeiras de interclasse de todas as escolas do Brasil!</p>
-        <h1>Bandeiras</h1>
-        <div class="container">
-            <?php
-            while ($dados_bandeiras = mysqli_fetch_assoc($bandeiras)) {
-                echo "<div class='card'>";
-                echo "<img src=\"" . $dados_bandeiras['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
-                echo "<div class='card-body'>";
-                echo "<h2 class='card-title'>" . $dados_bandeiras['nome'] . " - " . $dados_bandeiras['cor_principal'] . "</h2>";
-                echo "<h2 class='card-price'>R$" . $dados_bandeiras['preco'] . "</h2>";
-                echo "<h2 class='card-subtitle'> COD PRODUTO: " . $dados_bandeiras['id_produto'] . "</h2>";
-                echo "</div>";
-                echo "</div>";
-            }
-            ?>
-        </div>
-    </div>
-    <div id="create">
-        <button class="flat">Crie sua bandeira
-            <ion-icon name="flag"></ion-icon>
-        </button>
     </div>
     <div class="section" id="logos">
         <p>Veja também os melhores Escudos e Logos de interclasse de todas os campeonatos deste país!!!</p>

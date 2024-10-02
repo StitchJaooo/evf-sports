@@ -23,8 +23,9 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
                 session_abort();
             }
 
-            $_SESSION['id'] = $usuario['id'];
+            $_SESSION['id_usuario'] = $usuario['ID'];
             $_SESSION['nome'] = $usuario['nome'];
+            $_SESSION['email'] = $usuario['email'];
 
             if ($usuario['perfil'] == 'ADM') {
                 header("Location: adm.php");

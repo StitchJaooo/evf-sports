@@ -4,7 +4,7 @@ create database evfsports;
 use evfsports;
 
 CREATE TABLE `usuarios` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11)  AUTO_INCREMENT PRIMARY KEY NOT NULL,
   `nome` varchar(140) DEFAULT NULL,
   `email` varchar(140) NOT NULL,
   `senha` varchar(255) NOT NULL,
@@ -52,3 +52,13 @@ INSERT INTO `produtos` (`nome`, `classificacao`, `ano`, `cor_principal`, `preco`
 ('2 ADM', 'logo', 2023, 'AMARELO', 50.00, 'assets/logo.png'),
 ('2 MA', 'logo', 2024, 'LARANJA', 40.00, 'assets/logo.png'),
 ('3 ADM', 'logo', 2024, 'CIANO', 38.00, 'assets/logo.png');
+
+CREATE TABLE `carrinho` (
+  `id_usuario` int(11) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  `quantidade` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `carrinho`
+  ADD PRIMARY KEY (`id_usuario`,`id_produto`),
+  ADD KEY `fk_produto` (`id_produto`);

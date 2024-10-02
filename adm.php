@@ -28,6 +28,14 @@ $logos = $mysqli->query($sql_logos);
             width: 100vw;
         }
 
+        .container.form {
+            margin-top: 15vh;
+        }
+
+        #camisas {
+            margin: 20px;
+        }
+
         .card {
             color: #000;
         }
@@ -121,11 +129,57 @@ $logos = $mysqli->query($sql_logos);
         form button {
             margin: 15px 10px 10px 10px;
         }
+
+        .icon-left {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 2rem;
+            color: orange;
+            transition: .8s;
+        }
+
+        .icon-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            color: red;
+            transition: .8s;
+        }
+
+        .icon-left:hover,
+        .icon-right:hover {
+            transform: scale(1.2);
+        }
+
+        .delete {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid red;
+            background-color: red;
+        }
+
+        .delete ion-icon {
+            margin-left: 8px;
+            font-size: 1.5rem;
+        }
+
+        .delete:hover {
+            box-shadow: 0px 0px 10px 4px red;
+        }
+
+        .modal-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     </style>
 </head>
 
 <body>
-    <header>
+    <header class="scrolled">
         <ion-icon name="menu" class="nav-menu"></ion-icon>
         <img src="assets/logo.png" alt="">
         <div class="usuario">
@@ -178,40 +232,29 @@ $logos = $mysqli->query($sql_logos);
         </div>
     </div>
 
-    <div class="section" id="home">
-        <h1>Bem vindo ao nosso site!</h1>
-        <h3>Encontre aqui a camiseta que é do seu jeito!</h3>
-        <div class="buttons">
-            <a href="#camisas">
-                <button class="flat">Coleção de camisas</button>
-            </a>
-            <button class="raised">Montar sua camisa</button>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDeleteLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <button class="flat" data-dismiss="modal">Cancelar</button>
+                    <button class="flat delete" data-dismiss="modal" id="confirmDeleteBtn">Excluir
+                        <ion-icon name="trash"></ion-icon>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="propaganda" id="propaganda">
-        <div class="anuncio">
-            <ion-icon name="car-sport" class="icons-anuncio"></ion-icon>
-            <h1 class="anuncio-title">Frete Grátis</h1>
-            <h3 class="anuncio-sub">Para toda zona leste - SP</h3>
-        </div>
-        <div class="anuncio">
-            <ion-icon name="call" class="icons-anuncio"></ion-icon>
-            <h1 class="anuncio-title">Suporte 24H</h1>
-            <h3 class="anuncio-sub">Atendimento online a todo momento.</h3>
-        </div>
-        <div class="anuncio">
-            <ion-icon name="refresh-outline" class="icons-anuncio"></ion-icon>
-            <h1 class="anuncio-title">Dinheiro de volta</h1>
-            <h3 class="anuncio-sub">Em caso de erro, tenha seu dinheiro de volta.</h3>
-        </div>
-    </div>
-    <div class="section" id="camisas">
-        <p>Conheça agora as melhoras camisas de interclasse de todas as escolas deste país!!!</p>
-        <h1>Camisas já feitas</h1>
-    </div>
-    <div class="container">
+
+    <div class="container form">
         <div class="card form">
-            <h2 class="card-title">Formulário</h2>
+            <h2 class="card-title">Adicionar produto</h2>
             <form id="meuForm" enctype="multipart/form-data">
                 <input type="text" name="nome" placeholder="nome" required>
 
@@ -237,9 +280,17 @@ $logos = $mysqli->query($sql_logos);
                 <button type="submit" class="flat">Adicionar Item</button>
             </form>
         </div>
+    </div>
+
+    <div class="section" id="camisas">
+        <h1>Camisas</h1>
+    </div>
+    <div class="container">
         <?php
         while ($dados_camisas = mysqli_fetch_assoc($camisas)) {
-            echo "<div class='card' onclick=\"Delete(" . $dados_camisas['id_produto'] . ")\">";
+            echo "<div class='card'>";
+            echo "<div class=\"icon-left\"><ion-icon name=\"pencil\"></ion-icon></div>";
+            echo "<div class=\"icon-right\" onclick=\"Delete(" . $dados_camisas['id_produto'] . ")\"><ion-icon name=\"trash\"></ion-icon></div>";
             echo "<img src=\"" . $dados_camisas['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
             echo "<div class='card-body'>";
             echo "<h2 class='card-title'>" . $dados_camisas['nome'] . " - " . $dados_camisas['cor_principal'] . "</h2>";
@@ -251,12 +302,13 @@ $logos = $mysqli->query($sql_logos);
         ?>
     </div>
     <div class="section" id="logos">
-        <p>Veja também os melhores Escudos e Logos de interclasse de todas os campeonatos deste país!!!</p>
         <h1>Logos</h1>
         <div class="container">
             <?php
             while ($dados_logos = mysqli_fetch_assoc($logos)) {
                 echo "<div class='card'>";
+                echo "<div class=\"icon-left\"><ion-icon name=\"pencil\"></ion-icon></div>";
+                echo "<div class=\"icon-right\" onclick=\"Delete(" . $dados_logos['id_produto'] . ")\"><ion-icon name=\"trash\"></ion-icon></div>";
                 echo "<img src=\"" . $dados_logos['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
                 echo "<div class='card-body'>";
                 echo "<h2 class='card-title'>" . $dados_logos['nome'] . " - " . $dados_logos['cor_principal'] . "</h2>";
@@ -267,11 +319,6 @@ $logos = $mysqli->query($sql_logos);
             }
             ?>
         </div>
-    </div>
-    <div id="create">
-        <button class="flat">Crie sua Logo
-            <ion-icon name="add-circle"></ion-icon>
-        </button>
     </div>
     <footer>
         <div class="infos">
@@ -291,9 +338,28 @@ $logos = $mysqli->query($sql_logos);
     </footer>
 
     <script>
-        function Delete(idproduto) {
-            $('#modalLabel').html('Você tem certeza que deseja deletar o produto com ID: ' + idproduto + '?');
-            $('#resultadoModal').modal('show');
+        function Delete(id_produto) {
+            $('#modalDeleteLabel').html('Você tem certeza que deseja deletar este produto?');
+            $('#deleteModal').modal('show');
+            document.getElementById('confirmDeleteBtn').onclick = function () {
+                DeleteProduct(id_produto);
+            };
+        }
+
+        function DeleteProduct(id_produto) {
+            $.ajax({
+                    url: 'delete_item.php',
+                    type: 'POST',
+                    data: { id_produto: id_produto },
+                    success: function (response) {
+                        $('#modalLabel').html(response);
+                        $('#resultadoModal').modal('show');
+                    },
+                    error: function () {
+                        $('#modalLabel').html('Erro ao enviar os dados.');
+                        $('#resultadoModal').modal('show');
+                    }
+                });
         }
 
         document.getElementById('imageUpload').addEventListener('change', function () {
@@ -328,7 +394,6 @@ $logos = $mysqli->query($sql_logos);
 
     <script src="js/user-animation.js"></script>
     <script src="js/nav-animation.js"></script>
-    <script src="js/header-animation.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 

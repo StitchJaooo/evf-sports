@@ -57,7 +57,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
         }
 
         body {
-            background-image: url("../assets/background.png");
+            background-image: url("assets/background.png");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: start;
@@ -243,20 +243,6 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     </div>
 
     <script>
-         document.getElementById('loginForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            formData.append('action', 'login');
-
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('loginMessage').textContent = data.message;
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                });
-        });
-
         $(document).ready(function () {
             $('#registerForm').on('submit', function (event) {
                 event.preventDefault();

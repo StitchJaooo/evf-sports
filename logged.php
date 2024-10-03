@@ -99,6 +99,11 @@ $logos = $mysqli->query($sql_logos);
             echo "<div class='card-body'>";
             echo "<h2 class='card-title'>" . $dados_camisas['nome'] . " - " . $dados_camisas['cor_principal'] . "</h2>";
             echo "<h2 class='card-price'>R$" . $dados_camisas['preco'] . "</h2>";
+            echo "<form action=\"carrinho.php\" method=\"POST\">";
+            echo "<input type=\"hidden\" name=\"id_produto\" value=" . $dados_camisas['id_produto'] .  "></input>";
+            echo "<input type=\"text\" name=\"quantidade\" value=\"1\" pattern=\"\d*\" maxlength=\"4\" style=\" width:100px; text-align:center\" placeholder=\"Quantidade\"></input>";
+            echo "<button type=\"submit\">Adicionar ao Carrinho</button>";
+            echo "</form>";
             echo "</div>";
             echo "</div>";
         }
@@ -120,6 +125,11 @@ $logos = $mysqli->query($sql_logos);
                 echo "<div class='card-body'>";
                 echo "<h2 class='card-title'>" . $dados_logos['nome'] . " - " . $dados_logos['cor_principal'] . "</h2>";
                 echo "<h2 class='card-price'>R$" . $dados_logos['preco'] . "</h2>";
+                echo "<form action=\"carrinho.php\" method=\"POST\">";
+                echo "<input type=\"hidden\" name=\"id_produto\" value=" . $dados_logos['id_produto'] . "></input>";
+                echo "<input type=\"text\" name=\"quantidade\" value=\"1\" pattern=\"\d*\" maxlength=\"4\" style=\" width:100px; text-align:center\" placeholder=\"Quantidade\"></input>";
+                echo "<button type=\"submit\">Adicionar ao Carrinho</button>";
+                echo "</form>";
                 echo "</div>";
                 echo "</div>";
             }

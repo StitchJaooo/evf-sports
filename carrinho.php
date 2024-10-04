@@ -59,8 +59,8 @@ if ($idProduto > 0) {
 
     $stmtCheck->close();
 }
-$idProduto=0;
-$quantidade=0;
+$idProduto = 0;
+$quantidade = 0;
 
 $sqlVerificaUsuario = "SELECT COUNT(*) FROM `carrinho` WHERE id_usuario = " . $idUsuario;
 
@@ -77,7 +77,7 @@ if ($sqlVerificaUsuario > 0) {
         echo "<p>Quantidade: " . $dados_produtos['quantidade'] . "</p>"; // Exibindo a quantidade
         echo "<button id=\"remover\" onclick=\"removerItem(" . $dados_produtos["id_produto"] . ")\">REMOVER</button>";
         echo "<button id=\"aumentar\" onclick=\"aumentarItem(" . $dados_produtos["id_produto"] . ")\">+</button>";
-        if($dados_produtos['quantidade'] == 1) {
+        if ($dados_produtos['quantidade'] == 1) {
             echo "<button id=\"diminuir\" disabled \">-</button>";
         } else {
             echo "<button id=\"diminuir\" onclick=\"diminuirItem(" . $dados_produtos["id_produto"] . ")\">-</button>";
@@ -100,9 +100,6 @@ if ($sqlVerificaUsuario > 0) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 </head>
 
 <body>

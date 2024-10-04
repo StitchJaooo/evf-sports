@@ -13,12 +13,36 @@ $logos = $mysqli->query($sql_logos);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EVF SPORTS</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        #item-footer1,
+        #item-footer2 {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+        }
+
+        .item-footer h1 {
+            font-family: "OpenSauceBold";
+        }
+
+        #item-footer1 p,
+        #item-footer2 p {
+            margin-top: 5px;
+            margin-top: -8px;
+        }
+
+        @media all and (max-width: 600px) {
+            footer {
+                height: 50vh;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -26,7 +50,7 @@ $logos = $mysqli->query($sql_logos);
         <ion-icon name="menu" class="nav-menu"></ion-icon>
         <img src="assets/logo.png" alt="">
         <div class="usuario">
-            <ion-icon name="cart"></ion-icon>
+            <a href="carrinho.php"><ion-icon name="cart"></ion-icon></a>
             <ion-icon name="person-circle"></ion-icon>
             <p id="user"><?php echo $_SESSION['nome']; ?>
                 <ion-icon name="chevron-forward" class="seta-user"></ion-icon>
@@ -94,16 +118,11 @@ $logos = $mysqli->query($sql_logos);
     <div class="slick-carousel">
         <?php
         while ($dados_camisas = mysqli_fetch_assoc($camisas)) {
-            echo "<div class='card'>";
+            echo "<div class='card' onclick=\"ExibirProduto(" . $dados_camisas['id_produto'] . ")\">";
             echo "<img src=\"" . $dados_camisas['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
             echo "<div class='card-body'>";
             echo "<h2 class='card-title'>" . $dados_camisas['nome'] . " - " . $dados_camisas['cor_principal'] . "</h2>";
             echo "<h2 class='card-price'>R$" . $dados_camisas['preco'] . "</h2>";
-            echo "<form action=\"carrinho.php\" method=\"POST\">";
-            echo "<input type=\"hidden\" name=\"id_produto\" value=" . $dados_camisas['id_produto'] .  "></input>";
-            echo "<input type=\"text\" name=\"quantidade\" value=\"1\" pattern=\"\d*\" maxlength=\"4\" style=\" width:100px; text-align:center\" placeholder=\"Quantidade\"></input>";
-            echo "<button type=\"submit\">Adicionar ao Carrinho</button>";
-            echo "</form>";
             echo "</div>";
             echo "</div>";
         }
@@ -120,16 +139,11 @@ $logos = $mysqli->query($sql_logos);
         <div class="slick-carousel">
             <?php
             while ($dados_logos = mysqli_fetch_assoc($logos)) {
-                echo "<div class='card'>";
+                echo "<div class='card' onclick=\"ExibirProduto(" . $dados_camisas['id_produto'] . ")\">";
                 echo "<img src=\"" . $dados_logos['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
                 echo "<div class='card-body'>";
                 echo "<h2 class='card-title'>" . $dados_logos['nome'] . " - " . $dados_logos['cor_principal'] . "</h2>";
                 echo "<h2 class='card-price'>R$" . $dados_logos['preco'] . "</h2>";
-                echo "<form action=\"carrinho.php\" method=\"POST\">";
-                echo "<input type=\"hidden\" name=\"id_produto\" value=" . $dados_logos['id_produto'] . "></input>";
-                echo "<input type=\"text\" name=\"quantidade\" value=\"1\" pattern=\"\d*\" maxlength=\"4\" style=\" width:100px; text-align:center\" placeholder=\"Quantidade\"></input>";
-                echo "<button type=\"submit\">Adicionar ao Carrinho</button>";
-                echo "</form>";
                 echo "</div>";
                 echo "</div>";
             }
@@ -142,13 +156,14 @@ $logos = $mysqli->query($sql_logos);
         </button>
     </div>
     <footer>
-        <div class="infos">
-            <div class="item-footer">
+        <div class="infos" id="infos">
+            <div class="item-footer" id="item-footer1">
                 <h1>Sobre nós</h1>
-                <p>Somos uma empresa de confecção de camisas, bandeiras e designs, vendemos itens prontos já feitos por
+                <p>Somos uma empresa de confecção de camisas, bandeiras e designs, vendemos itens prontos já feitos
+                    por
                     nossa empresa!</p>
             </div>
-            <div class="item-footer">
+            <div class="item-footer" id="item-footer2">
                 <h1>Nossos contatos</h1>
                 <p>random@teste.com</p>
                 <p>1199999999999999</p>
@@ -157,10 +172,10 @@ $logos = $mysqli->query($sql_logos);
         <p class="copy">Copyrights © 2024 - EVF SPORTS</p>
     </footer>
 
-
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript" src="js/carousel-camisas.js"></script>
+    <script src="js/exibir-produto.js"></script>
     <script src="js/user-animation.js"></script>
     <script src="js/nav-animation.js"></script>
     <script src="js/header-animation.js"></script>

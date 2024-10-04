@@ -175,6 +175,29 @@ $logos = $mysqli->query($sql_logos);
             justify-content: space-between;
             align-items: center;
         }
+
+        #item-footer1,
+        #item-footer2 {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+        }
+
+        .item-footer h1 {
+            font-family: "OpenSauceBold";
+        }
+
+        #item-footer1 p,
+        #item-footer2 p {
+            margin-top: 5px;
+            margin-top: -8px;
+        }
+
+        @media all and (max-width: 600px) {
+            footer {
+                height: 50vh;
+            }
+        }
     </style>
 </head>
 
@@ -321,14 +344,14 @@ $logos = $mysqli->query($sql_logos);
         </div>
     </div>
     <footer>
-        <div class="infos">
-            <div class="item-footer">
+        <div class="infos" id="infos">
+            <div class="item-footer" id="item-footer1">
                 <h1>Sobre nós</h1>
                 <p>Somos uma empresa de confecção de camisas, bandeiras e designs, vendemos itens prontos já feitos
                     por
                     nossa empresa!</p>
             </div>
-            <div class="item-footer">
+            <div class="item-footer" id="item-footer2">
                 <h1>Nossos contatos</h1>
                 <p>random@teste.com</p>
                 <p>1199999999999999</p>
@@ -348,18 +371,18 @@ $logos = $mysqli->query($sql_logos);
 
         function DeleteProduct(id_produto) {
             $.ajax({
-                    url: 'delete_item.php',
-                    type: 'POST',
-                    data: { id_produto: id_produto },
-                    success: function (response) {
-                        $('#modalLabel').html(response);
-                        $('#resultadoModal').modal('show');
-                    },
-                    error: function () {
-                        $('#modalLabel').html('Erro ao enviar os dados.');
-                        $('#resultadoModal').modal('show');
-                    }
-                });
+                url: 'delete_item.php',
+                type: 'POST',
+                data: { id_produto: id_produto },
+                success: function (response) {
+                    $('#modalLabel').html(response);
+                    $('#resultadoModal').modal('show');
+                },
+                error: function () {
+                    $('#modalLabel').html('Erro ao enviar os dados.');
+                    $('#resultadoModal').modal('show');
+                }
+            });
         }
 
         document.getElementById('imageUpload').addEventListener('change', function () {

@@ -496,6 +496,7 @@ a {
 
 footer {
     height: 40vh;
+    width: 100vw;
     background-color: #050a30;
     display: flex;
     justify-content: center;
@@ -515,7 +516,7 @@ footer {
 .item-footer {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 400px;
 }
 
 .item-footer p {

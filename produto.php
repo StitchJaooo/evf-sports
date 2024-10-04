@@ -43,6 +43,16 @@ if (isset($_GET['id'])) {
 
         .card {
             text-align: center;
+            height: 25vh
+        }
+
+        .card-body,
+        .card {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: column;
+            font-family: "OpenSauceBold";
         }
 
         .card ion-icon {
@@ -76,6 +86,59 @@ if (isset($_GET['id'])) {
         .modal {
             color: #000;
         }
+
+        nav {
+            margin-top: -15vh;
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flat {
+            padding: 5px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 20px;
+            border: 1px solid #233dff;
+            box-sizing: border-box;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-top-left-radius: 24px;
+            border-bottom-left-radius: 24px;
+            font: 1.3rem "OpenSauceRegular";
+            color: #000;
+            background: #00294910;
+            transition: .8s;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #000;
+        }
+
+        .flat:hover{
+            transform: scale(1.05);
+            box-shadow: 0px 0px 10px 1px #233dff;
+        }
+
+        .quantidade{
+            transition: .8s;
+        }
+
+        .quantidade:hover{
+            transform: scale(1.05);
+            box-shadow: 0px 0px 10px 1px #233dff;
+        }
     </style>
 </head>
 
@@ -100,15 +163,15 @@ if (isset($_GET['id'])) {
     </header>
     <nav class="sidebar">
         <ul>
-            <a href="#home">
+            <a href="logged.php">
                 <li data-section="home" class="selecionado">Home</li>
             </a>
             <div class="borda"></div>
-            <a href="#camisas">
+            <a href="logged.php">
                 <li data-section="camisas">Camisas</li>
             </a>
             <div class="borda"></div>
-            <a href="#produ$dados_produtos">
+            <a href="logged.php">
                 <li data-section="logos">Logos</li>
             </a>
             <div class="borda"></div>
@@ -137,13 +200,15 @@ if (isset($_GET['id'])) {
             while ($dados_produtos = mysqli_fetch_assoc($result)) {
                 echo "<div class='card'>";
                 echo "<img src=\"" . $dados_produtos['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
+                echo "</div>";
+                echo "<div class='card'>";
                 echo "<div class='card-body'>";
                 echo "<h2 class='card-title'>" . $dados_produtos['nome'] . " - " . $dados_produtos['cor_principal'] . "</h2>";
                 echo "<h2 class='card-price'>R$" . $dados_produtos['preco'] . "</h2>";
                 echo "<form id=\"carrinho\">";
                 echo "<input type=\"hidden\" name=\"id_produto\" value=" . $dados_produtos['id_produto'] . "></input>";
-                echo "<input type=\"text\" name=\"quantidade\" value=\"1\" pattern=\"\d*\" maxlength=\"4\" style=\" width:100px; text-align:center\" placeholder=\"Quantidade\"></input>";
-                echo "<button type=\"submit\">Adicionar ao Carrinho</button>";
+                echo "<input type=\"number\" name=\"quantidade\" value=\"1\" pattern=\"\d*\" maxlength=\"4\" style=\" width:100px; text-align:center\" placeholder=\"Quantidade\" class='quantidade'></input>";
+                echo "<button type=\"submit\" class='flat'>Adicionar ao Carrinho</button>";
                 echo "</form>";
                 echo "</div>";
                 echo "</div>";

@@ -150,7 +150,7 @@ $logos = $mysqli->query($sql_logos);
         </div>
     </div>
     <div id="create">
-        <button class="flat">Crie sua Logo
+        <button class="flat" onclick="createLogo()">Crie sua Logo
             <ion-icon name="add-circle"></ion-icon>
         </button>
     </div>
@@ -170,6 +170,12 @@ $logos = $mysqli->query($sql_logos);
         </div>
         <p class="copy">Copyrights © 2024 - EVF SPORTS</p>
     </footer>
+
+<script>
+function createLogo(){
+    window.location.href="create-logo.php"
+}
+</script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

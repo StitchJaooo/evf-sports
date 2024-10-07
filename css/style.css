@@ -286,7 +286,7 @@ nav.ativo {
     align-items: center;
     justify-content: center;
     height: 110vh;
-    width: 110vw;
+    width: 100vw;
     background-image: url("../assets/background.png");
     background-size: cover;
     background-repeat: no-repeat;

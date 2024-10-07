@@ -16,7 +16,7 @@ $logos = $mysqli->query($sql_logos);
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css"
-    href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -121,7 +121,7 @@ $logos = $mysqli->query($sql_logos);
         </div>
     </div>
     <div id="create">
-        <button class="flat">Crie sua Logo
+        <button class="flat" onclick="createLogo()">Crie sua Logo
             <ion-icon name="add-circle"></ion-icon>
         </button>
     </div>
@@ -141,6 +141,11 @@ $logos = $mysqli->query($sql_logos);
         <p class="copy">Copyrights © 2024 - EVF SPORTS</p>
     </footer>
 
+    <script>
+        function createLogo() {
+            window.location.href = "create-logo.php"
+        }
+    </script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -148,6 +153,7 @@ $logos = $mysqli->query($sql_logos);
     <script src="js/user-animation.js"></script>
     <script src="js/nav-animation.js"></script>
     <script src="js/header-animation.js"></script>
+    <script src="js/exibir-produto.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 

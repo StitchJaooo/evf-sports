@@ -83,7 +83,7 @@ $logos = $mysqli->query($sql_logos);
             <div class="borda"></div>
         </ul>
     </nav>
-    <div class="section" id="home">
+    <div class="section" id="home" style="width: 100vw;">
         <h1>Bem vindo ao nosso site!</h1>
         <h3>Encontre aqui a camiseta que é do seu jeito!</h3>
         <div class="buttons">

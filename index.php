@@ -12,12 +12,12 @@ $logos = $mysqli->query($sql_logos);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EVF SPORTS</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -52,7 +52,8 @@ $logos = $mysqli->query($sql_logos);
             <div class="borda"></div>
         </ul>
     </nav>
-    <div class="section" id="home">
+
+    <div class="section" id="home" style="width: 100vw;">
         <h1>Bem vindo ao nosso site!</h1>
         <h3>Encontre aqui a camiseta que é do seu jeito!</h3>
         <div class="buttons">
@@ -62,6 +63,7 @@ $logos = $mysqli->query($sql_logos);
             <button class="raised">Montar sua camisa</button>
         </div>
     </div>
+
     <div class="propaganda" id="propaganda">
         <div class="anuncio">
             <ion-icon name="car-sport" class="icons-anuncio"></ion-icon>

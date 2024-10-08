@@ -172,7 +172,7 @@ header ion-icon {
     margin: 5px;
 }
 
-#secaoAdd{
+#secaoAdd {
     color: black;
 }
 
@@ -427,6 +427,18 @@ a {
 
 .card:active {
     cursor: grabbing;
+}
+
+.card-estoque {
+    color: #96969660;
+    width: 95%;
+    text-align: right;
+}
+
+.card-estoque-adm {
+    color: #96969660;
+    width: 95%;
+    text-align: center;
 }
 
 .card-img {

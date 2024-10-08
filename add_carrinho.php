@@ -1,37 +1,81 @@
 <?php
 include("protect.php");
 include("conexao.php");
+
 if (!isset($_SESSION['id_usuario'])) {
-    echo "Você precisa estar logado para adicionar ao carrinho.";
+    echo json_encode(['success' => false, 'message' => 'Você precisa estar logado para adicionar ao carrinho.']);
     exit;
 }
 
 $id_usuario = $_SESSION['id_usuario'];
 
-if (isset($_POST['id_produto'])) {
-    $id_produto = intval($_POST['id_produto']);
-    $sql = "SELECT quantidade FROM carrinho WHERE id_usuario = ? AND id_produto = ?";
-    $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param("ii", $id_usuario, $id_produto);
+if (isset($_POST["quantidade"]) && isset($_POST["id_produto"])) {
+    $quantidade = intval($_POST['quantidade']);
+    $idProduto = intval($_POST['id_produto']);
+
+    // Verificando o estoque do produto
+    $stmt = $mysqli->prepare('SELECT estoque FROM produtos WHERE id_produto = ?');
+    $stmt->bind_param("i", $idProduto);
     $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $nova_quantidade = $row['quantidade'] + 1;
-        $update_sql = "UPDATE carrinho SET quantidade = ? WHERE id_usuario = ? AND id_produto = ?";
-        $stmt = $mysqli->prepare($update_sql);
-        $stmt->bind_param("iii", $nova_quantidade, $id_usuario, $id_produto);
-        $stmt->execute();
-    } else {
-        $insert_sql = "INSERT INTO carrinho (id_usuario, id_produto, quantidade) VALUES (?, ?, 1)";
-        $stmt = $mysqli->prepare($insert_sql);
-        $stmt->bind_param("ii", $id_usuario, $id_produto);
-        $stmt->execute();
+    $stmt->bind_result($estoque);
+    $stmt->fetch();
+    $stmt->close();
+
+    if ($estoque === null) {
+        echo json_encode(['success' => false, 'message' => 'Produto não encontrado.']);
+        exit;
     }
 
-    echo "Produto adicionado ao carrinho com sucesso!";
+    // Verifica se o estoque é suficiente
+    if ($estoque >= $quantidade) {
+        // Atualiza o estoque do produto
+        $novoEstoque = $estoque - $quantidade;
+        $stmtUpdateEstoque = $mysqli->prepare("UPDATE produtos SET estoque = ? WHERE id_produto = ?");
+        $stmtUpdateEstoque->bind_param("ii", $novoEstoque, $idProduto);
+        $stmtUpdateEstoque->execute();
+        $stmtUpdateEstoque->close();
+
+        // Verificando se o produto já está no carrinho
+        $sqlCheck = "SELECT quantidade FROM carrinho WHERE id_usuario = ? AND id_produto = ?";
+        $stmtCheck = $mysqli->prepare($sqlCheck);
+        $stmtCheck->bind_param("ii", $id_usuario, $idProduto);
+        $stmtCheck->execute();
+        $stmtCheck->store_result();
+
+        if ($stmtCheck->num_rows > 0) {
+            // Produto já existe no carrinho, atualizar quantidade
+            $stmtCheck->bind_result($quantidadeExistente);
+            $stmtCheck->fetch();
+
+            // Atualizando a quantidade
+            $novaQuantidade = $quantidadeExistente + $quantidade; // Somando a nova quantidade
+            $sqlUpdate = "UPDATE carrinho SET quantidade = ? WHERE id_usuario = ? AND id_produto = ?";
+            $stmtUpdate = $mysqli->prepare($sqlUpdate);
+            $stmtUpdate->bind_param("iii", $novaQuantidade, $id_usuario, $idProduto);
+            if ($stmtUpdate->execute()) {
+                echo json_encode(['success' => true, 'message' => 'Quantidade atualizada com sucesso.']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Erro ao atualizar a quantidade.']);
+            }
+            $stmtUpdate->close();
+        } else {
+            // Produto não existe no carrinho, inserir novo registro
+            $sqlInsert = "INSERT INTO carrinho (id_usuario, id_produto, quantidade) VALUES (?, ?, ?)";
+            $stmtInsert = $mysqli->prepare($sqlInsert);
+            $stmtInsert->bind_param("iii", $id_usuario, $idProduto, $quantidade);
+            if ($stmtInsert->execute()) {
+                echo json_encode(['success' => true, 'message' => 'Produto adicionado ao carrinho.']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Erro ao adicionar item.']);
+            }
+            $stmtInsert->close();
+        }
+        $stmtCheck->close();
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Estoque insuficiente.']);
+    }
 } else {
-    echo "ID do produto não foi informado.";
+    echo json_encode(['success' => false, 'message' => 'ID do produto ou quantidade não foram informados.']);
 }
 
 $mysqli->close();

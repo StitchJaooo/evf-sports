@@ -300,6 +300,8 @@ $logos = $mysqli->query($sql_logos);
 
                 <input type="number" name="preco" step="0.01" placeholder="preco" required>
 
+                <input type="number" name="estoque" placeholder="estoque" required>
+
                 <button type="submit" class="flat">Adicionar Item</button>
             </form>
         </div>
@@ -314,6 +316,7 @@ $logos = $mysqli->query($sql_logos);
             echo "<div class='card'>";
             echo "<div class=\"icon-left\"><ion-icon name=\"pencil\"></ion-icon></div>";
             echo "<div class=\"icon-right\" onclick=\"Delete(" . $dados_camisas['id_produto'] . ")\"><ion-icon name=\"trash\"></ion-icon></div>";
+            echo "<h4 class='card-estoque-adm'>Estoque: " . $dados_camisas['estoque'] . "</h4>";
             echo "<img src=\"" . $dados_camisas['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
             echo "<div class='card-body'>";
             echo "<h2 class='card-title'>" . $dados_camisas['nome'] . " - " . $dados_camisas['cor_principal'] . "</h2>";
@@ -332,6 +335,7 @@ $logos = $mysqli->query($sql_logos);
                 echo "<div class='card'>";
                 echo "<div class=\"icon-left\"><ion-icon name=\"pencil\"></ion-icon></div>";
                 echo "<div class=\"icon-right\" onclick=\"Delete(" . $dados_logos['id_produto'] . ")\"><ion-icon name=\"trash\"></ion-icon></div>";
+                echo "<h4 class='card-estoque-adm'>Estoque: " . $dados_logos['estoque'] . "</h4>";
                 echo "<img src=\"" . $dados_logos['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
                 echo "<div class='card-body'>";
                 echo "<h2 class='card-title'>" . $dados_logos['nome'] . " - " . $dados_logos['cor_principal'] . "</h2>";
@@ -371,7 +375,7 @@ $logos = $mysqli->query($sql_logos);
 
         function DeleteProduct(id_produto) {
             $.ajax({
-                url: 'delete_item.php',
+                url: 'delete_produto.php',
                 type: 'POST',
                 data: { id_produto: id_produto },
                 success: function (response) {
@@ -397,7 +401,7 @@ $logos = $mysqli->query($sql_logos);
                 var formData = new FormData(this);
 
                 $.ajax({
-                    url: 'add_item.php',
+                    url: 'add_produto.php',
                     type: 'POST',
                     data: formData,
                     processData: false,

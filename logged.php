@@ -118,6 +118,7 @@ $logos = $mysqli->query($sql_logos);
         <?php
         while ($dados_camisas = mysqli_fetch_assoc($camisas)) {
             echo "<div class='card' data-id-produto=\"" . $dados_camisas['id_produto'] . "\">";
+            echo "<h2 class='card-estoque'>Estoque: " . $dados_camisas['estoque'] . "</h2>";
             echo "<img src=\"" . $dados_camisas['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
             echo "<div class='card-body'>";
             echo "<h2 class='card-title'>" . $dados_camisas['nome'] . " - " . $dados_camisas['cor_principal'] . "</h2>";
@@ -139,6 +140,7 @@ $logos = $mysqli->query($sql_logos);
             <?php
             while ($dados_logos = mysqli_fetch_assoc($logos)) {
                 echo "<div class='card' data-id-produto=\"" . $dados_logos['id_produto'] . "\">";
+                echo "<h2 class='card-estoque'>Estoque: " . $dados_logos['estoque'] . "</h2>";
                 echo "<img src=\"" . $dados_logos['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
                 echo "<div class='card-body'>";
                 echo "<h2 class='card-title'>" . $dados_logos['nome'] . " - " . $dados_logos['cor_principal'] . "</h2>";

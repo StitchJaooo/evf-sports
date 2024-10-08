@@ -199,6 +199,7 @@ if (isset($_GET['id'])) {
         if ($produtExist) {
             while ($dados_produtos = mysqli_fetch_assoc($result)) {
                 echo "<div class='card'>";
+                echo "<h3 class='card-estoque'>Estoque: " . $dados_produtos['estoque'] . "</h3>";
                 echo "<img src=\"" . $dados_produtos['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
                 echo "</div>";
                 echo "<div class='card'>";

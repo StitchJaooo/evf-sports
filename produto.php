@@ -253,7 +253,11 @@ if (isset($_GET['id'])) {
                     processData: false,
                     contentType: false,
                     success: function (response) {
-                        $('#modalLabel').html(response);
+                        if (response.status === 'success') {
+                            $('#modalLabel').html(response.message);
+                        } else {
+                            $('#modalLabel').html('Erro: ' + response.message);
+                        }
                         $('#resultadoModal').modal('show');
                     }
                 });

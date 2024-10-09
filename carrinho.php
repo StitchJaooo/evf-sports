@@ -212,6 +212,14 @@ $produtosCarrinho = $stmt->get_result();
             width: 7vw;
             height: 5vh;
         }
+
+        footer{
+            height: 50vh;
+        }
+
+        nav{
+            margin-top: -15vh;
+        }
     </style>
 </head>
 
@@ -236,19 +244,19 @@ $produtosCarrinho = $stmt->get_result();
     </header>
     <nav class="sidebar">
         <ul>
-            <a href="#home">
+            <a href="logged.php">
                 <li data-section="home" class="selecionado">Home</li>
             </a>
             <div class="borda"></div>
-            <a href="#camisas">
+            <a href="logged.php">
                 <li data-section="camisas">Camisas</li>
             </a>
             <div class="borda"></div>
-            <a href="#logos">
+            <a href="logged.php">
                 <li data-section="logos">Logos</li>
             </a>
             <div class="borda"></div>
-            <a href="">
+            <a href="logged.php">
                 <li>Quem Somos</li>
             </a>
             <div class="borda"></div>

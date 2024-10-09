@@ -1,10 +1,12 @@
 <?php
 include("protect.php");
 include("conexao.php");
-
+header('Content-Type: application/json'); // Define o tipo de conteúdo como JSON
+$response = []; // Inicializa a variável de resposta
 if (!isset($_SESSION['id_usuario'])) {
-    echo json_encode(['success' => false, 'message' => 'Você precisa estar logado para adicionar ao carrinho.']);
-    exit;
+    $response['status'] = 'error';
+    $response['message'] = "Você precisa estar logado para adicionar ao carrinho.";
+    
 }
 
 $id_usuario = $_SESSION['id_usuario'];
@@ -22,8 +24,9 @@ if (isset($_POST["quantidade"]) && isset($_POST["id_produto"])) {
     $stmt->close();
 
     if ($estoque === null) {
-        echo json_encode(['success' => false, 'message' => 'Produto não encontrado.']);
-        exit;
+        $response['status'] = 'error';
+        $response['message'] = "Produto não encontrado.";
+        
     }
 
     // Verifica se o estoque é suficiente
@@ -53,9 +56,11 @@ if (isset($_POST["quantidade"]) && isset($_POST["id_produto"])) {
             $stmtUpdate = $mysqli->prepare($sqlUpdate);
             $stmtUpdate->bind_param("iii", $novaQuantidade, $id_usuario, $idProduto);
             if ($stmtUpdate->execute()) {
-                echo json_encode(['success' => true, 'message' => 'Quantidade atualizada com sucesso.']);
+                $response['status'] = 'success';
+                $response['message'] = "Produto adicionado ao carrinho.";
             } else {
-                echo json_encode(['success' => false, 'message' => 'Erro ao atualizar a quantidade.']);
+                $response['status'] = 'error';
+                $response['message'] = "Erro ao atualizar a quantidade.";
             }
             $stmtUpdate->close();
         } else {
@@ -64,19 +69,25 @@ if (isset($_POST["quantidade"]) && isset($_POST["id_produto"])) {
             $stmtInsert = $mysqli->prepare($sqlInsert);
             $stmtInsert->bind_param("iii", $id_usuario, $idProduto, $quantidade);
             if ($stmtInsert->execute()) {
-                echo json_encode(['success' => true, 'message' => 'Produto adicionado ao carrinho.']);
+                $response['status'] = 'success';
+                $response['message'] = "Produto adicionado ao carrinho.";
             } else {
-                echo json_encode(['success' => false, 'message' => 'Erro ao adicionar item.']);
+                $response['status'] = 'error';
+                $response['message'] = "Erro ao adicionar item.";
             }
             $stmtInsert->close();
         }
         $stmtCheck->close();
     } else {
-        echo json_encode(['success' => false, 'message' => 'Estoque insuficiente.']);
+        $response['status'] = 'error';
+        $response['message'] = "Estoque insuficiente.";
     }
 } else {
-    echo json_encode(['success' => false, 'message' => 'ID do produto ou quantidade não foram informados.']);
+    $response['status'] = 'error';
+    $response['message'] = "ID do produto ou quantidade não foram informados.";
 }
+
+echo json_encode($response);
 
 $mysqli->close();
 ?>

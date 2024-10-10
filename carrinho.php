@@ -213,12 +213,70 @@ $produtosCarrinho = $stmt->get_result();
             height: 5vh;
         }
 
-        footer{
+        footer {
             height: 50vh;
         }
 
-        nav{
+        nav {
             margin-top: -15vh;
+        }
+
+        @media all and (max-width: 600px) {
+
+            .main,
+            .produtos,
+            .tabelas {
+                width: 100vw;
+            }
+
+            .main {
+                margin: 18vh 0 0 0;
+                padding: 0;
+                justify-content: center;
+            }
+
+            .tabelas {
+                flex-direction: column;
+            }
+
+            footer {
+                height: 70vh;
+            }
+
+            .item-footer h1 {
+                width: 80%;
+                font-size: 1.8rem;
+                margin-left: 4vw
+            }
+
+            .item-footer p {
+                margin-top: -5px;
+                width: 80%;
+                margin-left: 5vw
+            }
+
+            .card.img {
+                height: auto;
+            }
+
+            #cupom{
+                width: 30vw;
+            }
+            #aplicar{
+                width: 20vw;
+            }
+            #pagar {
+                margin: 20px;
+                width: 40vw;
+            }
+            .areaCupom{
+                width: 40vw;
+            }
+            .areaPagamento{
+                margin-top: 20px;
+                align-items: center;
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -287,7 +345,7 @@ $produtosCarrinho = $stmt->get_result();
 
             <table class="produtos">
                 <tr class="topoTable">
-                    <th id="excluir" ><!--<ion-icon name="close-outline"></ion-icon>--></th>
+                    <th id="excluir"><!--<ion-icon name="close-outline"></ion-icon>--></th>
                     <th id="img">Imagem</th>
                     <th id="produto">Produto</th>
                     <th id="preco">Preço</th>
@@ -330,7 +388,7 @@ $produtosCarrinho = $stmt->get_result();
                 </table>
 
                 <button id="pagar">
-                    <a href="#PagDePagamento">Pagar</a>
+                    Pagar
                 </button>
 
             </div>
@@ -363,7 +421,7 @@ $produtosCarrinho = $stmt->get_result();
     <script src="js/nav-animation.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-        <script>
+    <script>
         function removerItem(id) {
             if (confirm("Você tem certeza que deseja remover este item?")) {
                 fetch('removerItem.php', { // O arquivo PHP que processará a exclusão

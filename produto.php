@@ -126,18 +126,37 @@ if (isset($_GET['id'])) {
             color: #000;
         }
 
-        .flat:hover{
+        .flat:hover {
             transform: scale(1.05);
             box-shadow: 0px 0px 10px 1px #233dff;
         }
 
-        .quantidade{
+        .quantidade {
             transition: .8s;
         }
 
-        .quantidade:hover{
+        .quantidade:hover {
             transform: scale(1.05);
             box-shadow: 0px 0px 10px 1px #233dff;
+        }
+
+        @media all and (max-width: 600px) {
+            .container{
+                flex-direction: column;
+            }
+            footer{
+                height: 60vh;
+            }
+            .item-footer h1{
+                font-size: 1.8rem;
+                margin-left: 4vw
+            }
+            .item-footer p{
+                margin-left: 4vw
+            }
+            .card.img{
+                height: auto;
+            }
         }
     </style>
 </head>
@@ -198,7 +217,7 @@ if (isset($_GET['id'])) {
         <?php
         if ($produtExist) {
             while ($dados_produtos = mysqli_fetch_assoc($result)) {
-                echo "<div class='card'>";
+                echo "<div class='card img'>";
                 echo "<h3 class='card-estoque'>Estoque: " . $dados_produtos['estoque'] . "</h3>";
                 echo "<img src=\"" . $dados_produtos['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
                 echo "</div>";

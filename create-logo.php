@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('protect.php');
 ?>
 <!DOCTYPE html>
@@ -29,6 +29,13 @@ include('protect.php');
       width: 90vw;
     }
 
+    .formas {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
     canvas {
       border: 1px solid #ccc;
       border-radius: 24px;
@@ -54,7 +61,7 @@ include('protect.php');
       width: 20vw;
     }
 
-    .images{
+    .images {
       height: 45vh;
     }
 
@@ -70,7 +77,7 @@ include('protect.php');
       color: #fff;
     }
 
-    .color{
+    .color {
       display: flex;
       align-items: center;
     }
@@ -195,6 +202,51 @@ include('protect.php');
       margin: 10px 0;
       padding: 0;
     }
+
+    @media all and (max-width: 600px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .controls.images {
+        margin-top: 75vh;
+      }
+
+      .controls {
+        justify-content: flex-start;
+        width: 90vw;
+        height: auto
+      }
+
+      .controls.images span,
+      .color {
+        width: 100%;
+      }
+
+      .color {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .formas {
+        width: 100%;
+        flex-direction: row;
+      }
+
+      .shapeBtn {
+        margin-right: 20px;
+      }
+
+      .custom-file-upload {
+        margin: 25px 0;
+      }
+    }
+    @media all and (max-width: 375px) {
+      .controls.images {
+        margin-top: 100vh;
+      }
+    }
   </style>
 </head>
 
@@ -221,19 +273,19 @@ include('protect.php');
   </header>
   <nav class="sidebar">
     <ul>
-      <a href="#home">
+      <a href="logged.php">
         <li data-section="home" class="selecionado">Home</li>
       </a>
       <div class="borda"></div>
-      <a href="#camisas">
+      <a href="logged.php">
         <li data-section="camisas">Camisas</li>
       </a>
       <div class="borda"></div>
-      <a href="#logos">
+      <a href="logged.php">
         <li data-section="logos">Logos</li>
       </a>
       <div class="borda"></div>
-      <a href="">
+      <a href="logged.php">
         <li>Quem Somos</li>
       </a>
       <div class="borda"></div>
@@ -247,9 +299,11 @@ include('protect.php');
         <label for="shapeColor">Cor da Forma:</label>
         <input type="color" id="shapeColor" value="#233dff" />
       </p>
-      <button id="circleShape" class="shapeBtn">Circulo</button>
-      <button id="squareShape" class="shapeBtn">Quadrado</button>
-      <button id="triangleShape" class="shapeBtn">Triângulo</button>
+      <div class="formas">
+        <button id="circleShape" class="shapeBtn">Circulo</button>
+        <button id="squareShape" class="shapeBtn">Quadrado</button>
+        <button id="triangleShape" class="shapeBtn">Triângulo</button>
+      </div>
     </div>
     <div class="painel">
       <h1>Crie sua Logo</h1>
@@ -260,6 +314,10 @@ include('protect.php');
       <p class="color" style="margin-top: 20px;">
         <label for="colorPicker">Cor de fundo:</label>
         <input type="color" id="colorPicker" value="#ffffff" />
+      </p>
+      <p class="color" style="margin-bottom: -20px;">
+        <label for="colorPicker">Cor do texto:</label>
+        <input type="color" id="colorText" value="#000000" />
       </p>
       <p>
         <input type="text" id="textInput" placeholder="Digite seu texto" />
@@ -279,6 +337,7 @@ include('protect.php');
     const canvas = new fabric.Canvas("shirtCanvas");
     const colorPicker = document.getElementById("colorPicker");
     const textInput = document.getElementById("textInput");
+    const textColorInput = document.getElementById("colorText");
     const addTextBtn = document.getElementById("addText");
     const downloadBtn = document.getElementById("downloadBtn");
     const imageUpload = document.getElementById("imageUpload");
@@ -302,12 +361,13 @@ include('protect.php');
     });
 
     addTextBtn.addEventListener("click", () => {
+      const textColor = textColorInput.value;
       const text = new fabric.Text(textInput.value, {
         left: 100,
         top: 150,
         fontSize: 24,
         fontFamily: "OpenSauce",
-        fill: "#000",
+        fill: textColor,
       });
       canvas.add(text);
       textInput.value = ""; // Limpa o campo de texto
@@ -413,10 +473,41 @@ include('protect.php');
       });
       canvas.add(triangle);
     });
+
+    function resizeCanvas() {
+      const containerWidth = window.innerWidth * 0.8; // Exemplo: 80% da largura da janela
+      const containerHeight = window.innerHeight * 0.6; // Exemplo: 60% da altura da janela
+
+      // Atualiza o tamanho do canvas
+      canvas.setWidth(containerWidth);
+      canvas.setHeight(containerHeight);
+
+      // Opcional: Redimensiona os objetos proporcionalmente
+      canvas.getObjects().forEach(function (obj) {
+        const scaleX = containerWidth / canvas.originalWidth;
+        const scaleY = containerHeight / canvas.originalHeight;
+
+        obj.scaleX *= scaleX;
+        obj.scaleY *= scaleY;
+        obj.left *= scaleX;
+        obj.top *= scaleY;
+        obj.setCoords();
+      });
+
+      canvas.originalWidth = containerWidth;
+      canvas.originalHeight = containerHeight;
+
+      canvas.renderAll();
+    }
+
+    // Chama a função para redimensionar o canvas ao carregar a página
+    resizeCanvas();
+
+    // Redimensiona o canvas quando a janela é redimensionada
+    window.addEventListener('resize', resizeCanvas);
   </script>
   <script src="js/user-animation.js"></script>
   <script src="js/nav-animation.js"></script>
-  <script src="js/header-animation.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

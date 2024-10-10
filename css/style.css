@@ -50,9 +50,7 @@
     }
 
     .usuario ion-icon[name="cart"] {
-        position: absolute;
-        margin-left: -22vw;
-        margin-top: 22vw;
+        margin-right: -8px;
     }
 
     .usuario.ativo {
@@ -106,10 +104,6 @@
         margin-top: -10vh;
     }
 }
-
-@media all and (min-width: 601px) and (max-width: 1024px) {}
-
-
 
 .animation-surgir {
     animation: 2.5s Surgir ease-in-out;

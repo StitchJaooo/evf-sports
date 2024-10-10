@@ -254,7 +254,9 @@ include('protect.php');
 
   <header class="scrolled">
     <ion-icon name="menu" class="nav-menu"></ion-icon>
-    <img src="assets/logo.png" alt="">
+    <a href="logged.php">
+            <img src="assets/logo.png" alt="">
+        </a>
     <div class="usuario">
       <a href="carrinho.php"><ion-icon name="cart"></ion-icon></a>
       <ion-icon name="person-circle"></ion-icon>

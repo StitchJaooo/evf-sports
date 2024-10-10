@@ -4,15 +4,37 @@ include("conexao.php");
 
 $idUsuario = $_SESSION['id_usuario'];
 
-$sql_select = "SELECT c.id_usuario, u.nome, p.*, c.quantidade FROM carrinho c, usuarios u, produtos p WHERE c.id_usuario = u.ID AND c.id_produto = p.id_produto AND c.id_usuario = ?";
+$sql_select = "SELECT c.id_produto c.id_usuario, u.nome, p.*, c.quantidade FROM carrinho c, usuarios u, produtos p WHERE c.id_usuario = u.ID AND c.id_produto = p.id_produto AND c.id_usuario = ?";
 $stmt = $mysqli->prepare($sql_select);
 $stmt->bind_param("i", $idUsuario);
 $stmt->execute();
 $produtosCarrinho = $stmt->get_result();
-// $dados_produtos = mysqli_fetch_assoc($produtosCarrinho);
 
-// $subTotal = $dados_produtos['preco'];
+$subtotal = 0;
+$calculo = 0;
+$checkCarrinho = $mysqli->prepare("SELECT * FROM carrinho WHERE id_usuario = ?");
+$checkCarrinho->bind_param("i", $idUsuario);
+$checkCarrinho->execute();
+$result = $checkCarrinho->get_result();
 
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {        
+        $checkPreco = $mysqli->prepare("SELECT preco FROM produtos WHERE id_produto = ?");
+        $checkPreco->bind_param("i", $row['id_produto']);
+        $checkPreco->execute();
+        $checkPreco->bind_result($preco);
+        $checkPreco->fetch();
+        $checkPreco->close();
+
+        $preco = intval($preco);
+        $qtd = intval($row['quantidade']);
+        $calculo += $preco * $qtd;
+    }
+    $subtotal = number_format($calculo, 2);
+}
+
+$calculoFrete = 20;
+$frete = number_format($calculoFrete, 2);
 ?>
 
 
@@ -221,6 +243,22 @@ $produtosCarrinho = $stmt->get_result();
             margin-top: -15vh;
         }
 
+        #botoes{
+            display: flex;
+            width: 100%;
+            margin-top: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .atualizar{
+            border: 1px solid gray;
+            width: 40%;
+            /* flex:0.5; */
+            cursor: pointer;
+            background-color: #e6e6e6;
+        }
+
         @media all and (max-width: 600px) {
 
             .main,
@@ -284,11 +322,13 @@ $produtosCarrinho = $stmt->get_result();
 <body>
     <header class="scrolled">
         <ion-icon name="menu" class="nav-menu"></ion-icon>
-        <img src="assets/logo.png" alt="">
+        <a href="logged.php">
+            <img src="assets/logo.png" alt="">
+        </a>
         <div class="usuario">
             <ion-icon name="cart"></ion-icon>
             <ion-icon name="person-circle"></ion-icon>
-            <p id="user">teste
+            <p id="user"><?php echo $_SESSION['nome']; ?>
                 <ion-icon name="chevron-forward" class="seta-user"></ion-icon>
             </p>
             <div class="config-conta">
@@ -358,8 +398,12 @@ $produtosCarrinho = $stmt->get_result();
                     echo "<td class='viewProduct'><img src='" . $dados_produtos['imagem'] . "' alt='Imagem do Produto'></td>";
                     echo "<td class='nameProduct'>" . $dados_produtos['nome'] . " - " . $dados_produtos['cor_principal'] . "</td>";
                     echo "<td class='cost'>R$" . $dados_produtos['preco'] . "</td>";
-                    echo "<td class='quantity'>" . $dados_produtos['quantidade'] . "</td>";
-                    echo "</tr>";
+                    echo "<td class='quantity'>" . $dados_produtos['quantidade'] . "
+                    <div id=\"botoes\">
+                    <div class='atualizar' onclick=\"diminuirItem(". $dados_produtos['id_produto'].")\">-</div>
+                    <div class='atualizar' onclick=\"aumentarItem(". $dados_produtos['id_produto'].")\">+</div>
+                    </div>
+                    </td>";                    echo "</tr>";
                 }
                 ?>
             </table>
@@ -371,19 +415,19 @@ $produtosCarrinho = $stmt->get_result();
                     </tr>
                     <tr class="subTotal">
                         <td>SUBTOTAL</td>
-                        <td>63,00</td>
+                        <td><?php echo $subtotal ?></td>
                     </tr>
                     <tr class="frete">
                         <td>FRETE</td>
-                        <td>20,00</td>
+                        <td><?php echo $frete ?></td>
                     </tr>
                     <tr class="trCupom">
                         <td>CUPOM</td>
-                        <td>-10,00</td>
+                        <td id="tdCupom">10.00</td>
                     </tr>
                     <tr class="total">
                         <td>TOTAL</td>
-                        <td>R$73,00</td>
+                        <td><?php $total ?></td>
                         </r>
                 </table>
 
@@ -397,14 +441,14 @@ $produtosCarrinho = $stmt->get_result();
         <div class="areaCupom">
             <label for="cupom">DIGITE SEU CUPOM:</label>
             <input type="text" name="cupom" id="cupom" placeholder="CUPOM">
-            <button id="aplicar">Aplicar</button>
+            <button id="aplicar" onclick="aplicar('cupom')">Aplicar</button>
         </div>
     </div>
     <footer>
         <div class="infos">
             <div class="item-footer">
                 <h1>Sobre nós</h1>
-                <p>Somos uma empresa de confecção de camisas, bandeiras e designs, vendemos itens prontos já feitos por
+                <p>Somos uma empresa de confecção de camisas e designs, vendemos itens prontos já feitos por
                     nossa empresa!</p>
             </div>
             <div class="item-footer">
@@ -486,6 +530,18 @@ $produtosCarrinho = $stmt->get_result();
                 .catch((error) => {
                     console.error('Erro:', error);
                 });
+        }
+
+        function aplicar(id) {
+            cupom = document.getElementById(id);
+            valor = cupom.value.toUpperCase();
+            if (valor === "CUPOM ESPECIAL") {
+                alert("Cupom aplicado com sucesso!");
+                var tdCupom = document.getElementById("tdCupom");
+                tdCupom.innerText = 20.00;
+            } else {
+                alert("Cupom inválido.");
+                }
         }
     </script>
 </body>

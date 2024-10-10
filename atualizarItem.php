@@ -43,22 +43,16 @@ if (isset($data->id)) {
             }
         } else {
             // Diminui a quantidade no carrinho
-            $stmt = $mysqli->prepare("UPDATE carrinho SET quantidade = quantidade - 1 WHERE id_produto = ? AND id_usuario = ?");
+            
             $checkStmt = $mysqli->prepare("SELECT quantidade FROM carrinho WHERE id_produto = ? AND id_usuario = ?");
             $checkStmt->bind_param("ii", $id, $idUsuario);
             $checkStmt->execute();
             $checkStmt->bind_result($currentQty);
             $checkStmt->fetch();
             $checkStmt->close();
-
-            if ($currentQty <= 1) {
-                // Se a quantidade for 1 ou menor, remove do carrinho
-                $deleteStmt = $mysqli->prepare("DELETE FROM carrinho WHERE id_produto = ? AND id_usuario = ?");
-                $deleteStmt->bind_param("ii", $id, $idUsuario);
-                $deleteStmt->execute();
-                $deleteStmt->close();
-            } else {
+            if ($currentQty > 1) {
                 // Atualiza o estoque
+                $stmt = $mysqli->prepare("UPDATE carrinho SET quantidade = quantidade - 1 WHERE id_produto = ? AND id_usuario = ?");
                 $stmt2 = $mysqli->prepare("UPDATE produtos SET estoque = estoque + 1 WHERE id_produto = ?");
                 $stmt2->bind_param("i", $id);
                 $stmt2->execute();

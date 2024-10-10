@@ -351,7 +351,7 @@ $logos = $mysqli->query($sql_logos);
         <div class="infos" id="infos">
             <div class="item-footer" id="item-footer1">
                 <h1>Sobre nós</h1>
-                <p>Somos uma empresa de confecção de camisas, bandeiras e designs, vendemos itens prontos já feitos
+                <p>Somos uma empresa de confecção de camisas e designs, vendemos itens prontos já feitos
                     por
                     nossa empresa!</p>
             </div>

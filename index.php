@@ -129,7 +129,7 @@ $logos = $mysqli->query($sql_logos);
         <div class="infos">
             <div class="item-footer">
                 <h1>Sobre nós</h1>
-                <p>Somos uma empresa de confecção de camisas, bandeiras e designs, vendemos itens prontos já feitos por
+                <p>Somos uma empresa de confecção de camisas e designs, vendemos itens prontos já feitos por
                     nossa empresa!</p>
             </div>
             <div class="item-footer">

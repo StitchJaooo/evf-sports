@@ -1,10 +1,4 @@
-<?php include('protect.php');
-include('conexao.php');
-$sql_camisas = "SELECT * FROM produtos WHERE classificacao = 'camisa';";
-$camisas = $mysqli->query($sql_camisas);
-$sql_logos = "SELECT * FROM produtos WHERE  classificacao = 'logo';";
-$logos = $mysqli->query($sql_logos);
-?>
+<?php include('protect.php'); ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -170,76 +164,29 @@ $logos = $mysqli->query($sql_logos);
             box-shadow: 0px 0px 10px 4px red;
         }
 
-        .modal-body {
+        .modal-body.delete-btn, .buttons-update {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        #item-footer1,
-        #item-footer2 {
-            display: flex;
-            flex-direction: column;
-            width: 400px;
-        }
-
-        .item-footer h1 {
-            font-family: "OpenSauceBold";
-        }
-
-        #item-footer1 p,
-        #item-footer2 p {
-            margin-top: 5px;
-            margin-top: -8px;
-        }
-
         @media all and (max-width: 600px) {
             footer {
-                height: 50vh;
+                height: 65vh;
+            }
+
+            .item-footer {
+                width: 70vw;
             }
         }
     </style>
 </head>
 
 <body>
-    <header class="scrolled">
-        <ion-icon name="menu" class="nav-menu"></ion-icon>
-        <img src="assets/logo.png" alt="">
-        <div class="usuario">
-            <ion-icon name="cart"></ion-icon>
-            <ion-icon name="person-circle"></ion-icon>
-            <p id="user"><?php echo $_SESSION['nome']; ?>
-                <ion-icon name="chevron-forward" class="seta-user"></ion-icon>
-            </p>
-            <div class="config-conta">
-                <p id="myuser">Minha conta</p>
-                <div class="borda"></div>
-                <p id="exit">
-                    <a style="color:red;" href="logout.php">Sair</a>
-                </p>
-            </div>
-        </div>
-    </header>
-    <nav class="sidebar">
-        <ul>
-            <a href="#home">
-                <li data-section="home" class="selecionado">Home</li>
-            </a>
-            <div class="borda"></div>
-            <a href="#camisas">
-                <li data-section="camisas">Camisas</li>
-            </a>
-            <div class="borda"></div>
-            <a href="#logos">
-                <li data-section="logos">Logos</li>
-            </a>
-            <div class="borda"></div>
-            <a href="">
-                <li>Quem Somos</li>
-            </a>
-            <div class="borda"></div>
-        </ul>
-    </nav>
+    <?php
+    include("includes/header-fixo.php");
+    include("includes/nav.php");
+    ?>
 
     <div class="modal fade" id="resultadoModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
         aria-hidden="true">
@@ -265,11 +212,56 @@ $logos = $mysqli->query($sql_logos);
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body delete-btn">
                     <button class="flat" data-dismiss="modal">Cancelar</button>
                     <button class="flat delete" data-dismiss="modal" id="confirmDeleteBtn">Excluir
                         <ion-icon name="trash"></ion-icon>
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalUpdateLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateForm" enctype="multipart/form-data">
+                        <input type="text" name="idproduto" placeholder="id_produto" id="id_produto" readonly>
+                        <input type="text" name="nome-update" placeholder="nome" required>
+
+                        <p>Tipo:
+                            <select name="classificacao-update" class="flat" required>
+                                <option value="camisa">Camisa</option>
+                                <option value="logo">Logo</option>
+                            </select>
+                        </p>
+
+                        <input type="number" name="ano-update" min="2000" max="2100" placeholder="ano" required>
+
+                        <label class="custom-file-upload">
+                            <input type="file" id="imageUpload-update" name="imagem-update" accept="image/*" placeholder="Imagem"
+                                required />
+                            Imagem
+                        </label>
+                        <div id="fileName-update" class="mt-2"></div>
+
+                        <input type="text" name="cor_principal-update" placeholder="cor principal" required>
+
+                        <input type="number" name="preco-update" step="0.01" placeholder="preco" required>
+
+                        <input type="number" name="estoque-update" placeholder="estoque" required>
+
+                        <button type="submit" class="flat" >Atualizar Item</button>
+                        <button class="flat delete" data-dismiss="modal">Cancelar</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -306,63 +298,11 @@ $logos = $mysqli->query($sql_logos);
             </form>
         </div>
     </div>
-
-    <div class="section" id="camisas">
-        <h1>Camisas</h1>
-    </div>
-    <div class="container">
-        <?php
-        while ($dados_camisas = mysqli_fetch_assoc($camisas)) {
-            echo "<div class='card'>";
-            echo "<div class=\"icon-left\"><ion-icon name=\"pencil\"></ion-icon></div>";
-            echo "<div class=\"icon-right\" onclick=\"Delete(" . $dados_camisas['id_produto'] . ")\"><ion-icon name=\"trash\"></ion-icon></div>";
-            echo "<h4 class='card-estoque-adm'>Estoque: " . $dados_camisas['estoque'] . "</h4>";
-            echo "<img src=\"" . $dados_camisas['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
-            echo "<div class='card-body'>";
-            echo "<h2 class='card-title'>" . $dados_camisas['nome'] . " - " . $dados_camisas['cor_principal'] . "</h2>";
-            echo "<h2 class='card-price'>R$" . $dados_camisas['preco'] . "</h2>";
-            echo "<h2 class='card-subtitle'> COD PRODUTO: " . $dados_camisas['id_produto'] . "</h2>";
-            echo "</div>";
-            echo "</div>";
-        }
-        ?>
-    </div>
-    <div class="section" id="logos">
-        <h1>Logos</h1>
-        <div class="container">
-            <?php
-            while ($dados_logos = mysqli_fetch_assoc($logos)) {
-                echo "<div class='card'>";
-                echo "<div class=\"icon-left\"><ion-icon name=\"pencil\"></ion-icon></div>";
-                echo "<div class=\"icon-right\" onclick=\"Delete(" . $dados_logos['id_produto'] . ")\"><ion-icon name=\"trash\"></ion-icon></div>";
-                echo "<h4 class='card-estoque-adm'>Estoque: " . $dados_logos['estoque'] . "</h4>";
-                echo "<img src=\"" . $dados_logos['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
-                echo "<div class='card-body'>";
-                echo "<h2 class='card-title'>" . $dados_logos['nome'] . " - " . $dados_logos['cor_principal'] . "</h2>";
-                echo "<h2 class='card-price'>R$" . $dados_logos['preco'] . "</h2>";
-                echo "<h2 class='card-subtitle'> COD PRODUTO: " . $dados_logos['id_produto'] . "</h2>";
-                echo "</div>";
-                echo "</div>";
-            }
-            ?>
-        </div>
-    </div>
-    <footer>
-        <div class="infos" id="infos">
-            <div class="item-footer" id="item-footer1">
-                <h1>Sobre nós</h1>
-                <p>Somos uma empresa de confecção de camisas e designs, vendemos itens prontos já feitos
-                    por
-                    nossa empresa!</p>
-            </div>
-            <div class="item-footer" id="item-footer2">
-                <h1>Nossos contatos</h1>
-                <p>random@teste.com</p>
-                <p>1199999999999999</p>
-            </div>
-        </div>
-        <p class="copy">Copyrights © 2024 - EVF SPORTS</p>
-    </footer>
+    <?php
+    include("includes/edit-camisas.php");
+    include("includes/edit-logos.php");
+    include("includes/footer.html");
+    ?>
 
     <script>
         function Delete(id_produto) {
@@ -371,6 +311,12 @@ $logos = $mysqli->query($sql_logos);
             document.getElementById('confirmDeleteBtn').onclick = function () {
                 DeleteProduct(id_produto);
             };
+        }
+
+        function Update(id_produto) {
+            $('#modalUpdateLabel').html('PRODUTO');
+            document.getElementById("id_produto").value = id_produto;
+            $('#updateModal').modal('show');
         }
 
         function DeleteProduct(id_produto) {
@@ -394,6 +340,11 @@ $logos = $mysqli->query($sql_logos);
             document.getElementById('fileName').textContent = fileName;
         });
 
+        document.getElementById('imageUpload-update').addEventListener('change', function () {
+            const fileName = this.files[0] ? this.files[0].name : 'Nenhum arquivo selecionado';
+            document.getElementById('fileName-update').textContent = fileName;
+        });
+
         $(document).ready(function () {
             $('#meuForm').on('submit', function (event) {
                 event.preventDefault();
@@ -402,6 +353,30 @@ $logos = $mysqli->query($sql_logos);
 
                 $.ajax({
                     url: 'add_produto.php',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        $('#modalLabel').html(response);
+                        $('#resultadoModal').modal('show');
+                    },
+                    error: function () {
+                        $('#modalLabel').html('Erro ao enviar os dados.');
+                        $('#resultadoModal').modal('show');
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $('#updateForm').on('submit', function (event) {
+                event.preventDefault();
+
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: 'atualizar_produto.php',
                     type: 'POST',
                     data: formData,
                     processData: false,

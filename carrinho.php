@@ -259,6 +259,10 @@ $frete = number_format($calculoFrete, 2);
             background-color: #e6e6e6;
         }
 
+        header{
+            animation: none;
+        }
+
         @media all and (max-width: 600px) {
 
             .main,

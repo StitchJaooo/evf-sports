@@ -85,10 +85,6 @@
         margin-right: 32px;
     }
 
-    footer {
-        height: 80vh;
-    }
-
     .infos {
         flex-direction: column;
         justify-content: center;

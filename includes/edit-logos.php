@@ -9,7 +9,7 @@ $logos = $mysqli->query($sql_logos);
         <?php
         while ($dados_logos = mysqli_fetch_assoc($logos)) {
             echo "<div class='card'>";
-            echo "<div class=\"icon-left\"><ion-icon name=\"pencil\"></ion-icon></div>";
+            echo "<div class=\"icon-left\" onclick=\"Update(" . $dados_logos['id_produto'] . ")\"><ion-icon name=\"pencil\"></ion-icon></div>";
             echo "<div class=\"icon-right\" onclick=\"Delete(" . $dados_logos['id_produto'] . ")\"><ion-icon name=\"trash\"></ion-icon></div>";
             echo "<h4 class='card-estoque-adm'>Estoque: " . $dados_logos['estoque'] . "</h4>";
             echo "<img src=\"" . $dados_logos['imagem'] . "\" alt='Imagem do Card' class='card-img'>";

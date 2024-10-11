@@ -1,20 +1,24 @@
 <?php
-include('protect.php');
-include('conexao.php');
+include('protect.php'); // Inclui o arquivo de proteção para verificar a sessão do usuário
+include('conexao.php'); // Inclui o arquivo de conexão com o banco de dados
+
+// Verifica se o parâmetro 'id' foi passado na URL
 if (isset($_GET['id'])) {
-    $productId = $_GET['id'];
-    $produtExist = true;
-    $stmt = $mysqli->prepare("SELECT * FROM produtos WHERE id_produto = ?");
-    $stmt->bind_param("i", $productId);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $productId = $_GET['id']; // Armazena o ID do produto
+    $produtExist = true; // Inicializa a variável para verificar a existência do produto
+    $stmt = $mysqli->prepare("SELECT * FROM produtos WHERE id_produto = ?"); // Prepara a consulta SQL
+    $stmt->bind_param("i", $productId); // Faz o bind do parâmetro do ID como inteiro
+    $stmt->execute(); // Executa a consulta
+    $result = $stmt->get_result(); // Obtém o resultado da consulta
+
+    // Verifica se algum produto foi encontrado
     if ($result->num_rows > 0) {
-        $produtExist = true;
+        $produtExist = true; // Produto existe
     } else {
-        $produtExist = false;
+        $produtExist = false; // Produto não existe
     }
 } else {
-    $produtExist = false;
+    $produtExist = false; // Se 'id' não foi passado, o produto não existe
 }
 ?>
 
@@ -25,12 +29,15 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EVF SPORTS</title>
-    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon"> <!-- Ícone da página -->
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
+    <!-- Fonte utilizada -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- CSS do Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- jQuery -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <!-- JS do Bootstrap -->
+    <link rel="stylesheet" href="css/style.css"> <!-- CSS personalizado -->
     <style>
         .container {
             display: flex;
@@ -141,20 +148,24 @@ if (isset($_GET['id'])) {
         }
 
         @media all and (max-width: 600px) {
-            .container{
+            .container {
                 flex-direction: column;
             }
-            footer{
+
+            footer {
                 height: 60vh;
             }
-            .item-footer h1{
+
+            .item-footer h1 {
                 font-size: 1.8rem;
                 margin-left: 4vw
             }
-            .item-footer p{
+
+            .item-footer p {
                 margin-left: 4vw
             }
-            .card.img{
+
+            .card.img {
                 height: auto;
             }
         }
@@ -162,134 +173,108 @@ if (isset($_GET['id'])) {
 </head>
 
 <body>
-    <header class="scrolled">
-        <ion-icon name="menu" class="nav-menu"></ion-icon>
-        <a href="logged.php">
-            <img src="assets/logo.png" alt="">
-        </a>
-        <div class="usuario">
-            <a href="carrinho.php"><ion-icon name="cart"></ion-icon></a>
-            <ion-icon name="person-circle"></ion-icon>
-            <p id="user"><?php echo $_SESSION['nome']; ?>
-                <ion-icon name="chevron-forward" class="seta-user"></ion-icon>
-            </p>
-            <div class="config-conta">
-                <p id="myuser">Minha conta</p>
-                <div class="borda"></div>
-                <p id="exit">
-                    <a style="color:red;" href="logout.php">Sair</a>
-                </p>
-            </div>
-        </div>
-    </header>
-    <nav class="sidebar">
-        <ul>
-            <a href="logged.php">
-                <li data-section="home" class="selecionado">Home</li>
-            </a>
-            <div class="borda"></div>
-            <a href="logged.php">
-                <li data-section="camisas">Camisas</li>
-            </a>
-            <div class="borda"></div>
-            <a href="logged.php">
-                <li data-section="logos">Logos</li>
-            </a>
-            <div class="borda"></div>
-            <a href="">
-                <li>Quem Somos</li>
-            </a>
-            <div class="borda"></div>
-        </ul>
-    </nav>
+    <?php
+    include("includes/header-fixo.php"); // Inclui o cabeçalho fixo
+    include("includes/nav.php"); // Inclui a navegação
+    ?>
+
+    <!-- Modal para exibir resultados de operações -->
     <div class="modal fade" id="resultadoModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel"></h5>
+                    <h5 class="modal-title" id="modalLabel"></h5> <!-- Título do modal -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span> <!-- Botão para fechar o modal -->
                     </button>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="container">
         <?php
+        // Se o produto existe, exibe seus dados
         if ($produtExist) {
-            while ($dados_produtos = mysqli_fetch_assoc($result)) {
-                echo "<div class='card img'>";
-                echo "<h3 class='card-estoque'>Estoque: " . $dados_produtos['estoque'] . "</h3>";
-                echo "<img src=\"" . $dados_produtos['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
+            while ($dados_produtos = mysqli_fetch_assoc($result)) { // Busca os dados do produto
+                echo "<div class='card img'>"; // Início do card de imagem do produto
+                echo "<h3 class='card-estoque'>Estoque: " . $dados_produtos['estoque'] . "</h3>"; // Exibe a quantidade em estoque
+                echo "<img src=\"" . $dados_produtos['imagem'] . "\" alt='Imagem do Card' class='card-img'>"; // Exibe a imagem do produto
                 echo "</div>";
-                echo "<div class='card'>";
-                echo "<div class='card-body'>";
-                echo "<h2 class='card-title'>" . $dados_produtos['nome'] . " - " . $dados_produtos['cor_principal'] . "</h2>";
-                echo "<h2 class='card-price'>R$" . $dados_produtos['preco'] . "</h2>";
-                echo "<form id=\"carrinho\">";
-                echo "<input type=\"hidden\" name=\"id_produto\" value=" . $dados_produtos['id_produto'] . "></input>";
-                echo "<input type=\"number\" name=\"quantidade\" value=\"1\" pattern=\"\d*\" maxlength=\"4\" style=\" width:100px; text-align:center\" placeholder=\"Quantidade\" class='quantidade'></input>";
-                echo "<button type=\"submit\" class='flat'>Adicionar ao Carrinho</button>";
+                echo "<div class='card'>"; // Início do card de informações do produto
+                echo "<div class='card-body'>"; // Corpo do card
+                echo "<h2 class='card-title'>" . $dados_produtos['nome'] . " - " . $dados_produtos['cor_principal'] . "</h2>"; // Nome e cor do produto
+                echo "<h2 class='card-price'>R$" . $dados_produtos['preco'] . "</h2>"; // Preço do produto
+                echo "<form id=\"carrinho\">"; // Formulário para adicionar ao carrinho
+                echo "<input type=\"hidden\" name=\"id_produto\" value=" . $dados_produtos['id_produto'] . ">"; // ID do produto (oculto)
+                echo "<input type=\"number\" name=\"quantidade\" value=\"1\" pattern=\"\d*\" maxlength=\"4\" style=\" width:100px; text-align:center\" placeholder=\"Quantidade\" class='quantidade'>"; // Campo para quantidade
+                echo "<button type=\"submit\" class='flat'>Adicionar ao Carrinho</button>"; // Botão para adicionar ao carrinho
                 echo "</form>";
-                echo "</div>";
-                echo "</div>";
+                echo "</div>"; // Fim do corpo do card
+                echo "</div>"; // Fim do card de informações
             }
         } else {
+            // Se o produto não existir, exibe mensagem
             echo "<div class=\"card\">";
             echo "<div class=\"card-body\">";
-            echo "<p><ion-icon name=\"close-circle\"></ion-icon></p>";
-            echo "<h2 class=\"card-title\">Produto não encontrado.</h2>";
+            echo "<p><ion-icon name=\"close-circle\"></ion-icon></p>"; // Ícone de erro
+            echo "<h2 class=\"card-title\">Produto não encontrado.</h2>"; // Mensagem de produto não encontrado
             echo "</div>";
             echo "</div>";
         }
         ?>
     </div>
-    <footer>
+
+    <footer> <!-- Rodapé da página -->
         <div class="infos" id="infos">
             <div class="item-footer" id="item-footer1">
-                <h1>Sobre nós</h1>
-                <p>Somos uma empresa de confecção de camisas, bandeiras e designs, vendemos itens prontos já feitos
-                    por
+                <h1>Sobre nós</h1> <!-- Seção sobre a empresa -->
+                <p>Somos uma empresa de confecção de camisas, bandeiras e designs, vendemos itens prontos já feitos por
                     nossa empresa!</p>
             </div>
             <div class="item-footer" id="item-footer2">
-                <h1>Nossos contatos</h1>
+                <h1>Nossos contatos</h1> <!-- Seção de contato -->
                 <p>random@teste.com</p>
                 <p>1199999999999999</p>
             </div>
         </div>
-        <p class="copy">Copyrights © 2024 - EVF SPORTS</p>
+        <p class="copy">Copyrights © 2024 - EVF SPORTS</p> <!-- Direitos autorais -->
     </footer>
 
     <script>
         $(document).ready(function () {
+            // Ao submeter o formulário do carrinho
             $('#carrinho').on('submit', function (event) {
-                event.preventDefault();
-                var formData = new FormData(this);
+                event.preventDefault(); // Previne o envio padrão do formulário
+                var formData = new FormData(this); // Cria um objeto FormData com os dados do formulário
                 $.ajax({
-                    url: 'add_carrinho.php',
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
+                    url: 'add_carrinho.php', // URL para adicionar ao carrinho
+                    type: 'POST', // Método POST
+                    data: formData, // Dados a serem enviados
+                    processData: false, // Não processar os dados
+                    contentType: false, // Não definir cabeçalho de tipo de conteúdo
                     success: function (response) {
+                        // Exibe mensagem de sucesso ou erro baseado na resposta
                         if (response.status === 'success') {
-                            $('#modalLabel').html(response.message);
+                            $('#modalLabel').html(response.message); // Mensagem de sucesso
                         } else {
-                            $('#modalLabel').html('Erro: ' + response.message);
+                            $('#modalLabel').html('Erro: ' + response.message); // Mensagem de erro
                         }
-                        $('#resultadoModal').modal('show');
+                        $('#resultadoModal').modal('show'); // Exibe o modal com a mensagem
                     }
                 });
             });
         });
     </script>
 
-    <script src="js/user-animation.js"></script>
-    <script src="js/nav-animation.js"></script>
+    <!-- Scripts adicionais para animações e ícones -->
+    <script src="js/user-animation.js"></script> <!-- Animações de usuário -->
+    <script src="js/nav-animation.js"></script> <!-- Animações de navegação -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <!-- Importa ícones do Ionicons -->
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Importa ícones para navegadores sem suporte a módulos -->
 </body>
 
 </html>

@@ -1,4 +1,5 @@
-<? include("protect.php") ?>
+<? include("protect.php") ?> <!-- Protege a página, garantindo que apenas usuários autenticados possam acessá-la -->
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -28,26 +29,38 @@
 <body>
 
     <?php
-    include("includes/header.php");
-    include("includes/nav.html");
-    include("includes/home.html");
-    include("includes/section-camisas.php");
-    include("includes/section-logos.php");
-    include("includes/footer.html");
+    // Inclui os componentes do site, como cabeçalho, navegação, e seções
+    include("includes/header.php"); // Inclui o cabeçalho do site
+    include("includes/nav.html"); // Inclui o menu de navegação
+    include("includes/home.html"); // Inclui a seção principal da página inicial
+    include("includes/section-camisas.php"); // Inclui a seção que exibe as camisas
+    include("includes/section-logos.php"); // Inclui a seção que exibe os logos
+    include("includes/footer.html"); // Inclui o rodapé do site
     ?>
 
     <script>
+        // Função para redirecionar o usuário para a página de criação de logo
         function createLogo() {
-            window.location.href = "create-logo.php"
+            window.location.href = "create-logo.php"; // Muda a URL da janela atual
         }
     </script>
+
+    <!-- Importação do jQuery, necessário para o funcionamento do slick-carousel -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+    <!-- Importação do slick-carousel para criar carrosséis de forma fácil -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <!-- Script específico para o carrossel de camisas -->
     <script type="text/javascript" src="js/carousel-camisas.js"></script>
+
+    <!-- Outros scripts de animação do usuário e navegação -->
     <script src="js/user-animation.js"></script>
     <script src="js/nav-animation.js"></script>
     <script src="js/header-animation.js"></script>
     <script src="js/exibir-produto.js"></script>
+
+    <!-- Importação de ícones do Ionicons, com suporte para módulos -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 

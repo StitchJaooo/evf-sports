@@ -38,7 +38,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
             if ($usuario['perfil'] == 'ADM') {
                 header("Location: adm.php"); // Redireciona para a página de administração
             } else {
-                header("Location: logged.php"); // Redireciona para a página do usuário logado
+                header("Location: index.php"); // Redireciona para a página do usuário logado
             }
         } else {
             // Mensagem de erro se o login falhar

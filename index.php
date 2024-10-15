@@ -18,6 +18,17 @@
 
     <!-- Link para o CSS customizado do projeto -->
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        @media all and (max-width: 600px) {
+            footer {
+                height: 65vh;
+            }
+
+            .item-footer {
+                width: 70vw;
+            }
+        }
+    </style>
 </head>
 
 <body>

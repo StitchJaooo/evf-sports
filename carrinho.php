@@ -4,7 +4,7 @@ include("conexao.php");
 
 $idUsuario = $_SESSION['id_usuario'];
 
-$sql_select = "SELECT c.id_produto c.id_usuario, u.nome, p.*, c.quantidade FROM carrinho c, usuarios u, produtos p WHERE c.id_usuario = u.ID AND c.id_produto = p.id_produto AND c.id_usuario = ?";
+$sql_select = "SELECT c.id_produto, c.id_usuario, u.nome, p.*, c.quantidade FROM carrinho c, usuarios u, produtos p WHERE c.id_usuario = u.ID AND c.id_produto = p.id_produto AND c.id_usuario = ?";
 $stmt = $mysqli->prepare($sql_select);
 $stmt->bind_param("i", $idUsuario);
 $stmt->execute();

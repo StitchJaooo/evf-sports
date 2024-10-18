@@ -59,7 +59,7 @@
 4. No shell do MySQL, copie e cole todo o conteúdo do arquivo `script-banco.txt` que está no repositório para criar o banco de dados:
 
     ```bash
-    source script-banco.txt;
+    source script banco.txt;
     ```
 
     Isso criará o banco de dados necessário e suas tabelas.

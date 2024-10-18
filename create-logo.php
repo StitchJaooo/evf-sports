@@ -56,7 +56,7 @@ include('protect.php');
       align-items: center;
       padding: 10px;
       flex-direction: column;
-      margin: 20px 0;
+      margin: 20px 10px;
       height: 40vh;
       width: 20vw;
     }
@@ -252,49 +252,10 @@ include('protect.php');
 
 <body>
 
-  <header class="scrolled">
-    <ion-icon name="menu" class="nav-menu"></ion-icon>
-    <a href="index.php">
-            <img src="assets/logo.png" alt="">
-        </a>
-    <div class="usuario">
-      <a href="carrinho.php"><ion-icon name="cart"></ion-icon></a>
-      <ion-icon name="person-circle"></ion-icon>
-      <p id="user">
-        <?php
-        echo $_SESSION['nome'];
-        ?>
-        <ion-icon name="chevron-forward" class="seta-user"></ion-icon>
-      </p>
-      <div class="config-conta">
-        <p id="myuser">Minha conta</p>
-        <div class="borda"></div>
-        <p id="exit">
-          <a style="color:red;" href="logout.php">Sair</a>
-        </p>
-      </div>
-    </div>
-  </header>
-  <nav class="sidebar">
-    <ul>
-      <a href="index.php">
-        <li data-section="home" class="selecionado">Home</li>
-      </a>
-      <div class="borda"></div>
-      <a href="index.php">
-        <li data-section="camisas">Camisas</li>
-      </a>
-      <div class="borda"></div>
-      <a href="index.php">
-        <li data-section="logos">Logos</li>
-      </a>
-      <div class="borda"></div>
-      <a href="index.php">
-        <li>Quem Somos</li>
-      </a>
-      <div class="borda"></div>
-    </ul>
-  </nav>
+  <?php 
+  include("includes/header-fixo.php");
+  include("includes/nav.html");
+  ?>
 
   <div class="container">
     <div class="controls images">
@@ -479,7 +440,7 @@ include('protect.php');
     });
 
     function resizeCanvas() {
-      const containerWidth = window.innerWidth * 0.8; // Exemplo: 80% da largura da janela
+      const containerWidth = window.innerWidth * 0.6; // Exemplo: 80% da largura da janela
       const containerHeight = window.innerHeight * 0.6; // Exemplo: 60% da altura da janela
 
       // Atualiza o tamanho do canvas

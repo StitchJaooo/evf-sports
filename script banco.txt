@@ -36,15 +36,15 @@ CREATE TABLE `produtos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `produtos` (`nome`, `classificacao`, `ano`, `cor_principal`, `preco`, `imagem`, `estoque`) VALUES
-('2 DS', 'camisa', 2024, 'AZUL', 63.00, 'assets/camisa.png', 100),
-('1 DS', 'camisa', 2024, 'ROSA', 50.00, 'assets/camisa.png', 100),
+('2 DS', 'camisa', 2024, 'AZUL', 63.00, 'assets/2ds-2024.jpg', 100),
+('1 DS', 'camisa', 2024, 'ROSA', 50.00, 'assets/1ds-2024.jpg', 100),
 ('1 ADM', 'camisa', 2022, 'ROSA', 50.00, 'assets/camisa.png', 100),
 ('1 ADM', 'camisa', 2023, 'ROXO', 45.00, 'assets/camisa.png', 100),
-('1 ADM', 'camisa', 2024, 'VERDE', 48.00, 'assets/camisa.png', 100),
-('1 MA', 'camisa', 2023, 'VERMELHO', 50.00, 'assets/camisa.png', 100),
+('1 ADM', 'camisa', 2024, 'VERDE', 48.00, 'assets/1adm-2024.jpg', 100),
+('1 MA', 'camisa', 2023, 'VERMELHO', 50.00, 'assets/1ma-2023.jpg', 100),
 ('2 ADM', 'camisa', 2023, 'AMARELO', 50.00, 'assets/camisa.png', 100),
-('2 MA', 'camisa', 2024, 'LARANJA', 40.00, 'assets/camisa.png', 100),
-('3 ADM', 'camisa', 2024, 'CIANO', 38.00, 'assets/camisa.png', 100),
+('2 MA', 'camisa', 2024, 'LARANJA', 40.00, 'assets/2ma-2024.jpg', 100),
+('3 ADM', 'camisa', 2024, 'CIANO', 38.00, 'assets/3adm-2024.jpg', 100),
 ('2 DS', 'logo', 2024, 'AZUL', 63.00, 'assets/logo.png', 100),
 ('1 DS', 'logo', 2024, 'ROSA', 50.00, 'assets/logo.png', 100),
 ('1 ADM', 'logo', 2022, 'ROSA', 50.00, 'assets/logo.png', 100),

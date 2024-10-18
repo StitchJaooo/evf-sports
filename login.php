@@ -108,7 +108,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
         /* Estilos para as caixas de login e cadastro */
         .login-container,
         .register-container {
-            height: 35vh;
+            height: 45vh;
             /* Altura da caixa */
             padding: 20px;
             /* Espaçamento interno */

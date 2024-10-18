@@ -20,7 +20,7 @@ $checkCarrinho->execute();
 $result = $checkCarrinho->get_result();
 
 if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {        
+    while ($row = $result->fetch_assoc()) {
         $checkPreco = $mysqli->prepare("SELECT preco FROM produtos WHERE id_produto = ?");
         $checkPreco->bind_param("i", $row['id_produto']);
         $checkPreco->execute();
@@ -40,38 +40,38 @@ $valorCupom = 0;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $getCupom = $_POST['cupom'];
     $cupom_maiusculo = strtoupper($getCupom);
-    
+
     $checkCupomExists = $mysqli->prepare("SELECT * FROM cupons WHERE nomeCupom = ?");
     $checkCupomExists->bind_param("s", $cupom_maiusculo);
     $checkCupomExists->execute();
     $resultado = $checkCupomExists->get_result();
-    
+
     if ($resultado->num_rows > 0) {
-        
+
         $checkCupomValido = $mysqli->prepare("SELECT valido FROM cupons WHERE nomeCupom = ?");
         $checkCupomValido->bind_param("s", $cupom_maiusculo);
         $checkCupomValido->execute();
         $checkCupomValido->bind_result($valido);
         $checkCupomValido->fetch();
         $checkCupomValido->close();
-        
-        if($valido == 1){
-            
+
+        if ($valido == 1) {
+
             $checkCupom = $mysqli->prepare("SELECT valor FROM cupons WHERE nomeCupom = ?");
-        $checkCupom->bind_param("s", $cupom_maiusculo);
-        $checkCupom->execute();
-        $checkCupom->bind_result($valorCupom);
-        $checkCupom->fetch();
-        $checkCupom->close();
-        $valorCupom = number_format($valorCupom, 2);
-    } else{
+            $checkCupom->bind_param("s", $cupom_maiusculo);
+            $checkCupom->execute();
+            $checkCupom->bind_result($valorCupom);
+            $checkCupom->fetch();
+            $checkCupom->close();
+            $valorCupom = number_format($valorCupom, 2);
+        } else {
+            $response['status'] = 'error';
+            $response['message'] = "Cupom não é valido.";
+        }
+    } else {
         $response['status'] = 'error';
-        $response['message'] = "Cupom não é valido.";            
+        $response['message'] = "Cupom não encontrado.";
     }
-} else{
-    $response['status'] = 'error';
-    $response['message'] = "Cupom não encontrado.";
-}
 }
 
 
@@ -288,25 +288,67 @@ $total = number_format($calculoTotal, 2);
             margin-top: -15vh;
         }
 
-        #botoes{
+        #botoes {
             display: flex;
             width: 100%;
             margin-top: 10px;
             justify-content: center;
             align-items: center;
         }
-        
-        .atualizar{
-            border: 1px solid gray;
-            width: 40%;
-            /* flex:0.5; */
+
+        .atualizar {
+            border: none;
             cursor: pointer;
-            background-color: #e6e6e6;
+            background-color: none;
+            font-size: 1.8rem;
+            margin: 0 10px -20px 10px; 
         }
 
-        header{
+        .mais{
+            color: #233dff;
+        }
+
+        .menos{
+            font-size: 2.8rem;
+            color: red;
+        }
+
+        header {
             animation: none;
         }
+
+        .modal{
+            color: #000;
+        }
+
+        .delete {
+            /* Alinha os itens verticalmente */
+            border: 3px solid red;
+            /* Borda vermelha */
+            background-color: red;
+            /* Cor de fundo vermelha */
+        }
+        
+        .flat {
+            padding: 8px;
+            border-radius: 15px;
+            /* Bordas arredondadas */
+            font-size: 1.1rem;
+            /* Tamanho da fonte */
+        }
+        
+        .flat:hover {
+            transform: scale(1.05);
+            /* Efeito de aumento no hover */
+            box-shadow: 0px 0px 10px 1px #233dff;
+            /* Sombra no hover */
+        }
+
+        .delete:hover {
+            box-shadow: 0px 0px 10px 4px red;
+            /* Sombra no hover */
+        }
+
 
         @media all and (max-width: 600px) {
 
@@ -317,7 +359,7 @@ $total = number_format($calculoTotal, 2);
             }
 
             .main {
-                margin: 18vh 0 0 0;
+                margin-top: -2vh;
                 padding: 0;
                 justify-content: center;
             }
@@ -346,20 +388,24 @@ $total = number_format($calculoTotal, 2);
                 height: auto;
             }
 
-            #cupom{
+            #cupom {
                 width: 30vw;
             }
-            #aplicar{
+
+            #aplicar {
                 width: 20vw;
             }
+
             #pagar {
                 margin: 20px;
                 width: 40vw;
             }
-            .areaCupom{
+
+            .areaCupom {
                 width: 40vw;
             }
-            .areaPagamento{
+
+            .areaPagamento {
                 margin-top: 20px;
                 align-items: center;
                 width: 100%;
@@ -369,66 +415,74 @@ $total = number_format($calculoTotal, 2);
 </head>
 
 <body>
-    <header class="scrolled">
-        <ion-icon name="menu" class="nav-menu"></ion-icon>
-        <a href="index.php">
-            <img src="assets/logo.png" alt="">
-        </a>
-        <div class="usuario">
-            <ion-icon name="cart"></ion-icon>
-            <ion-icon name="person-circle"></ion-icon>
-            <p id="user"><?php echo $_SESSION['nome']; ?>
-                <ion-icon name="chevron-forward" class="seta-user"></ion-icon>
-            </p>
-            <div class="config-conta">
-                <p id="myuser">Minha conta</p>
-                <div class="borda"></div>
-                <p id="exit">
-                    <a style="color:red;" href="logout.php">Sair</a>
-                </p>
-            </div>
-        </div>
-    </header>
-    <nav class="sidebar">
-        <ul>
-            <a href="index.php">
-                <li data-section="home" class="selecionado">Home</li>
-            </a>
-            <div class="borda"></div>
-            <a href="index.php">
-                <li data-section="camisas">Camisas</li>
-            </a>
-            <div class="borda"></div>
-            <a href="index.php">
-                <li data-section="logos">Logos</li>
-            </a>
-            <div class="borda"></div>
-            <a href="index.php">
-                <li>Quem Somos</li>
-            </a>
-            <div class="borda"></div>
-        </ul>
-    </nav>
+    <?php
+    include("includes/header-fixo.php"); // Inclui o cabeçalho fixo
+    include("includes/nav.php"); // Inclui a navegação
+    ?>
 
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalDeleteLabel"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmação</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <button class="flat" data-dismiss="modal">Cancelar</button>
-                    <button class="flat delete" data-dismiss="modal" id="confirmDeleteBtn">Excluir
-                        <ion-icon name="trash"></ion-icon>
-                    </button>
+                    Você tem certeza que deseja remover este item?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="flat" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="flat delete" id="confirmButton">Remover</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Sucesso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Mensagem de sucesso será injetada aqui -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="flat" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Erro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Mensagem de erro será injetada aqui -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="flat delete" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="main">
         <div class="tabelas">
 
@@ -443,16 +497,17 @@ $total = number_format($calculoTotal, 2);
                 <?php
                 while ($dados_produtos = mysqli_fetch_assoc($produtosCarrinho)) {
                     echo "<tr>";
-                    echo "<td onclick=\"removerItem(". $dados_produtos['id_produto'].")\"><ion-icon name='close-outline'></ion-icon></td>";
+                    echo "<td onclick=\"removerItem(" . $dados_produtos['id_produto'] . ")\"><ion-icon name='close-outline'></ion-icon></td>";
                     echo "<td class='viewProduct'><img src='" . $dados_produtos['imagem'] . "' alt='Imagem do Produto'></td>";
                     echo "<td class='nameProduct'>" . $dados_produtos['nome'] . " - " . $dados_produtos['cor_principal'] . "</td>";
                     echo "<td class='cost'>R$" . $dados_produtos['preco'] . "</td>";
                     echo "<td class='quantity'>" . $dados_produtos['quantidade'] . "
                     <div id=\"botoes\">
-                    <div class='atualizar' onclick=\"diminuirItem(". $dados_produtos['id_produto'].")\">-</div>
-                    <div class='atualizar' onclick=\"aumentarItem(". $dados_produtos['id_produto'].")\">+</div>
+                    <div class='atualizar menos' onclick=\"diminuirItem(" . $dados_produtos['id_produto'] . ")\">-</div>
+                    <div class='atualizar mais' onclick=\"aumentarItem(" . $dados_produtos['id_produto'] . ")\">+</div>
                     </div>
-                    </td>";                    echo "</tr>";
+                    </td>";
+                    echo "</tr>";
                 }
                 ?>
             </table>
@@ -495,21 +550,9 @@ $total = number_format($calculoTotal, 2);
             </form>
         </div>
     </div>
-    <footer>
-        <div class="infos">
-            <div class="item-footer">
-                <h1>Sobre nós</h1>
-                <p>Somos uma empresa de confecção de camisas e designs, vendemos itens prontos já feitos por
-                    nossa empresa!</p>
-            </div>
-            <div class="item-footer">
-                <h1>Nossos contatos</h1>
-                <p>random@teste.com</p>
-                <p>1199999999999999</p>
-            </div>
-        </div>
-        <p class="copy">Copyrights © 2024 - EVF SPORTS</p>
-    </footer>
+    <?php
+    include("includes/footer.html");
+    ?>
 
 
     <script src="js/user-animation.js"></script>
@@ -518,69 +561,80 @@ $total = number_format($calculoTotal, 2);
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
         function removerItem(id) {
-            if (confirm("Você tem certeza que deseja remover este item?")) {
-                fetch('removerItem.php', { // O arquivo PHP que processará a exclusão
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ id: id }), // Enviando o ID como JSON
-                })
-                    .then(response => response.json())
-                    .then(data => {
+            $('#confirmModal').modal('show'); // Exibe o modal de confirmação
+
+            $('#confirmButton').off('click').on('click', function () {
+                $.ajax({
+                    url: 'removerItem.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ id: id }),
+                    success: function (data) {
                         if (data.success) {
-                            location.reload();
-                            alert("Item removido com sucesso!");
+                            $('#successModal .modal-body').text('Item removido com sucesso!');
+                            $('#successModal').modal('show'); // Exibe o modal de sucesso
+                            $('#successModal').on('hidden.bs.modal', function () {
+                                location.reload();
+                            });
                         } else {
-                            alert("Erro ao remover o item: " + data.message);
+                            $('#errorModal .modal-body').text('Erro ao remover o item: ' + data.message);
+                            $('#errorModal').modal('show'); // Exibe o modal de erro
                         }
-                    })
-                    .catch((error) => {
+                    },
+                    error: function (error) {
                         console.error('Erro:', error);
-                    });
-            }
+                        $('#errorModal .modal-body').text('Erro ao processar a solicitação.');
+                        $('#errorModal').modal('show');
+                    }
+                });
+            });
         }
 
         function aumentarItem(id) {
-            fetch('atualizarItem.php', { // O arquivo PHP que processará a exclusão
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id: id, qtd: 1 }), // Enviando o ID como JSON
-            })
-                .then(response => response.json())
-                .then(data => {
+            $.ajax({
+                url: 'atualizarItem.php',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({ id: id, qtd: 1 }),
+                success: function (data) {
                     if (data.success) {
                         location.reload();
                     } else {
-                        alert("Erro ao aumentar o item: " + data.message);
+                        $('#errorModal .modal-body').text('Erro ao aumentar o item: ' + data.message);
+                        $('#errorModal').modal('show');
                     }
-                })
-                .catch((error) => {
+                },
+                error: function (error) {
                     console.error('Erro:', error);
-                });
+                    $('#errorModal .modal-body').text('Erro ao processar a solicitação.');
+                    $('#errorModal').modal('show');
+                }
+            });
         }
 
         function diminuirItem(id) {
-            fetch('atualizarItem.php', { // O arquivo PHP que processará a exclusão
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id: id, qtd: -1 }), // Enviando o ID como JSON
-            })
-                .then(response => response.json())
-                .then(data => {
+            $.ajax({
+                url: 'atualizarItem.php',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({ id: id, qtd: -1 }),
+                success: function (data) {
                     if (data.success) {
                         location.reload();
                     } else {
-                        alert("Erro ao diminuir o item: " + data.message);
+                        $('#errorModal .modal-body').text('Erro ao diminuir o item: ' + data.message);
+                        $('#errorModal').modal('show');
                     }
-                })
-                .catch((error) => {
+                },
+                error: function (error) {
                     console.error('Erro:', error);
-                });
+                    $('#errorModal .modal-body').text('Erro ao processar a solicitação.');
+                    $('#errorModal').modal('show');
+                }
+            });
         }
 
     </script>

@@ -44,13 +44,19 @@ if (isset($_GET['id'])) {
             align-items: center;
             justify-content: center;
             width: 100vw;
-            margin-top: 21vh;
+            margin-top: 16vh;
             margin-bottom: 15.6vh;
         }
 
         .card {
             text-align: center;
-            height: 25vh
+            height: 40vh;
+            width: 30vw;
+        }
+
+        .card-img{
+            width: 100%;
+            height: 100%;
         }
 
         .card-body,
@@ -105,7 +111,7 @@ if (isset($_GET['id'])) {
         }
 
         .flat {
-            padding: 5px;
+            padding: 18px;
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
@@ -152,6 +158,15 @@ if (isset($_GET['id'])) {
                 flex-direction: column;
             }
 
+            .card{
+                width: 80vw;
+                height: 30vh;
+            }
+
+            .flat{
+                padding: 5px;
+            }
+
             footer {
                 height: 60vh;
             }
@@ -175,7 +190,7 @@ if (isset($_GET['id'])) {
 <body>
     <?php
     include("includes/header-fixo.php"); // Inclui o cabeçalho fixo
-    include("includes/nav.php"); // Inclui a navegação
+    include("includes/nav.html"); // Inclui a navegação
     ?>
 
     <!-- Modal para exibir resultados de operações -->

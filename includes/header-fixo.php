@@ -1,6 +1,8 @@
 <header class="scrolled">
     <ion-icon name="menu" class="nav-menu"></ion-icon>
-    <img src="assets/logo.png" alt="">
+    <a href="index.php">
+        <img src="assets/logo.png" alt="">
+    </a>
     <div class="usuario">
         <a href="carrinho.php"><ion-icon name="cart"></ion-icon></a>
         <ion-icon name="person-circle"></ion-icon>
@@ -8,10 +10,10 @@
         if (!isset($_SESSION['nome'])) {
             echo "<a href=\"logout.php\"><p id=\"user\">Entrar</p></a>";
         } else {
-            echo "<p id=\"user\">".$_SESSION['nome']."</p>";
+            echo "<p id=\"user\">" . $_SESSION['nome'] . "</p>";
         }
         ?>
-            <ion-icon name="chevron-forward" class="seta-user"></ion-icon>
+        <ion-icon name="chevron-forward" class="seta-user"></ion-icon>
         </p>
         <div class="config-conta">
             <p id="myuser">Minha conta</p>

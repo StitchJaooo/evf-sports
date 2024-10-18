@@ -14,6 +14,16 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`ID`, `nome`, `email`, `senha`, `perfil`) VALUES
 (17, 'ADMIN', 'admin@gmail.com', '$2y$10$f6MJyHhS2CHScdsvsU3kOO6UZmLvbWZ8MZQe8oTACsLzklX6MCMUi', 'ADM');
 
+CREATE TABLE `cupons` (
+  `id_cupom` int(11) NOT NULL,
+  `nomeCupom` varchar(100) NOT NULL,
+  `valor` int(10) NOT NULL,
+  `valido` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `cupons` (`id_cupom`, `nomeCupom`, `valor`, `valido`) VALUES
+(1, 'CUPOM ESPECIAL', 20, 1);
+
 CREATE TABLE `produtos` (
   `id_produto` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
   `nome` varchar(40) DEFAULT NULL,

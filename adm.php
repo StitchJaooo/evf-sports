@@ -264,7 +264,7 @@
 <body>
     <?php
     include("includes/header-fixo.php"); // Inclui o cabeçalho fixo
-    include("includes/nav.php"); // Inclui a navegação
+    include("includes/nav.html"); // Inclui a navegação
     ?>
 
     <!-- Modal para mostrar resultados de ações -->

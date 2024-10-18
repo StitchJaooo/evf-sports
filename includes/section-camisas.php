@@ -21,7 +21,9 @@ $camisas = $mysqli->query($sql_camisas);
     ?>
 </div>
 <div id="create">
-    <button class="flat">Crie sua camisa
-        <ion-icon name="shirt"></ion-icon>
-    </button>
+    <a href="create-camisas.php">
+        <button class="flat">Crie sua camisa
+            <ion-icon name="shirt"></ion-icon>
+        </button>
+    </a>
 </div>

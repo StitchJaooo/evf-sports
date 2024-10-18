@@ -254,14 +254,16 @@ include('protect.php');
 
   <header class="scrolled">
     <ion-icon name="menu" class="nav-menu"></ion-icon>
-    <a href="logged.php">
+    <a href="index.php">
             <img src="assets/logo.png" alt="">
         </a>
     <div class="usuario">
       <a href="carrinho.php"><ion-icon name="cart"></ion-icon></a>
       <ion-icon name="person-circle"></ion-icon>
       <p id="user">
-        teste
+        <?php
+        echo $_SESSION['nome'];
+        ?>
         <ion-icon name="chevron-forward" class="seta-user"></ion-icon>
       </p>
       <div class="config-conta">
@@ -275,19 +277,19 @@ include('protect.php');
   </header>
   <nav class="sidebar">
     <ul>
-      <a href="logged.php">
+      <a href="index.php">
         <li data-section="home" class="selecionado">Home</li>
       </a>
       <div class="borda"></div>
-      <a href="logged.php">
+      <a href="index.php">
         <li data-section="camisas">Camisas</li>
       </a>
       <div class="borda"></div>
-      <a href="logged.php">
+      <a href="index.php">
         <li data-section="logos">Logos</li>
       </a>
       <div class="borda"></div>
-      <a href="logged.php">
+      <a href="index.php">
         <li>Quem Somos</li>
       </a>
       <div class="borda"></div>

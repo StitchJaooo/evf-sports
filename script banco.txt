@@ -12,7 +12,8 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `usuarios` (`ID`, `nome`, `email`, `senha`, `perfil`) VALUES
-(17, 'ADMIN', 'admin@gmail.com', '$2y$10$f6MJyHhS2CHScdsvsU3kOO6UZmLvbWZ8MZQe8oTACsLzklX6MCMUi', 'ADM');
+(1, 'ADMIN', 'admin@gmail.com', '$2y$10$f6MJyHhS2CHScdsvsU3kOO6UZmLvbWZ8MZQe8oTACsLzklX6MCMUi', 'ADM'),
+(2, 'Usuario', 'user@gmail.com', '$2y$10$C0pBEHQJrGEjrG9tzkciOeT8H7sTLB/weksXYiPy7Hxxp7XjnCYWK', 'USR');
 
 CREATE TABLE `cupons` (
   `id_cupom` int(11) NOT NULL,
@@ -38,17 +39,14 @@ CREATE TABLE `produtos` (
 INSERT INTO `produtos` (`nome`, `classificacao`, `ano`, `cor_principal`, `preco`, `imagem`, `estoque`) VALUES
 ('2 DS', 'camisa', 2024, 'AZUL', 63.00, 'assets/2ds-2024.jpg', 100),
 ('1 DS', 'camisa', 2024, 'ROSA', 50.00, 'assets/1ds-2024.jpg', 100),
-('1 ADM', 'camisa', 2022, 'ROSA', 50.00, 'assets/camisa.png', 100),
-('1 ADM', 'camisa', 2023, 'ROXO', 45.00, 'assets/camisa.png', 100),
+('1 MA', 'camisa', 2024, 'AMARELO', 50.00, 'assets/1ma-2024.png', 100),
 ('1 ADM', 'camisa', 2024, 'VERDE', 48.00, 'assets/1adm-2024.jpg', 100),
 ('1 MA', 'camisa', 2023, 'VERMELHO', 50.00, 'assets/1ma-2023.jpg', 100),
-('2 ADM', 'camisa', 2023, 'AMARELO', 50.00, 'assets/camisa.png', 100),
 ('2 MA', 'camisa', 2024, 'LARANJA', 40.00, 'assets/2ma-2024.jpg', 100),
 ('3 ADM', 'camisa', 2024, 'CIANO', 38.00, 'assets/3adm-2024.jpg', 100),
 ('2 DS', 'logo', 2024, 'AZUL', 63.00, 'assets/logo.png', 100),
 ('1 DS', 'logo', 2024, 'ROSA', 50.00, 'assets/logo.png', 100),
 ('1 ADM', 'logo', 2022, 'ROSA', 50.00, 'assets/logo.png', 100),
-('1 ADM', 'logo', 2023, 'ROXO', 45.00, 'assets/logo.png', 100),
 ('1 ADM', 'logo', 2024, 'VERDE', 48.00, 'assets/logo.png', 100),
 ('1 MA', 'logo', 2023, 'VERMELHO', 50.00, 'assets/logo.png', 100),
 ('2 ADM', 'logo', 2023, 'AMARELO', 50.00, 'assets/logo.png', 100),

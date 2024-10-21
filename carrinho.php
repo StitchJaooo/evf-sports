@@ -47,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = $checkCupomExists->get_result();
 
     if ($resultado->num_rows > 0) {
-
         $checkCupomValido = $mysqli->prepare("SELECT valido FROM cupons WHERE nomeCupom = ?");
         $checkCupomValido->bind_param("s", $cupom_maiusculo);
         $checkCupomValido->execute();
@@ -56,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $checkCupomValido->close();
 
         if ($valido == 1) {
-
             $checkCupom = $mysqli->prepare("SELECT valor FROM cupons WHERE nomeCupom = ?");
             $checkCupom->bind_param("s", $cupom_maiusculo);
             $checkCupom->execute();
@@ -74,14 +72,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$calculoFrete = 30;
+$frete = number_format($calculoFrete, 2, ',', '.');
 
-$calculoFrete = 10;
-$frete = number_format($calculoFrete, 2);
+$calculoTotal = $calculo + $calculoFrete - $valorCupom;
+$total = number_format($calculoTotal, 2, ',', '.');
 
-$calculoTotal = $subtotal + $frete - $valorCupom;
-$total = number_format($calculoTotal, 2);
+// Chave PIX
+$pixKey = "chavePix"; // Substitua pela sua chave PIX
+
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -417,7 +417,7 @@ $total = number_format($calculoTotal, 2);
 <body>
     <?php
     include("includes/header-fixo.php"); // Inclui o cabeçalho fixo
-    include("includes/nav.php"); // Inclui a navegação
+    include("includes/nav.html"); // Inclui a navegação
     ?>
 
     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
@@ -485,10 +485,9 @@ $total = number_format($calculoTotal, 2);
 
     <div class="main">
         <div class="tabelas">
-
             <table class="produtos">
                 <tr class="topoTable">
-                    <th id="excluir"><!--<ion-icon name="close-outline"></ion-icon>--></th>
+                    <th id="excluir"></th>
                     <th id="img">Imagem</th>
                     <th id="produto">Produto</th>
                     <th id="preco">Preço</th>
@@ -532,16 +531,46 @@ $total = number_format($calculoTotal, 2);
                     <tr class="total">
                         <td>TOTAL</td>
                         <td id="valorTotal"><?php echo $total ?></td>
-                        </r>
+                    </tr>
                 </table>
 
-                <button id="pagar">
-                    Pagar
+                <button id="pagar" onclick="mostrarInfoPix()">
+                    Pagar com PIX
                 </button>
 
-            </div>
+                <script>
+                    function mostrarInfoPix() {
+                        alert("Para concluir o pagamento, use a seguinte chave PIX: \n\n" + "<?php echo $pixKey; ?>" + "\n\nValor: R$ <?php echo $total; ?>");
+                    }
+                </script>
 
+
+                <!-- Modal PIX -->
+                <!-- <div class="modal fade" id="pixModal" tabindex="-1" role="dialog" aria-labelledby="pixModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="pixModalLabel">Pagamento via PIX</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Para concluir o pagamento, use a seguinte chave PIX:</p>
+                                <h3><?php echo $pixKey; ?></h3>
+                                <p>Valor: R$ <?php echo $total; ?></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="flat" data-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
         </div>
+    </div>
+    </div>
         <div class="areaCupom">
             <form action="carrinho.php" method="POST">
                 <label for="cupom">DIGITE SEU CUPOM:</label>

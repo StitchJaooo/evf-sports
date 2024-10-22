@@ -254,7 +254,6 @@ include('protect.php');
 
   <?php 
   include("includes/header-fixo.php");
-  include("includes/nav.html");
   ?>
 
   <div class="container">

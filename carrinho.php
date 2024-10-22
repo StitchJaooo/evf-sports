@@ -301,14 +301,14 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
             cursor: pointer;
             background-color: none;
             font-size: 1.8rem;
-            margin: 0 10px -20px 10px; 
+            margin: 0 10px -20px 10px;
         }
 
-        .mais{
+        .mais {
             color: #233dff;
         }
 
-        .menos{
+        .menos {
             font-size: 2.8rem;
             color: red;
         }
@@ -317,7 +317,7 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
             animation: none;
         }
 
-        .modal{
+        .modal {
             color: #000;
         }
 
@@ -328,7 +328,7 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
             background-color: red;
             /* Cor de fundo vermelha */
         }
-        
+
         .flat {
             padding: 8px;
             border-radius: 15px;
@@ -336,7 +336,7 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
             font-size: 1.1rem;
             /* Tamanho da fonte */
         }
-        
+
         .flat:hover {
             transform: scale(1.05);
             /* Efeito de aumento no hover */
@@ -419,6 +419,28 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
     include("includes/header-fixo.php"); // Inclui o cabeçalho fixo
     include("includes/nav.html"); // Inclui a navegação
     ?>
+
+    <div class="modal fade" id="pixModal" tabindex="-1" role="dialog" aria-labelledby="pixModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pixModalLabel">Concluir Pagamento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Para concluir o pagamento, use a seguinte chave PIX:</p>
+                    <h4>716cobre@gmail.com</h4>
+                    <h4>R$: <?php echo $total; ?></h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="flat delete" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
         aria-hidden="true">
@@ -540,7 +562,7 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
 
                 <script>
                     function mostrarInfoPix() {
-                        alert("Para concluir o pagamento, use a seguinte chave PIX: \n\n" + "<?php echo $pixKey; ?>" + "\n\nValor: R$ <?php echo $total; ?>");
+                        $('#pixModal').modal('show'); 
                     }
                 </script>
 
@@ -571,13 +593,13 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
         </div>
     </div>
     </div>
-        <div class="areaCupom">
-            <form action="carrinho.php" method="POST">
-                <label for="cupom">DIGITE SEU CUPOM:</label>
-                <input type="text" name="cupom" id="cupom" placeholder="CUPOM">
-                <button id="aplicar" onclick="aplicar('cupom')">Aplicar</button>
-            </form>
-        </div>
+    <div class="areaCupom">
+        <form action="carrinho.php" method="POST">
+            <label for="cupom">DIGITE SEU CUPOM:</label>
+            <input type="text" name="cupom" id="cupom" placeholder="CUPOM">
+            <button id="aplicar" onclick="aplicar('cupom')">Aplicar</button>
+        </form>
+    </div>
     </div>
     <?php
     include("includes/footer.html");

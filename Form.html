@@ -1,270 +1,290 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-    * {
-        padding: 0;
-        margin: 0;
-    }
+        * {
+            padding: 0;
+            margin: 0;
+        }
 
-    @font-face {
-        font-family: 'OpenSauce';
-        src: url('font/OpenSauceOne-Light.ttf') format('truetype');
-    }
+        @font-face {
+            font-family: 'OpenSauce';
+            src: url('font/OpenSauceOne-Light.ttf') format('truetype');
+        }
 
-    @font-face {
-        font-family: 'OpenSauceRegular';
-        src: url('font/OpenSauceOne-Regular.ttf') format('truetype');
-    }
+        @font-face {
+            font-family: 'OpenSauceRegular';
+            src: url('font/OpenSauceOne-Regular.ttf') format('truetype');
+        }
 
-    @font-face {
-        font-family: 'OpenSauceBold';
-        src: url('font/OpenSauceOne-Bold.ttf') format('truetype');
-    }
+        @font-face {
+            font-family: 'OpenSauceBold';
+            src: url('font/OpenSauceOne-Bold.ttf') format('truetype');
+        }
 
-    @font-face {
-        font-family: 'OpenSauceExtraBold';
-        src: url('font/OpenSauceOne-ExtraBold.ttf') format('truetype');
-    }
+        @font-face {
+            font-family: 'OpenSauceExtraBold';
+            src: url('font/OpenSauceOne-ExtraBold.ttf') format('truetype');
+        }
 
-    body {
-        color: black;
-        background-image: url("assets/background.png");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: start;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        body {
+            color: black;
+            background-image: url("assets/background.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: start;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    a {
-        color: #fff;
-        text-decoration: none;
-        user-select: none;
-    }
+        a {
+            color: #fff;
+            text-decoration: none;
+            user-select: none;
+        }
 
-    .container {
-        background-color: #f8f8ff;
-        width: 40vw;
-        height: 80vh;
-        margin: 10vh 0vw;
-        padding: 0vh 5vw;
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        /* justify-content: center; */
-        align-items: center;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .title {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        height: 21vh;
-        padding: 3vh 0;
-        margin-bottom: 3vh;
-        color: #12229d;
-        
-        /* background-color: #e4a1f5; */
-    }
-
-    h1 {
-        padding: 5px 35px 5px 35px;
-        font: 2.3rem 'OpenSauceExtraBold';
-        letter-spacing: -2px;
-        margin-bottom: 4vh;
-        border-bottom: 3px solid #cae8ff;
-        user-select: none;
-    }
-
-    p {
-        width: 100%;
-        height: 8vh;
-        color: #000;
-        font: 1.2rem 'OpenSauceBold';
-        text-align: center;
-        
-        /* background-color: cyan; */
-    }
-
-    form {
-        width: 100%;
-        height: 30vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        font: 1rem 'OpenSauceRegular';
-        
-        /* background-color: rgb(245, 231, 153); */
-    }
-
-    .mainForm, .pag1, .pag2, .pag3, .pag4, .pag5 {
-        width: 100%;
-        height: 30vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 3vh 0vw;
-        margin-bottom: 3vh;
-    }
-
-    .nav {
-        position: absolute;
-        bottom: 0px;
-        width: 40vw;
-        height: auto; 
-        padding: 3vh 0;
-        display: flex;
-        justify-content: space-between;
-        
-        /* background-color: #a3ffff; */
-    }
-
-    .p1, .p2, .p3, .p4, .p5, .p6 {
-        width: 8vw;
-        height: 6vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: 'OpenSauceBold';
-        user-select: none;
-        
-        /* background-color: #068f66; */
-    }
-
-    /* Perguntas */
-    label {
-        width: 100%;
-        align-self: flex-start;
-        padding-bottom: 15px;
-    }
-
-    .perg {
-        width: 100%;
-        height: 7vh;
-        margin-bottom: 3vh;
-        border: 0;
-        outline: 0;
-        border-bottom: 2px solid black;
-        background: transparent;
-        font: 1rem 'OpenSauceRegular';
-        
-    }
-
-    .perg::placeholder {
-        font-size: small;
-        user-select: none;
-    }
-
-    .perg:focus {
-        border-color: #06168f;
-    }
-
-    textarea {
-        width: 100%;
-        height: auto;
-        margin-bottom: 3vh;
-        border: 0;
-        outline: 0;
-        resize: none;
-        border-bottom: 2px solid black;
-        background: transparent;
-        font: 1rem 'OpenSauceRegular';
-    }
-
-    textarea::-webkit-scrollbar {
-        width: 0;
-    }
-
-    /* Páginas */
-    .hide {
-        display: none;
-    }
-
-    /* Butttons */
-    button {
-        width: 8vw;
-        height: 6vh;
-        margin: 0px 2px;
-        background-color: #06168f;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        font-family: 'OpenSauceBold';
-        cursor: pointer;
-    }
-
-    button:hover {
-        transition: 0.3s;
-        scale: 1.05;
-    }
-
-    .exit {
-        background-color: #8f0606;
-    }
-
-    .send {
-        width: 8vw;
-        height: 6vh;
-        margin: 0px 2px;
-        background-color: #068f66;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        font-family: 'OpenSauceBold';
-        cursor: pointer;
-    }
-
-    .send:hover {
-        transition: 0.3s;
-        scale: 1.05;
-    }
-
-    @media all and (max-width: 800px) {
         .container {
-            width: 75vw;
+            background-color: #f8f8ff;
+            width: 40vw;
             height: 80vh;
-            margin: 0vh 0vw;
+            margin: 10vh 0vw;
+            padding: 0vh 5vw;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: center;
+            overflow: hidden;
+            position: relative;
         }
 
         .title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: 100%;
+            height: 21vh;
+            padding: 3vh 0;
+            margin-bottom: 3vh;
+            color: #12229d;
 
+            /* background-color: #e4a1f5; */
         }
 
-        h1{
-            font-size: 2rem;
+        h1 {
+            padding: 5px 35px 5px 35px;
+            font: 2.3rem 'OpenSauceExtraBold';
+            letter-spacing: -2px;
+            margin-bottom: 4vh;
+            border-bottom: 3px solid #cae8ff;
+            user-select: none;
         }
 
         p {
-            font-size: 0.9rem;
+            width: 100%;
+            height: 8vh;
+            color: #000;
+            font: 1.2rem 'OpenSauceBold';
+            text-align: center;
+
+            /* background-color: cyan; */
+        }
+
+        form {
+            width: 100%;
+            height: 30vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            font: 1rem 'OpenSauceRegular';
+
+            /* background-color: rgb(245, 231, 153); */
+        }
+
+        .mainForm,
+        .pag1,
+        .pag2,
+        .pag3,
+        .pag4,
+        .pag5 {
+            width: 100%;
+            height: 30vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3vh 0vw;
+            margin-bottom: 3vh;
         }
 
         .nav {
-            left: 0;
-            width: 90%;
-            height: 8vh;
-            padding: 0 5%;
+            position: absolute;
+            bottom: 0px;
+            width: 40vw;
+            height: auto;
+            padding: 3vh 0;
+            display: flex;
+            justify-content: space-between;
+
+            /* background-color: #a3ffff; */
         }
 
-        label, .perg, textarea {
-            font-size: 0.9rem;
+        .p1,
+        .p2,
+        .p3,
+        .p4,
+        .p5,
+        .p6 {
+            width: 8vw;
+            height: 6vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'OpenSauceBold';
+            user-select: none;
+
+            /* background-color: #068f66; */
         }
 
-        button, .send {
-            width: 20vw;
+        /* Perguntas */
+        label {
+            width: 100%;
+            align-self: flex-start;
+            padding-bottom: 15px;
         }
-    }
+
+        .perg {
+            width: 100%;
+            height: 7vh;
+            margin-bottom: 3vh;
+            border: 0;
+            outline: 0;
+            border-bottom: 2px solid black;
+            background: transparent;
+            font: 1rem 'OpenSauceRegular';
+
+        }
+
+        .perg::placeholder {
+            font-size: small;
+            user-select: none;
+        }
+
+        .perg:focus {
+            border-color: #06168f;
+        }
+
+        textarea {
+            width: 100%;
+            height: auto;
+            margin-bottom: 3vh;
+            border: 0;
+            outline: 0;
+            resize: none;
+            border-bottom: 2px solid black;
+            background: transparent;
+            font: 1rem 'OpenSauceRegular';
+        }
+
+        textarea::-webkit-scrollbar {
+            width: 0;
+        }
+
+        /* Páginas */
+        .hide {
+            display: none;
+        }
+
+        /* Butttons */
+        button {
+            width: 8vw;
+            height: 6vh;
+            margin: 0px 2px;
+            background-color: #06168f;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'OpenSauceBold';
+            cursor: pointer;
+        }
+
+        button:hover {
+            transition: 0.3s;
+            scale: 1.05;
+        }
+
+        .exit {
+            background-color: #8f0606;
+        }
+
+        .send {
+            width: 8vw;
+            height: 6vh;
+            margin: 0px 2px;
+            background-color: #068f66;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'OpenSauceBold';
+            cursor: pointer;
+        }
+
+        .send:hover {
+            transition: 0.3s;
+            scale: 1.05;
+        }
+
+        .stars{
+            font-size: 2rem;
+            color: #233dff;
+        }
+
+        @media all and (max-width: 800px) {
+            .container {
+                width: 75vw;
+                height: 80vh;
+                margin: 0vh 0vw;
+            }
+
+            .title {
+                width: 100%;
+
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+
+            .nav {
+                left: 0;
+                width: 90%;
+                height: 8vh;
+                padding: 0 5%;
+            }
+
+            label,
+            .perg,
+            textarea {
+                font-size: 0.9rem;
+            }
+
+            button,
+            .send {
+                width: 20vw;
+            }
+        }
     </style>
     <title>FeedBack</title>
 </head>
+
 <body>
 
     <div class="container">
@@ -273,58 +293,78 @@
             <div class="p0">
                 <p>Complete o formulário para nos ajudar melhorar a sua experiência como usuário!</p>
             </div>
-            
+
         </div>
         <form action="Resp.php" method="post" onkeydown="return event.key !== 'Enter';">
             <div class="mainForm">
                 <label for="nome">Nome:</label>
-                <input type="text" name="name" class="perg" id="nome" placeholder="Seu Nome" autocomplete="off" required>
+                <input type="text" name="name" class="perg" id="nome" placeholder="Seu Nome" autocomplete="off"
+                    required>
                 <label for="curso">Curso:</label>
-                <input type="text" name="curso" class="perg" id="curso" placeholder="Ex: 1 DS" autocomplete="off" required>
+                <input type="text" name="curso" class="perg" id="curso" placeholder="Ex: 1 DS" autocomplete="off"
+                    required>
             </div>
 
             <div class="pag1 hide">
                 <label for="um">Como foi o processo de personalização das camisas?</label>
-                <textarea placeholder="" name="pergunta1" class="textPerg" id="um" autocomplete="off" required></textarea>
-            
+                <textarea placeholder="" name="pergunta1" class="textPerg" id="um" autocomplete="off"
+                    required></textarea>
+
                 <label for="dois">Algum problema ocorreu ao fazer uma simulação de compra?</label>
-                <textarea placeholder="" name="pergunta2" class="textPerg" id="dois" autocomplete="off" required></textarea>
+                <textarea placeholder="" name="pergunta2" class="textPerg" id="dois" autocomplete="off"
+                    required></textarea>
             </div>
 
             <div class="pag2 hide">
                 <label for="tres">O design e a estética do site são atraentes?</label>
-                <textarea placeholder="" name="pergunta3" class="textPerg" id="tres" autocomplete="off" required></textarea>
-                
+                <textarea placeholder="" name="pergunta3" class="textPerg" id="tres" autocomplete="off"
+                    required></textarea>
+
                 <label for="quatro">Houve alguma dificuldade em encontrar algum produto específico?</label>
-                <textarea placeholder="" name="pergunta4" class="textPerg" id="quatro" autocomplete="off" required></textarea>
+                <textarea placeholder="" name="pergunta4" class="textPerg" id="quatro" autocomplete="off"
+                    required></textarea>
             </div>
 
             <div class="pag3 hide">
                 <label for="cinco">A navegação no site é intuitiva e fácil de usar?</label>
-                <textarea placeholder="" name="pergunta5" class="textPerg" id="cinco" autocomplete="off" required></textarea>
-                
+                <textarea placeholder="" name="pergunta5" class="textPerg" id="cinco" autocomplete="off"
+                    required></textarea>
+
                 <label for="seis">Encontrou algum erro ou bug durante o uso do site?</label>
-                <textarea placeholder="" name="pergunta6" class="textPerg" id="seis" autocomplete="off" required></textarea>
+                <textarea placeholder="" name="pergunta6" class="textPerg" id="seis" autocomplete="off"
+                    required></textarea>
             </div>
 
             <div class="pag4 hide">
                 <label for="sete">Quais funcionalidades do site você achou mais úteis?</label>
-                <textarea placeholder="" name="pergunta7" class="textPerg" id="sete" autocomplete="off" required></textarea>
-                
+                <textarea placeholder="" name="pergunta7" class="textPerg" id="sete" autocomplete="off"
+                    required></textarea>
+
                 <label for="oito">Como você avaliaria a velocidade e a eficiência do site?</label>
-                <textarea placeholder="" name="pergunta8" class="textPerg" id="oito" autocomplete="off" required></textarea>
+                <textarea placeholder="" name="pergunta8" class="textPerg" id="oito" autocomplete="off"
+                    required></textarea>
             </div>
 
-            <div class="pag5 hide">   
+            <div class="pag5 hide">
                 <label for="nove">O que você sugeriria para melhorar a experiência do usuário?</label>
-                <textarea placeholder="" name="pergunta9" class="textPerg" id="nove" autocomplete="off" required></textarea>
-                
+                <textarea placeholder="" name="pergunta9" class="textPerg" id="nove" autocomplete="off"
+                    required></textarea>
+
                 <label for="dez">Deixe aqui sua avaliação geral e sugestão de projetos futuros:</label>
-                <textarea placeholder="" name="pergunta10" class="textPerg" id="dez" autocomplete="off" required></textarea>
-                
+                <textarea placeholder="" name="pergunta10" class="textPerg" id="dez" autocomplete="off"
+                    required></textarea>
+
+                <div class="stars">
+                    <ion-icon class="star" name="star-outline" onclick="starClick(1)"></ion-icon>
+                    <ion-icon class="star" name="star-outline" onclick="starClick(2)"></ion-icon>
+                    <ion-icon class="star" name="star-outline" onclick="starClick(3)"></ion-icon>
+                    <ion-icon class="star" name="star-outline" onclick="starClick(4)"></ion-icon>
+                    <ion-icon class="star" name="star-outline" onclick="starClick(5)"></ion-icon>
+                </div>
+
             </div>
-            <div class="nav">   
-                <button type="button" class="exit"><a href="#">Sair</a></button>
+            <div class="nav">
+                <button type="button" class="exit"><a href="index.php">Sair</a></button>
                 <div class="p1">
                     1/6
                 </div>
@@ -354,6 +394,26 @@
 
     <!-- JS -->
     <script>
+
+        const btnExit = document.querySelector('.exit');
+        btnExit.addEventListener("click", ()=>{
+            window.location.href = "index.php";
+        })
+
+        function starClick(rating) {
+            const stars = document.querySelectorAll('.star');
+
+            // Atualiza cada estrela com base no valor do clique
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.name = "star"; // Preenche a estrela
+                } else {
+                    star.name = "star-outline"; // Volta para o contorno
+                }
+            });
+        }
+
+
         // Passar Pág container -> inicio <-
         const btnBack = document.querySelector(".back")
         const btnAvancar = document.querySelector(".next")
@@ -389,8 +449,8 @@
             } else if (!pag2.classList.contains("hide")) {
                 pag2.classList.add("hide")
                 p3.classList.add("hide")
-                pag3.classList.remove("hide") 
-                p4.classList.remove("hide")               
+                pag3.classList.remove("hide")
+                p4.classList.remove("hide")
             } else if (!pag3.classList.contains("hide")) {
                 pag3.classList.add("hide")
                 p4.classList.add("hide")
@@ -443,7 +503,7 @@
         // Salvar form mesmo que atualize a pág -> inicio <-
         function saveToLocalStorage(fieldId) {
             const field = document.getElementById(fieldId)
-            field.addEventListener("input", function() {
+            field.addEventListener("input", function () {
                 localStorage.setItem(fieldId, field.value)
             });
         }
@@ -456,7 +516,7 @@
             }
         }
 
-        window.onload = function() {
+        window.onload = function () {
             loadFromLocalStorage("nome")
             saveToLocalStorage("nome")
 
@@ -492,7 +552,7 @@
 
             loadFromLocalStorage("dez")
             saveToLocalStorage("dez")
-        } 
+        }
         // Salvar form mesmo que atualize a pág -> inicio <-
 
         // Aviso para preencher todos os input
@@ -507,4 +567,5 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>

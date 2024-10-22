@@ -436,6 +436,18 @@ a {
     height: 50vh;
 }
 
+#logos .card{
+    flex-direction: column;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#logos .card-img{
+    width: 80%;
+}
+
 .card-body {
     padding: 16px;
 }

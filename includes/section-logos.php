@@ -9,7 +9,7 @@ $logos = $mysqli->query($sql_logos);
     <div class="slick-carousel">
         <?php
         while ($dados_logos = mysqli_fetch_assoc($logos)) {
-            echo "<div class='card' data-id-produto=\"" . $dados_logos['id_produto'] . "\">";
+            echo "<div class='card exibir-logos' data-id-produto=\"" . $dados_logos['id_produto'] . "\">";
             echo "<img src=\"" . $dados_logos['imagem'] . "\" alt='Imagem do Card' class='card-img'>";
             echo "<div class='card-body'>";
             echo "<h2 class='card-title'>" . $dados_logos['nome'] . " - " . $dados_logos['cor_principal'] . "</h2>";

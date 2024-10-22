@@ -111,14 +111,14 @@ if (isset($_GET['id'])) {
         }
 
         .flat {
-            padding: 18px;
+            padding: 14px;
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
 
         input[type="number"] {
             width: 100%;
-            padding: 20px;
+            padding: 17px;
             border: 1px solid #233dff;
             box-sizing: border-box;
             border-top-right-radius: 0;
@@ -214,10 +214,10 @@ if (isset($_GET['id'])) {
         if ($produtExist) {
             while ($dados_produtos = mysqli_fetch_assoc($result)) { // Busca os dados do produto
                 echo "<div class='card img'>"; // Início do card de imagem do produto
-                echo "<h3 class='card-estoque'>Estoque: " . $dados_produtos['estoque'] . "</h3>"; // Exibe a quantidade em estoque
                 echo "<img src=\"" . $dados_produtos['imagem'] . "\" alt='Imagem do Card' class='card-img'>"; // Exibe a imagem do produto
                 echo "</div>";
                 echo "<div class='card'>"; // Início do card de informações do produto
+                echo "<h3 class='card-estoque'>Estoque: " . $dados_produtos['estoque'] . "</h3>"; // Exibe a quantidade em estoque
                 echo "<div class='card-body'>"; // Corpo do card
                 echo "<h2 class='card-title'>" . $dados_produtos['nome'] . " - " . $dados_produtos['cor_principal'] . "</h2>"; // Nome e cor do produto
                 echo "<h2 class='card-price'>R$" . $dados_produtos['preco'] . "</h2>"; // Preço do produto

@@ -135,10 +135,13 @@ include('protect.php');
         <img class="marca" src="assets/adidas.svg" alt="Adidas" onclick="addLogo('assets/adidas.svg', 'marca')">
         <img class="time" src="assets/corinthians.png" alt="Corinthians" onclick="addLogo('assets/corinthians.png', 'time')">
         <img class="time" src="assets/santos.png" alt="Santos" onclick="addLogo('assets/santos.png', 'time')">
-        <img class="time" src="assets/saoPaulo.png" alt="SP" onclick="addLogo('assets/saoPaulo.png', 'time')">
+        <img class="time" src="assets/saoPaulo.png" style="transform: rotate(180deg);" alt="SP" onclick="addLogo('assets/saoPaulo.png', 'time')">
         <img class="time" src="assets/palmeiras.png" alt="Palmeiras" onclick="addLogo('assets/palmeiras.png', 'time')">
         <img class="time" src="assets/gremio.png" alt="Gremio" onclick="addLogo('assets/gremio.png', 'time')">
         <img class="time" src="assets/vasco.png" alt="Vasco" onclick="addLogo('assets/vasco.png', 'time')">
+        <img class="camp" src="assets/liberta.png" alt="Liberta" onclick="addLogo('assets/liberta.png', 'camp')">
+        <img class="camp" src="assets/copaBrasil.png" alt="Copa do Brasil" onclick="addLogo('assets/copaBrasil.png', 'camp')">
+        <img class="camp" src="assets/serieB.png" alt="Serie B" onclick="addLogo('assets/serieB.png', 'camp')">
     </div>
     <div class="painel">
         <h1>Crie sua Camisa</h1>
@@ -191,7 +194,9 @@ include('protect.php');
             if (tipo === 'marca') {
                 img.set({ left: 100, top: 80, scaleX: 0.05, scaleY: 0.05 }); // Adiciona à esquerda
             } else if (tipo === 'time') {
-                img.set({ left: 160, top: 70, scaleX: 0.05, scaleY: 0.05 }); // Adiciona à direita
+                img.set({ left: 160, top: 70, scaleX: 0.05, scaleY: 0.05}); // Adiciona à direita
+            } else if (tipo === 'camp') {
+                img.set({ left: 205 , top: 70, scaleX: 0.02, scaleY: 0.02, angle: -40 }); // Adiciona à direita
             }
             canvas.add(img);
         });

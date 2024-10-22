@@ -23,7 +23,8 @@ CREATE TABLE `cupons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `cupons` (`id_cupom`, `nomeCupom`, `valor`, `valido`) VALUES
-(1, 'CUPOM ESPECIAL', 20, 1);
+(1, 'CUPOM ESPECIAL', 20, 1),
+(2, '2CM_AGUENTA', 100, 1);
 
 CREATE TABLE `produtos` (
   `id_produto` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,

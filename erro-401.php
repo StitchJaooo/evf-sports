@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Erro</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon" />
     <style>
 
       .container, .login-container{
@@ -19,7 +19,7 @@
         height: 95.8vh;
         padding: 20px;
         font-family: "OpenSauceRegular";
-        background-image: url("assets/background.png");
+        background-image: url("assets/img/background.png");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: start;
@@ -59,6 +59,7 @@
       }
 
       ion-icon{
+        margin: 20px 0 0 0;
         font-size: 3rem;
       }
     </style>

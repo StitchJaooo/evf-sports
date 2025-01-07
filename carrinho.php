@@ -90,12 +90,12 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EVF SPORTS</title>
-    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         .main {
             display: flex;
@@ -432,7 +432,7 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
                 </div>
                 <div class="modal-body">
                     <p>Para concluir o pagamento, use a seguinte chave PIX:</p>
-                    <h4>716cobre@gmail.com</h4>
+                    <h4>PIX FALSO</h4>
                     <h4>R$: <?php echo $total; ?></h4>
                 </div>
                 <div class="modal-footer">
@@ -565,30 +565,6 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
                         $('#pixModal').modal('show'); 
                     }
                 </script>
-
-
-                <!-- Modal PIX -->
-                <!-- <div class="modal fade" id="pixModal" tabindex="-1" role="dialog" aria-labelledby="pixModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="pixModalLabel">Pagamento via PIX</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Para concluir o pagamento, use a seguinte chave PIX:</p>
-                                <h3><?php echo $pixKey; ?></h3>
-                                <p>Valor: R$ <?php echo $total; ?></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="flat" data-dismiss="modal">Fechar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
             </div>
         </div>
     </div>
@@ -606,8 +582,8 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
     ?>
 
 
-    <script src="js/user-animation.js"></script>
-    <script src="js/nav-animation.js"></script>
+    <script src="assets/js/user-animation.js"></script>
+    <script src="assets/js/nav-animation.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
@@ -616,7 +592,7 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
 
             $('#confirmButton').off('click').on('click', function () {
                 $.ajax({
-                    url: 'removerItem.php',
+                    url: 'models/cart/remove_carrinho.php',
                     type: 'POST',
                     dataType: 'json',
                     contentType: 'application/json',
@@ -644,7 +620,7 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
 
         function aumentarItem(id) {
             $.ajax({
-                url: 'atualizarItem.php',
+                url: 'models/cart/atualizar_carrinho.php',
                 type: 'POST',
                 dataType: 'json',
                 contentType: 'application/json',
@@ -667,7 +643,7 @@ $pixKey = "chavePix"; // Substitua pela sua chave PIX
 
         function diminuirItem(id) {
             $.ajax({
-                url: 'atualizarItem.php',
+                url: 'models/cart/atualizar_carrinho.php',
                 type: 'POST',
                 dataType: 'json',
                 contentType: 'application/json',

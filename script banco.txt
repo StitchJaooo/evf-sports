@@ -38,20 +38,20 @@ CREATE TABLE `produtos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `produtos` (`nome`, `classificacao`, `ano`, `cor_principal`, `preco`, `imagem`, `estoque`) VALUES
-('2 DS', 'camisa', 2024, 'AZUL', 63.00, 'assets/2ds-2024.jpg', 100),
-('1 DS', 'camisa', 2024, 'ROSA', 50.00, 'assets/1ds-2024.jpg', 100),
-('3 ADM', 'camisa', 2024, 'CIANO', 38.00, 'assets/3adm-2024.jpg', 100),
-('1 ADM', 'camisa', 2024, 'VERDE', 48.00, 'assets/1adm-2024.jpg', 100),
-('1 MA', 'camisa', 2023, 'VERMELHO', 50.00, 'assets/1ma-2023.jpg', 100),
-('2 MA', 'camisa', 2024, 'LARANJA', 40.00, 'assets/2ma-2024.jpg', 100),
-('1 MA', 'camisa', 2024, 'AMARELO', 50.00, 'assets/1ma-2024.jpg', 100),
-('Adidas', 'logo', 2024, 'PRETO', 1.00, 'assets/adidas.svg', 200),
-('GREMIO', 'logo', 2024, 'TRICOLOR', 2.00, 'assets/gremio.png', 200),
-('LIBERTA', 'logo', 2024, 'DOURADO', 2.00, 'assets/liberta.png', 200),
-('PALMEIRAS', 'logo', 2024, 'ALVIVERDE', 2.00, 'assets/palmeiras.png', 200),
-('SANTOS', 'logo', 2024, 'ALVINEGRO', 1.00, 'assets/santos.png', 200),
-('SAO PAULO', 'logo', 2024, 'TRICOLOR', 2.00, 'assets/saoPaulo.png', 200),
-('CORINTHIANS', 'logo', 2024, 'ALVINEGRO', 0.50, 'assets/corinthians.png', 200);
+('2 DS', 'camisa', 2024, 'AZUL', 63.00, 'assets/img/2ds-2024.jpg', 100),
+('1 DS', 'camisa', 2024, 'ROSA', 50.00, 'assets/img/1ds-2024.jpg', 100),
+('3 ADM', 'camisa', 2024, 'CIANO', 38.00, 'assets/img/3adm-2024.jpg', 100),
+('1 ADM', 'camisa', 2024, 'VERDE', 48.00, 'assets/img/1adm-2024.jpg', 100),
+('1 MA', 'camisa', 2023, 'VERMELHO', 50.00, 'assets/img/1ma-2023.jpg', 100),
+('2 MA', 'camisa', 2024, 'LARANJA', 40.00, 'assets/img/2ma-2024.jpg', 100),
+('1 MA', 'camisa', 2024, 'AMARELO', 50.00, 'assets/img/1ma-2024.jpg', 100),
+('Adidas', 'logo', 2024, 'PRETO', 1.00, 'assets/img/adidas.svg', 200),
+('GREMIO', 'logo', 2024, 'TRICOLOR', 2.00, 'assets/img/gremio.png', 200),
+('LIBERTA', 'logo', 2024, 'DOURADO', 2.00, 'assets/img/liberta.png', 200),
+('PALMEIRAS', 'logo', 2024, 'ALVIVERDE', 2.00, 'assets/img/palmeiras.png', 200),
+('SANTOS', 'logo', 2024, 'ALVINEGRO', 1.00, 'assets/img/santos.png', 200),
+('SAO PAULO', 'logo', 2024, 'TRICOLOR', 2.00, 'assets/img/saoPaulo.png', 200),
+('CORINTHIANS', 'logo', 2024, 'ALVINEGRO', 0.50, 'assets/img/corinthians.png', 200);
 
 CREATE TABLE `carrinho` (
   `id_usuario` int(11) NOT NULL,

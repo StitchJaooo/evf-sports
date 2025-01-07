@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EVF SPORTS</title>
-    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon"> <!-- Ícone da página -->
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon"> <!-- Ícone da página -->
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
     <!-- Fonte utilizada -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -37,7 +37,7 @@ if (isset($_GET['id'])) {
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- jQuery -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JS do Bootstrap -->
-    <link rel="stylesheet" href="css/style.css"> <!-- CSS personalizado -->
+    <link rel="stylesheet" href="assets/css/style.css"> <!-- CSS personalizado -->
     <style>
         .container {
             display: flex;
@@ -264,7 +264,7 @@ if (isset($_GET['id'])) {
                 event.preventDefault(); // Previne o envio padrão do formulário
                 var formData = new FormData(this); // Cria um objeto FormData com os dados do formulário
                 $.ajax({
-                    url: 'add_carrinho.php', // URL para adicionar ao carrinho
+                    url: 'models/cart/add_carrinho.php', // URL para adicionar ao carrinho
                     type: 'POST', // Método POST
                     data: formData, // Dados a serem enviados
                     processData: false, // Não processar os dados
@@ -284,8 +284,8 @@ if (isset($_GET['id'])) {
     </script>
 
     <!-- Scripts adicionais para animações e ícones -->
-    <script src="js/user-animation.js"></script> <!-- Animações de usuário -->
-    <script src="js/nav-animation.js"></script> <!-- Animações de navegação -->
+    <script src="assets/js/user-animation.js"></script> <!-- Animações de usuário -->
+    <script src="assets/js/nav-animation.js"></script> <!-- Animações de navegação -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <!-- Importa ícones do Ionicons -->
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

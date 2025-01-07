@@ -8,7 +8,7 @@ include('protect.php');
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Crie sua logo</title>
-  <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css">
   <style>
@@ -470,8 +470,8 @@ include('protect.php');
     // Redimensiona o canvas quando a janela é redimensionada
     window.addEventListener('resize', resizeCanvas);
   </script>
-  <script src="js/user-animation.js"></script>
-  <script src="js/nav-animation.js"></script>
+  <script src="assets/js/user-animation.js"></script>
+  <script src="assets/js/nav-animation.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

@@ -29,27 +29,27 @@
 
     @font-face {
         font-family: 'OpenSauce';
-        src: url('font/OpenSauceOne-Light.ttf') format('truetype');
+        src: url('assets/font/OpenSauceOne-Light.ttf') format('truetype');
     }
 
     @font-face {
         font-family: 'OpenSauceRegular';
-        src: url('font/OpenSauceOne-Regular.ttf') format('truetype');
+        src: url('assets/font/OpenSauceOne-Regular.ttf') format('truetype');
     }
 
     @font-face {
         font-family: 'OpenSauceBold';
-        src: url('font/OpenSauceOne-Bold.ttf') format('truetype');
+        src: url('assets/font/OpenSauceOne-Bold.ttf') format('truetype');
     }
 
     @font-face {
         font-family: 'OpenSauceExtraBold';
-        src: url('font/OpenSauceOne-ExtraBold.ttf') format('truetype');
+        src: url('assets/font/OpenSauceOne-ExtraBold.ttf') format('truetype');
     }
 
     body {
         color: black;
-        background-image: url("assets/background.png");
+        background-image: url("assets/img/background.png");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: start;
@@ -188,7 +188,7 @@
         </div>
         <div class="frase">
             <p>Seu formulário foi enviado!<br>
-            Você já pode voltar as compras : )
+            Você já pode voltar as compras :)
             </p>
         </div>
         

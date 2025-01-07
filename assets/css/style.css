@@ -5,17 +5,17 @@
 
 @font-face {
     font-family: 'OpenSauce';
-    src: url('../assets/font/OpenSauceOne-Light.ttf') format('truetype');
+    src: url('../font/OpenSauceOne-Light.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'OpenSauceRegular';
-    src: url('../assets/font/OpenSauceOne-Regular.ttf') format('truetype');
+    src: url('../font/OpenSauceOne-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'OpenSauceBold';
-    src: url('../assets/font/OpenSauceOne-Bold.ttf') format('truetype');
+    src: url('../font/OpenSauceOne-Bold.ttf') format('truetype');
 }
 
 @keyframes Surgir {
@@ -277,7 +277,7 @@ nav.ativo {
     justify-content: center;
     height: 110vh;
     width: 100vw;
-    background-image: url("../assets/background.png");
+    background-image: url("../img/background.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: start;

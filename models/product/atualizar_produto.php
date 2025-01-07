@@ -1,5 +1,6 @@
 <?php
-include('conexao.php');
+include("../../protect.php");
+include("../../conexao.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_produto = $_POST['idproduto']; // ID do produto a ser atualizado
@@ -11,10 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $estoque = $_POST['estoque-update'];
 
     if (isset($_FILES['imagem-update']) && $_FILES['imagem-update']['error'] === UPLOAD_ERR_OK) {
-        $imagem_dir = 'assets/';
+        $imagem_dir = '../../assets/img/';
         $imagem_path = $imagem_dir . basename($_FILES['imagem-update']['name']);
-
+        
         if (move_uploaded_file($_FILES['imagem-update']['tmp_name'], $imagem_path)) {
+            $imagem_dir = 'assets/img/';
+            $imagem_path = $imagem_dir . basename($_FILES['imagem-update']['name']);
             // Atualizar o produto com o caminho da nova imagem
             $sql = "UPDATE produtos SET nome=?, classificacao=?, ano=?, cor_principal=?, preco=?, imagem=?, estoque=? WHERE id_produto=?";
             $stmt = $mysqli->prepare($sql);

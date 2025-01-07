@@ -1,5 +1,7 @@
 <?php
-include("conexao.php");
+include("../../protect.php");
+include("../../conexao.php");
+
 if (isset($_POST['id_produto']) && is_numeric($_POST['id_produto'])) {
     $id_produto = intval($_POST['id_produto']);
     $sql = "DELETE FROM produtos WHERE id_produto = ?";

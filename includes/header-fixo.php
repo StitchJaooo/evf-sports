@@ -1,7 +1,7 @@
 <header class="scrolled">
     <ion-icon name="menu" class="nav-menu"></ion-icon>
     <a href="index.php">
-        <img src="assets/logo.png" alt="">
+        <img src="assets/img/logo.png" alt="">
     </a>
     <div class="usuario">
         <a href="carrinho.php"><ion-icon name="cart"></ion-icon></a>

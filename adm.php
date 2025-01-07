@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EVF SPORTS</title>
-    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon"> <!-- Ícone da aba do navegador -->
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon"> <!-- Ícone da aba do navegador -->
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
     <!-- Fonte personalizada -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- Biblioteca jQuery -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JavaScript do Bootstrap -->
-    <link rel="stylesheet" href="css/style.css"> <!-- CSS personalizado -->
+    <link rel="stylesheet" href="assets/css/style.css"> <!-- CSS personalizado -->
     <style>
         /* Estilos para o contêiner principal */
         .container {
@@ -423,7 +423,7 @@
         // Função para excluir produto via AJAX
         function DeleteProduct(id_produto) {
             $.ajax({
-                url: 'delete_produto.php', // URL do script PHP para exclusão
+                url: 'models/product/delete_produto.php', // URL do script PHP para exclusão
                 type: 'POST', // Método POST para enviar dados
                 data: { id_produto: id_produto }, // Dados a serem enviados
                 success: function (response) {
@@ -458,7 +458,7 @@
 
                 // Faz uma requisição AJAX para adicionar um novo produto
                 $.ajax({
-                    url: 'add_produto.php', // URL do script PHP para adição
+                    url: 'models/product/add_produto.php', // URL do script PHP para adição
                     type: 'POST', // Método POST para enviar dados
                     data: formData, // Dados a serem enviados
                     processData: false, // Não processar os dados
@@ -484,7 +484,7 @@
 
                 // Faz uma requisição AJAX para atualizar um produto
                 $.ajax({
-                    url: 'atualizar_produto.php', // URL do script PHP para atualização
+                    url: 'models/product/atualizar_produto.php', // URL do script PHP para atualização
                     type: 'POST', // Método POST para enviar dados
                     data: formData, // Dados a serem enviados
                     processData: false, // Não processar os dados
@@ -503,8 +503,8 @@
     </script>
 
     <!-- Scripts para animações e ícones -->
-    <script src="js/user-animation.js"></script> <!-- Animações de usuário -->
-    <script src="js/nav-animation.js"></script> <!-- Animações de navegação -->
+    <script src="assets/js/user-animation.js"></script> <!-- Animações de usuário -->
+    <script src="assets/js/nav-animation.js"></script> <!-- Animações de navegação -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <!-- Importa ícones do Ionicons -->
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

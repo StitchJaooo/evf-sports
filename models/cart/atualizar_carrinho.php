@@ -1,6 +1,6 @@
 <?php
-include("conexao.php");
-include("protect.php");
+include("../../protect.php");
+include("../../conexao.php");
 
 // Receber os dados da requisição
 

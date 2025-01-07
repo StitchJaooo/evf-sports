@@ -8,9 +8,9 @@ include('protect.php');
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crie sua camisa</title>
-    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         header {
             position: fixed;
@@ -279,7 +279,7 @@ include('protect.php');
     <header class="scrolled">
         <ion-icon name="menu" class="nav-menu"></ion-icon>
         <a href="index.php">
-            <img src="assets/logo.png" alt="">
+            <img src="assets/img/logo.png" alt="">
         </a>
         <div class="usuario">
             <a href="carrinho.php"><ion-icon name="cart"></ion-icon></a>
@@ -296,21 +296,21 @@ include('protect.php');
 
     <div class="container">
         <div class="menu">
-            <img class="marca" src="assets/nike.png" alt="Nike" onclick="addLogo('assets/nike.png', 'marca')">
-            <img class="marca" src="assets/umbro.svg" alt="Umbro" onclick="addLogo('assets/umbro.svg', 'marca')">
-            <img class="marca" src="assets/adidas.svg" alt="Adidas" onclick="addLogo('assets/adidas.svg', 'marca')">
-            <img class="time" src="assets/corinthians.png" alt="Corinthians"
-                onclick="addLogo('assets/corinthians.png', 'time')">
-            <img class="time" src="assets/santos.png" alt="Santos" onclick="addLogo('assets/santos.png', 'time')">
-            <img class="time" src="assets/saoPaulo.png" alt="SP" onclick="addLogo('assets/saoPaulo.png', 'time')">
-            <img class="time" src="assets/palmeiras.png" alt="Palmeiras"
-                onclick="addLogo('assets/palmeiras.png', 'time')">
-            <img class="time" src="assets/gremio.png" alt="Gremio" onclick="addLogo('assets/gremio.png', 'time')">
-            <img class="time" src="assets/vasco.png" alt="Vasco" onclick="addLogo('assets/vasco.png', 'time')">
-            <img class="camp" src="assets/liberta.png" alt="Liberta" onclick="addLogo('assets/liberta.png', 'camp')">
-            <img class="camp" src="assets/copaBrasil.png" alt="Copa do Brasil"
-                onclick="addLogo('assets/copaBrasil.png', 'camp')">
-            <img class="camp" src="assets/serieB.png" alt="Serie B" onclick="addLogo('assets/serieB.png', 'camp')">
+            <img class="marca" src="assets/img/nike.png" alt="Nike" onclick="addLogo('assets/img/nike.png', 'marca')">
+            <img class="marca" src="assets/img/umbro.svg" alt="Umbro" onclick="addLogo('assets/img/umbro.svg', 'marca')">
+            <img class="marca" src="assets/img/adidas.svg" alt="Adidas" onclick="addLogo('assets/img/adidas.svg', 'marca')">
+            <img class="time" src="assets/img/corinthians.png" alt="Corinthians"
+                onclick="addLogo('assets/img/corinthians.png', 'time')">
+            <img class="time" src="assets/img/santos.png" alt="Santos" onclick="addLogo('assets/img/santos.png', 'time')">
+            <img class="time" src="assets/img/saoPaulo.png" alt="SP" onclick="addLogo('assets/img/saoPaulo.png', 'time')">
+            <img class="time" src="assets/img/palmeiras.png" alt="Palmeiras"
+                onclick="addLogo('assets/img/palmeiras.png', 'time')">
+            <img class="time" src="assets/img/gremio.png" alt="Gremio" onclick="addLogo('assets/img/gremio.png', 'time')">
+            <img class="time" src="assets/img/vasco.png" alt="Vasco" onclick="addLogo('assets/img/vasco.png', 'time')">
+            <img class="camp" src="assets/img/liberta.png" alt="Liberta" onclick="addLogo('assets/img/liberta.png', 'camp')">
+            <img class="camp" src="assets/img/copaBrasil.png" alt="Copa do Brasil"
+                onclick="addLogo('assets/img/copaBrasil.png', 'camp')">
+            <img class="camp" src="assets/img/serieB.png" alt="Serie B" onclick="addLogo('assets/img/serieB.png', 'camp')">
         </div>
         <div class="painel">
             <h1>Crie sua Camisa</h1>
@@ -318,11 +318,11 @@ include('protect.php');
         </div>
         <div class="controls">
             <div class="color">
-                <label for="colorPicker">Cor do fundo:</label>
+                <label for="colorPicker">Cor da camisa:</label>
                 <input type="color" id="colorPicker" value="#ffffff" />
             </div>
             <p>
-                <input type="text" id="textInput" placeholder="Digite seu texto" />
+                <input type="text" id="textInput" placeholder="Adicione texto" />
             </p>
             <button id="addText" class="flat">Adicionar</button>
             <label for="imageUpload" class="custom-file-upload">Adicionar Imagem
@@ -344,7 +344,7 @@ include('protect.php');
         const deleteBtn = document.getElementById("deleteBtn");
 
         // Função para definir a imagem da camisa como fundo
-        fabric.Image.fromURL('assets/camisa.png', function (img) {
+        fabric.Image.fromURL('assets/img/camisa.png', function (img) {
             img.set({ left: 0, top: 0, scaleX: canvas.width / img.width, scaleY: canvas.height / img.height });
             canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
         });
@@ -432,8 +432,8 @@ include('protect.php');
 
         drawBackground(colorPicker.value);
     </script>
-    <script src="js/user-animation.js"></script>
-    <script src="js/nav-animation.js"></script>
+    <script src="assets/js/user-animation.js"></script>
+    <script src="assets/js/nav-animation.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

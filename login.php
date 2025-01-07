@@ -56,7 +56,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Configura a visualização em dispositivos móveis -->
     <title>Página de Login</title> <!-- Título da página que aparece na aba do navegador -->
-    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon"> <!-- Ícone da aba do navegador -->
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon"> <!-- Ícone da aba do navegador -->
 
     <!-- Link para o CSS do Bootstrap para estilização -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -67,7 +67,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     <!-- Link para o JS do Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="stylesheet" href="css/style.css"> <!-- Link para o CSS customizado -->
+    <link rel="stylesheet" href="assets/css/style.css"> <!-- Link para o CSS customizado -->
 
     <style>
         /* Estilos customizados para o login */
@@ -80,7 +80,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
 
         /* Estilos do corpo da página */
         body {
-            background-image: url("assets/background.png");
+            background-image: url("assets/img/background.png");
             /* Imagem de fundo */
             background-size: cover;
             /* Cobre todo o fundo */
@@ -383,7 +383,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
     <!-- Importação dos ícones da Ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
-    <script src="js/password.js"></script> <!-- Script para a funcionalidade de mostrar/esconder senha -->
+    <script src="assets/js/password.js"></script> <!-- Script para a funcionalidade de mostrar/esconder senha -->
 </body>
 
 </html>

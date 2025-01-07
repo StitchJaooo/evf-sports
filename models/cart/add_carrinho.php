@@ -1,6 +1,6 @@
 <?php
-include("protect.php");
-include("conexao.php");
+include("../../protect.php");
+include("../../conexao.php");
 header('Content-Type: application/json'); // Define o tipo de conteúdo como JSON
 $response = []; // Inicializa a variável de resposta
 if (!isset($_SESSION['id_usuario'])) {

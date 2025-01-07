@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Configura a visualização em dispositivos móveis -->
     <title>EVF SPORTS</title> <!-- Título da página que aparece na aba do navegador -->
-    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon"> <!-- Ícone da aba do navegador -->
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon"> <!-- Ícone da aba do navegador -->
 
     <!-- Link para a fonte Arquivo Black do Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black:regular" rel="stylesheet" />
@@ -17,7 +17,7 @@
         href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
     <!-- Link para o CSS customizado do projeto -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         @media all and (max-width: 600px) {
             footer {
@@ -57,13 +57,13 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
     <!-- Script específico para o carrossel de camisas -->
-    <script type="text/javascript" src="js/carousel-camisas.js"></script>
+    <script type="text/javascript" src="assets/js/carousel-camisas.js"></script>
 
     <!-- Outros scripts de animação do usuário e navegação -->
-    <script src="js/user-animation.js"></script>
-    <script src="js/nav-animation.js"></script>
-    <script src="js/header-animation.js"></script>
-    <script src="js/exibir-produto.js"></script>
+    <script src="assets/js/user-animation.js"></script>
+    <script src="assets/js/nav-animation.js"></script>
+    <script src="assets/js/header-animation.js"></script>
+    <script src="assets/js/exibir-produto.js"></script>
 
     <!-- Importação de ícones do Ionicons, com suporte para módulos -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

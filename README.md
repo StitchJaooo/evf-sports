@@ -1,6 +1,8 @@
 # EVF Sports
 
 **EVF Sports** é um site desenvolvido para exibir e vender produtos esportivos, focando em camisas personalizadas. O projeto utiliza tecnologias web modernas e bibliotecas especializadas para criar uma experiência fluida e dinâmica para os usuários.
+<br><br>
+**Projeto feito em grupo em 2024 - 2º ano DS**
 
 ## Índice
 
